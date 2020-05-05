@@ -16,7 +16,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'password',
+        'picture', 'user_type_id'
     ];
 
     /**
@@ -36,4 +37,28 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * A user belongs to a type
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user_type(){
+        return $this->belongsTo(UserType::class);
+    }
+
+    /**
+     * A user has many startups
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function startups(){
+        return $this->hasMany(Startup::class);
+    }
+
+    /**
+     * A startup has one contact detail
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function contact_detail(){
+        return $this->hasOne(ContactDetail::class);
+    }
 }
