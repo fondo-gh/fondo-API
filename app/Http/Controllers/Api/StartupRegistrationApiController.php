@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\ContactDetail;
 use App\Http\Controllers\Controller;
 use App\Startup;
 use App\Traits\ApiBaseController;
@@ -45,7 +46,8 @@ class StartupRegistrationApiController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function registerStartup(Request $request){
+    public function registerStartup(Request $request)
+    {
         //validate credentials
         $validator = Validator::make($request->all(), [
             'company_name' => 'required|string|max:255|unique:startups',
@@ -75,12 +77,65 @@ class StartupRegistrationApiController extends Controller
         }
 
         //create or update the startup details information
-        if($request->has('startup_id')) {
+        if ($request->has('startup_id')) {
             $startup = Startup::query()->find($request['startup_id'])->update($request->all());
         } else {
             $startup = Startup::query()->create($request->all());
         }
 
         return $this->sendSuccessResponse(['startup_id' => $startup->id]);
+    }
+
+    /**
+     * Contact Details for a Startup
+     *
+     * Updates a startup with Contact details.
+     * The same route is used to update the contact details.
+     *
+     * @bodyParam startup_id int required The id of the startup contact details belong to. Example: 1
+     * @bodyParam email string required The email of the startup. Example: jane@ventures.com
+     * @bodyParam phone string required The phone number of the startup.
+     * @bodyParam facebook_handle string  The facebook handle of the startup.
+     * @bodyParam twitter_handle string  The twitter handle of the startup.
+     * @bodyParam instagram_handle string  The instagram handle of the startup.
+     * @bodyParam linkdin_handle string  The linkdin handle of the startup.
+     * @bodyParam skype_handle string  The skype handle of the startup.
+     *
+     * @response 200 {
+     * "success": {
+     * "code": 200,
+     * "message": "Request completed successfully."
+     * }
+     * }
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function startupContactDetails(Request $request)
+    {
+        //validate credentials
+        $validator = Validator::make($request->all(), [
+            'startup_id' => 'required|integer|exists:startups',
+            'email' => 'required|email|max:255|unique:startup_details',
+            'phone' => 'required|digits:10',
+            'facebook_handle' => 'nullable|string|max:255',
+            'twitter_handle' => 'nullable|string|max:255',
+            'instagram_handle' => 'nullable|string|max:255',
+            'linkdin_handle' => 'nullable|string|max:255',
+            'skype_handle' => 'nullable|string|max:255',
+        ]);
+
+
+        //send validation error response if any
+        if ($validator->fails()) {
+            return $this->sendErrorResponse($validator->errors()->first());
+        }
+
+        //update or create a startup detail based on startup
+        ContactDetail::query()->updateOrCreate(
+            ['startup_id' => $request['startup_id']],
+            $request->all()
+        );
+
+        return $this->sendSuccessResponse();
     }
 }
