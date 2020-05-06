@@ -24,7 +24,7 @@ class StartupRegistrationApiController extends Controller
     use ApiBaseController;
 
     /**
-     * * Register a Startup
+     *Register a Startup
      *
      * Registers a startup. First step out of 7 steps.
      * The same route is used to update the startup, if startup id is provided.

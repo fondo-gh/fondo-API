@@ -57,9 +57,7 @@ class AuthApiController extends Controller
      * "picture": http://www.fondo.com/user/kkjdfj.jpg,
      * "user_type": "Investor",
      * "token": "7geRI9P4LUFj3ensaxOV070Uk1yXeQ23ptqerJYc"
-     * }
-     *
-     *
+     *  }
      * }
      *
      * @response 404 {
@@ -125,8 +123,9 @@ class AuthApiController extends Controller
       * "picture": http://www.fondo.com/user/kkjdfj.jpg,
       * "user_type": "Entrepreneur",
       * "token": "7geRI9P4LUFj3ensaxOV070Uk1yXeQ23ptqerJYc"
+      *    }
       * }
-      * }
+      *
       * @param Request $request
       * @return \Illuminate\Http\JsonResponse
       */
