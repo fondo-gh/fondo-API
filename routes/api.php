@@ -36,7 +36,10 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
  */
 Route::group(['prefix' => 'v1', 'middleware' => 'auth:user', 'namespace' => 'Api'], function () {
     Route::post('startup/register', 'StartupRegistrationApiController@registerStartup');
-    Route::post('startup/contact/details', 'StartupRegistrationApiController@startupContactDetails');
+    Route::post('startup/startup_detail', 'StartupRegistrationApiController@startupDetail');
+    Route::post('startup/contact_detail', 'StartupRegistrationApiController@startupContactDetail');
+    Route::post('startup/business_model', 'StartupRegistrationApiController@startupBusinessModel');
+    Route::post('startup/product_detail', 'StartupRegistrationApiController@startupProductDetail');
 });
 
 

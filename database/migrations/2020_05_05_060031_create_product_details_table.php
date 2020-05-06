@@ -17,7 +17,7 @@ class CreateProductDetailsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('startup_id');
             $table->integer('product_progress_id');
-            $table->integer('product_url')->nullable();
+            $table->string('product_url')->nullable();
             $table->timestamps();
         });
     }

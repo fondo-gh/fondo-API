@@ -106,7 +106,7 @@ class AuthApiController extends Controller
       *
       * @bodyParam first_name string required The first name of the user. Example: Jane
       * @bodyParam last_name string required The last name of the user. Example: Doe
-      * @bodyParam picture file  The image of the person.
+      * @bodyParam picture file  The image of the person. Do not submit a null picture field.
       * @bodyParam user_type_id int required The id of the type of user. Example: 1 for Entrepreneur, 2 for Investor
       * @bodyParam email string required The email of the user. Example: mail@mail.com
       * @bodyParam password string required The password of the user.

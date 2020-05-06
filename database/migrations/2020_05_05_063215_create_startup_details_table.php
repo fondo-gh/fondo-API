@@ -18,7 +18,7 @@ class CreateStartupDetailsTable extends Migration
             $table->integer('startup_id');
             $table->integer('startup_type_id');
             $table->integer('startup_industry_id');
-            $table->boolean('has_patent');
+            $table->boolean('has_patent')->default(false);
             $table->string('location')->nullable();
             $table->timestamps();
         });

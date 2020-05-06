@@ -41,4 +41,29 @@ class Startup extends Model
     public function contact_detail() {
         return $this->hasOne(ContactDetail::class);
     }
+
+    /**
+     * A startup has one business model
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function business_model() {
+        return $this->hasOne(BusinessModel::class);
+    }
+
+
+    /**
+     * A startup has one product detail
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function product_detail() {
+        return $this->hasOne(ProductDetail::class);
+    }
+
+    /**
+     * A startup has one startup detail
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function startup_detail() {
+        return $this->hasOne(StartupDetail::class);
+    }
 }
