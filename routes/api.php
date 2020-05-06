@@ -35,7 +35,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
  *Authenticated routes
  */
 Route::group(['prefix' => 'v1', 'middleware' => 'auth:user', 'namespace' => 'Api'], function () {
-
+    Route::post('startups/register', 'StartupRegistrationApiController@registerStartup');
 });
 
 

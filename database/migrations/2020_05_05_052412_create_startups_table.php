@@ -19,7 +19,7 @@ class CreateStartupsTable extends Migration
             $table->string('product_image')->nullable();
             $table->string('caption')->nullable();
             $table->string('funds_to_raise')->nullable();
-            $table->integer('duration_for_raise')->nullable();
+            $table->string('duration_for_raise')->nullable();
             $table->integer('user_id');
             $table->boolean('approved')->default(false);
             $table->timestamps();
