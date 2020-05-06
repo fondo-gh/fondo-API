@@ -53,12 +53,15 @@ trait ApiBaseController
      *
      */
     public function generateUserData(User $user) {
+        //image path
+        $imageUrl = $user->picture ? url('/') . '/users/' . $user->picture : '';
+
         $data = array();
         $data['id'] = $user->id;
         $data['first_name'] = $user->first_name;
         $data['last_name'] = $user->last_name;
         $data['email'] = $user->email;
-        $data['picture'] = $user->picture;
+        $data['picture'] = $imageUrl;
         $data['user_type'] = $user->user_type->name;
         $data['token'] = $user->createToken(env('APP_NAME'))->accessToken;
         return $data;

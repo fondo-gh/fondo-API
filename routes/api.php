@@ -27,6 +27,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
      * Authentication routes for user
      */
     Route::post('user/login', 'AuthApiController@loginUser');
+    Route::get('user/types', 'AuthApiController@userTypes');
     Route::post('user/register', 'AuthApiController@registerUser');
 });
 
