@@ -3,11 +3,21 @@
 namespace App\Http\Controllers\Api;
 
 use App\BusinessModel;
+use App\BusinessTeam;
+use App\CofounderRole;
 use App\ContactDetail;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BusinessTeamCollection;
+use App\Http\Resources\CofounderRoleCollection;
+use App\Http\Resources\ProductProgressCollection;
+use App\Http\Resources\StartupIndustryCollection;
+use App\Http\Resources\StartupTypeCollection;
 use App\ProductDetail;
+use App\ProductProgress;
 use App\Startup;
 use App\StartupDetail;
+use App\StartupIndustry;
+use App\StartupType;
 use App\Traits\ApiBaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -23,7 +33,8 @@ class StartupRegistrationApiController extends Controller
 {
     use ApiBaseController;
 
-    public function startups() {
+    public function startups()
+    {
         //todo:implement logic
         //returns startups for the user/entrepreneur if user id is specified
         //else returns all startups
@@ -108,10 +119,46 @@ class StartupRegistrationApiController extends Controller
         return $this->sendSuccessResponse(['startup_id' => $startup->id]);
     }
 
-
-    public function dataForStartupDetailsRegistration() {
-        //todo:implement logic
-        //startup industry and startup type
+    /**
+     * Data For Startup Details Registration.
+     *
+     * The endpoint provides startup types and startup industries which will be needed
+     * to populate a select input for startup details registration by entrepreneur
+     *
+     * @response 200 {
+     * "startup_types": {
+     * "data": [
+     * {
+     * "id": 1,
+     * "name": "LLP - Limited liability Partnership"
+     * },
+     * {
+     * "id": 2,
+     * "name": "LP - Limited Partnership"
+     * },
+     * ]
+     * },
+     * "startup_industries": {
+     * "data": [
+     * {
+     * "id": 1,
+     * "name": "Agriculture"
+     * },
+     * {
+     * "id": 2,
+     * "name": "Finance"
+     * },
+     * ]
+     * }
+     * }
+     * @return array
+     */
+    public function dataForStartupDetailsRegistration()
+    {
+        return [
+            'startup_types' => new StartupTypeCollection(StartupType::all()),
+            'startup_industries' => new StartupIndustryCollection(StartupIndustry::all())
+        ];
     }
 
     /**
@@ -159,8 +206,6 @@ class StartupRegistrationApiController extends Controller
 
         return $this->sendSuccessResponse();
     }
-
-
 
     /**
      * Contact Details for a Startup
@@ -304,9 +349,30 @@ class StartupRegistrationApiController extends Controller
         return $this->sendSuccessResponse();
     }
 
-    public function dataForProductDetailRegistration(){
-        //todo:implement logic
-        //product progress
+    /**
+     * Data for Product Detail Registration
+     *
+     * The endpoint provides product progress which will be needed
+     * to populate a select input for startup product details registration by entrepreneur
+     *
+     * @response 200 {
+     *"data": [
+     * {
+     * "id": 1,
+     * "name": "Concept only"
+     * },
+     * {
+     * "id": 2,
+     * "name": "Product development"
+     * },
+     * ]
+     *
+     * }
+     * @return ProductProgressCollection
+     */
+    public function dataForProductDetailRegistration()
+    {
+        return new ProductProgressCollection(ProductProgress::all());
     }
 
     /**
@@ -352,16 +418,70 @@ class StartupRegistrationApiController extends Controller
         return $this->sendSuccessResponse();
     }
 
-    public function dataForCofounderDetailsRegistration(){
-        //todo:implement logic
-        //cofounder roles
+    /**
+     * Data for Cofounder Details registration
+     *
+     * The endpoint provides cofounder roles which will be needed
+     * to populate a select input for startup cofounder details registration by entrepreneur
+     *
+     * @response 200 {
+     *"data": [
+     * {
+     * "id": 1,
+     * "name": "Concept only"
+     * },
+     * {
+     * "id": 2,
+     * "name": "Product development"
+     * },
+     *
+     * ]
+     * }
+     *
+     *
+     * @return CofounderRoleCollection
+     */
+    public function dataForCofounderDetailsRegistration()
+    {
+        return new CofounderRoleCollection(CofounderRole::all());
     }
-    public function startupCofounderDetails(Request $request){}
 
-    public function dataForStartupTeamRegistration(){
+    public function startupCofounderDetails(Request $request)
+    {
         //todo:implement logic
-        //business teams
     }
-    public function startupTeam(Request $request){}
+
+    /**
+     * Data for Startup Team registration
+     *
+     * The endpoint provides business teams  which will be needed
+     * to populate a select input for startup teams registration by entrepreneur
+     *
+     * @response 200 {
+     *"data": [
+     * {
+     * "id": 1,
+     * "name": "Sales and marketing team",
+     * "description": "Responsible for bringing the product to market. They use several approaches to get the word out regarding their new invention."
+     * },
+     * {
+     * "id": 2,
+     * "name": "Operations and Production team",
+     * "description": "Responsible for bringing the product to life. They receive the product's vision and bring it into its finished stage."
+     * }]
+     *
+     * }
+     *
+     * @return BusinessTeamCollection
+     */
+    public function dataForStartupTeamRegistration()
+    {
+        return new BusinessTeamCollection(BusinessTeam::all());
+    }
+
+    public function startupTeam(Request $request)
+    {
+        //todo:implement logic
+    }
 
 }
