@@ -23,6 +23,13 @@ class StartupRegistrationApiController extends Controller
 {
     use ApiBaseController;
 
+    public function startups() {
+        //todo:implement logic
+        //returns startups for the user/entrepreneur if user id is specified
+        //else returns all startups
+        //returns simple or all startups information format
+    }
+
     /**
      *Register a Startup
      *
@@ -51,15 +58,27 @@ class StartupRegistrationApiController extends Controller
      */
     public function registerStartup(Request $request)
     {
-        //validate credentials
-        $validator = Validator::make($request->all(), [
-            'company_name' => 'required|string|max:255|unique:startups',
-            'caption' => 'required|string|max:255',
-            'product_image' => 'required|image',
-            'funds_to_raise' => 'required|string',
-            'duration_for_raise' => 'required|string',
-            'startup_id' => 'nullable|integer|exists:startups'
-        ]);
+
+        //perform different validation if request has startup id - it means validation should match update
+        if ($request->has('startup_id')) {
+            $validator = Validator::make($request->all(), [
+                'company_name' => 'required|string|max:255|unique:startups,company_name,' . $request['startup_id'],
+                'caption' => 'required|string|max:255',
+                'product_image' => 'required|image',
+                'funds_to_raise' => 'required|string',
+                'duration_for_raise' => 'required|string',
+                'startup_id' => 'nullable|integer|exists:startups,id'
+            ]);
+        } else {
+            $validator = Validator::make($request->all(), [
+                'company_name' => 'required|string|max:255|unique:startups',
+                'caption' => 'required|string|max:255',
+                'product_image' => 'required|image',
+                'funds_to_raise' => 'required|string',
+                'duration_for_raise' => 'required|string',
+                'startup_id' => 'nullable|integer|exists:startups,id'
+            ]);
+        }
 
 
         //send validation error response if any
@@ -89,6 +108,12 @@ class StartupRegistrationApiController extends Controller
         return $this->sendSuccessResponse(['startup_id' => $startup->id]);
     }
 
+
+    public function dataForStartupDetailsRegistration() {
+        //todo:implement logic
+        //startup industry and startup type
+    }
+
     /**
      * Startup Detail for a Startup
      *
@@ -114,7 +139,7 @@ class StartupRegistrationApiController extends Controller
     {
         //validate credentials
         $validator = Validator::make($request->all(), [
-            'startup_id' => 'required|integer|exists:startups',
+            'startup_id' => 'required|integer|exists:startups,id',
             'startup_type_id' => 'required|integer|exists:startup_types,id',
             'startup_industry_id' => 'required|integer|exists:startup_industries,id',
             'has_patent' => 'required|integer|max:1|min:0',
@@ -135,6 +160,8 @@ class StartupRegistrationApiController extends Controller
         return $this->sendSuccessResponse();
     }
 
+
+
     /**
      * Contact Details for a Startup
      *
@@ -142,6 +169,7 @@ class StartupRegistrationApiController extends Controller
      * The same route is used to update.
      *
      * @bodyParam startup_id int required The id of the startup that contact details belongs to. Example: 1
+     * @bodyParam id int The id of the contact detail data when updating. This is used to enhance uniqueness validation for email. Example: 1
      * @bodyParam email string required The email of the startup. Example: jane@ventures.com
      * @bodyParam phone string required The phone number of the startup.
      * @bodyParam facebook_handle string  The facebook handle of the startup.
@@ -161,17 +189,30 @@ class StartupRegistrationApiController extends Controller
      */
     public function startupContactDetail(Request $request)
     {
-        //validate credentials
-        $validator = Validator::make($request->all(), [
-            'startup_id' => 'required|integer|exists:startups',
-            'email' => 'required|email|max:255|unique:startup_details',
-            'phone' => 'required|digits:10',
-            'facebook_handle' => 'nullable|string|max:255',
-            'twitter_handle' => 'nullable|string|max:255',
-            'instagram_handle' => 'nullable|string|max:255',
-            'linkdin_handle' => 'nullable|string|max:255',
-            'skype_handle' => 'nullable|string|max:255',
-        ]);
+        //perform different validation if request has id - it means validation should match update
+        if ($request->has('id')) {
+            $validator = Validator::make($request->all(), [
+                'startup_id' => 'required|integer|exists:startups,id',
+                'email' => 'required|email|max:255|unique:contact_details,email,' . $request['id'],
+                'phone' => 'required|digits:10',
+                'facebook_handle' => 'nullable|string|max:255',
+                'twitter_handle' => 'nullable|string|max:255',
+                'instagram_handle' => 'nullable|string|max:255',
+                'linkdin_handle' => 'nullable|string|max:255',
+                'skype_handle' => 'nullable|string|max:255',
+            ]);
+        } else {
+            $validator = Validator::make($request->all(), [
+                'startup_id' => 'required|integer|exists:startups,id',
+                'email' => 'required|email|max:255|unique:contact_details',
+                'phone' => 'required|digits:10',
+                'facebook_handle' => 'nullable|string|max:255',
+                'twitter_handle' => 'nullable|string|max:255',
+                'instagram_handle' => 'nullable|string|max:255',
+                'linkdin_handle' => 'nullable|string|max:255',
+                'skype_handle' => 'nullable|string|max:255',
+            ]);
+        }
 
 
         //send validation error response if any
@@ -218,7 +259,7 @@ class StartupRegistrationApiController extends Controller
     {
         //validate credentials
         $validator = Validator::make($request->all(), [
-            'startup_id' => 'required|integer|exists:startups',
+            'startup_id' => 'required|integer|exists:startups,id',
             'key_resources' => 'nullable|string',
             'customer_target' => 'nullable|string',
             'value_proposition' => 'nullable|string',
@@ -263,6 +304,11 @@ class StartupRegistrationApiController extends Controller
         return $this->sendSuccessResponse();
     }
 
+    public function dataForProductDetailRegistration(){
+        //todo:implement logic
+        //product progress
+    }
+
     /**
      * Product Detail for a Startup
      *
@@ -286,7 +332,7 @@ class StartupRegistrationApiController extends Controller
     {
         //validate credentials
         $validator = Validator::make($request->all(), [
-            'startup_id' => 'required|integer|exists:startups',
+            'startup_id' => 'required|integer|exists:startups,id',
             'product_progress_id' => 'required|integer|exists:product_progresses,id',
             'product_url' => 'nullable|string',
         ]);
@@ -305,5 +351,17 @@ class StartupRegistrationApiController extends Controller
 
         return $this->sendSuccessResponse();
     }
+
+    public function dataForCofounderDetailsRegistration(){
+        //todo:implement logic
+        //cofounder roles
+    }
+    public function startupCofounderDetails(Request $request){}
+
+    public function dataForStartupTeamRegistration(){
+        //todo:implement logic
+        //business teams
+    }
+    public function startupTeam(Request $request){}
 
 }
