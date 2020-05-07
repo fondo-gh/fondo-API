@@ -26,7 +26,7 @@ API routes for registering startups on the platform
 
 Class StartupRegistrationApiController
 <!-- START_af3acc7ec335a1b55c53dc63fe31aac0 -->
-## * Register a Startup
+## Register a Startup
 
 Registers a startup. First step out of 7 steps.
 The same route is used to update the startup, if startup id is provided.
@@ -39,7 +39,7 @@ curl -X POST \
     "http://localhost/api/v1/startup/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"company_name":"Jane Ventures","caption":"quisquam","product_image":"quis","funds_to_raise":"Ghc 234.00","duration_for_raise":"3 months.","startup_id":1}'
+    -d '{"company_name":"Jane Ventures","caption":"voluptatem","product_image":"vel","funds_to_raise":"Ghc 234.00","duration_for_raise":"3 months.","startup_id":1}'
 
 ```
 
@@ -55,8 +55,8 @@ let headers = {
 
 let body = {
     "company_name": "Jane Ventures",
-    "caption": "quisquam",
-    "product_image": "quis",
+    "caption": "voluptatem",
+    "product_image": "vel",
     "funds_to_raise": "Ghc 234.00",
     "duration_for_raise": "3 months.",
     "startup_id": 1
@@ -101,6 +101,77 @@ Parameter | Type | Status | Description
     
 <!-- END_af3acc7ec335a1b55c53dc63fe31aac0 -->
 
+<!-- START_d707ccb080e8da38aba340d4c42d8f00 -->
+## Data For Startup Details Registration.
+
+The endpoint provides startup types and startup industries which will be needed
+to populate a select input for startup details registration by entrepreneur
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/v1/startup/registration/data/startup_detail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/v1/startup/registration/data/startup_detail"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "startup_types": {
+        "data": [
+            {
+                "id": 1,
+                "name": "LLP - Limited liability Partnership"
+            },
+            {
+                "id": 2,
+                "name": "LP - Limited Partnership"
+            }
+        ]
+    },
+    "startup_industries": {
+        "data": [
+            {
+                "id": 1,
+                "name": "Agriculture"
+            },
+            {
+                "id": 2,
+                "name": "Finance"
+            }
+        ]
+    }
+}
+```
+
+### HTTP Request
+`GET api/v1/startup/registration/data/startup_detail`
+
+
+<!-- END_d707ccb080e8da38aba340d4c42d8f00 -->
+
 <!-- START_ec7a7a59b235b51d4172b9f5abc84c0a -->
 ## Startup Detail for a Startup
 
@@ -114,7 +185,7 @@ curl -X POST \
     "http://localhost/api/v1/startup/startup_detail" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"startup_id":1,"startup_type_id":1,"startup_industry_id":1,"has_patent":true,"location":"harum"}'
+    -d '{"startup_id":1,"startup_type_id":1,"startup_industry_id":1,"has_patent":true,"location":"unde"}'
 
 ```
 
@@ -133,7 +204,7 @@ let body = {
     "startup_type_id": 1,
     "startup_industry_id": 1,
     "has_patent": true,
-    "location": "harum"
+    "location": "unde"
 }
 
 fetch(url, {
@@ -184,7 +255,7 @@ curl -X POST \
     "http://localhost/api/v1/startup/contact_detail" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"startup_id":1,"email":"jane@ventures.com","phone":"molestiae","facebook_handle":"in","twitter_handle":"ipsum","instagram_handle":"unde","linkdin_handle":"fuga","skype_handle":"hic"}'
+    -d '{"startup_id":1,"id":1,"email":"jane@ventures.com","phone":"adipisci","facebook_handle":"esse","twitter_handle":"enim","instagram_handle":"nulla","linkdin_handle":"perferendis","skype_handle":"fugit"}'
 
 ```
 
@@ -200,13 +271,14 @@ let headers = {
 
 let body = {
     "startup_id": 1,
+    "id": 1,
     "email": "jane@ventures.com",
-    "phone": "molestiae",
-    "facebook_handle": "in",
-    "twitter_handle": "ipsum",
-    "instagram_handle": "unde",
-    "linkdin_handle": "fuga",
-    "skype_handle": "hic"
+    "phone": "adipisci",
+    "facebook_handle": "esse",
+    "twitter_handle": "enim",
+    "instagram_handle": "nulla",
+    "linkdin_handle": "perferendis",
+    "skype_handle": "fugit"
 }
 
 fetch(url, {
@@ -237,6 +309,7 @@ fetch(url, {
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
     `startup_id` | integer |  required  | The id of the startup that contact details belongs to.
+        `id` | integer |  optional  | The id of the contact detail data when updating. This is used to enhance uniqueness validation for email.
         `email` | string |  required  | The email of the startup.
         `phone` | string |  required  | The phone number of the startup.
         `facebook_handle` | string |  optional  | The facebook handle of the startup.
@@ -260,7 +333,7 @@ curl -X POST \
     "http://localhost/api/v1/startup/business_model" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"startup_id":1,"key_resources":"aperiam","customer_target":"consequuntur","value_proposition":"et","sales_channels":"et","revenue_streams":"vel","key_metrics":"suscipit","cost_structure":"quod","financial_file":"sapiente","optional_file":"quis"}'
+    -d '{"startup_id":1,"key_resources":"ut","customer_target":"rerum","value_proposition":"adipisci","sales_channels":"consectetur","revenue_streams":"quos","key_metrics":"doloribus","cost_structure":"alias","financial_file":"maxime","optional_file":"molestias"}'
 
 ```
 
@@ -276,15 +349,15 @@ let headers = {
 
 let body = {
     "startup_id": 1,
-    "key_resources": "aperiam",
-    "customer_target": "consequuntur",
-    "value_proposition": "et",
-    "sales_channels": "et",
-    "revenue_streams": "vel",
-    "key_metrics": "suscipit",
-    "cost_structure": "quod",
-    "financial_file": "sapiente",
-    "optional_file": "quis"
+    "key_resources": "ut",
+    "customer_target": "rerum",
+    "value_proposition": "adipisci",
+    "sales_channels": "consectetur",
+    "revenue_streams": "quos",
+    "key_metrics": "doloribus",
+    "cost_structure": "alias",
+    "financial_file": "maxime",
+    "optional_file": "molestias"
 }
 
 fetch(url, {
@@ -327,6 +400,63 @@ Parameter | Type | Status | Description
     
 <!-- END_5859401432fa237c862c239a45330785 -->
 
+<!-- START_f89683583ee45ec05873a3e2e400c57a -->
+## Data for Product Detail Registration
+
+The endpoint provides product progress which will be needed
+to populate a select input for startup product details registration by entrepreneur
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/v1/startup/registration/data/product_detail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/v1/startup/registration/data/product_detail"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Concept only"
+        },
+        {
+            "id": 2,
+            "name": "Product development"
+        }
+    ]
+}
+```
+
+### HTTP Request
+`GET api/v1/startup/registration/data/product_detail`
+
+
+<!-- END_f89683583ee45ec05873a3e2e400c57a -->
+
 <!-- START_9f81627daca3accf82a01c1fe5f1e36d -->
 ## Product Detail for a Startup
 
@@ -340,7 +470,7 @@ curl -X POST \
     "http://localhost/api/v1/startup/product_detail" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"startup_id":1,"product_progress_id":1,"product_url":"consectetur"}'
+    -d '{"startup_id":1,"product_progress_id":1,"product_url":"et"}'
 
 ```
 
@@ -357,7 +487,7 @@ let headers = {
 let body = {
     "startup_id": 1,
     "product_progress_id": 1,
-    "product_url": "consectetur"
+    "product_url": "et"
 }
 
 fetch(url, {
@@ -393,6 +523,122 @@ Parameter | Type | Status | Description
     
 <!-- END_9f81627daca3accf82a01c1fe5f1e36d -->
 
+<!-- START_b76580eb2a2f944af1cc8ec6ec266979 -->
+## Data for Cofounder Details registration
+
+The endpoint provides cofounder roles which will be needed
+to populate a select input for startup cofounder details registration by entrepreneur
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/v1/startup/registration/data/cofounder_detail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/v1/startup/registration/data/cofounder_detail"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Concept only"
+        },
+        {
+            "id": 2,
+            "name": "Product development"
+        }
+    ]
+}
+```
+
+### HTTP Request
+`GET api/v1/startup/registration/data/cofounder_detail`
+
+
+<!-- END_b76580eb2a2f944af1cc8ec6ec266979 -->
+
+<!-- START_d81fe156bc4fba413ad45237758a9714 -->
+## Data for Startup Team registration
+
+The endpoint provides business teams  which will be needed
+to populate a select input for startup teams registration by entrepreneur
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/v1/startup/registration/data/startup_team" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost/api/v1/startup/registration/data/startup_team"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Sales and marketing team",
+            "description": "Responsible for bringing the product to market. They use several approaches to get the word out regarding their new invention."
+        },
+        {
+            "id": 2,
+            "name": "Operations and Production team",
+            "description": "Responsible for bringing the product to life. They receive the product's vision and bring it into its finished stage."
+        }
+    ]
+}
+```
+
+### HTTP Request
+`GET api/v1/startup/registration/data/startup_team`
+
+
+<!-- END_d81fe156bc4fba413ad45237758a9714 -->
+
 #User Management
 
 
@@ -409,7 +655,7 @@ curl -X POST \
     "http://localhost/api/v1/user/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"mail@mail.com","password":"fugiat"}'
+    -d '{"email":"mail@mail.com","password":"et"}'
 
 ```
 
@@ -425,7 +671,7 @@ let headers = {
 
 let body = {
     "email": "mail@mail.com",
-    "password": "fugiat"
+    "password": "et"
 }
 
 fetch(url, {
@@ -441,7 +687,21 @@ fetch(url, {
 > Example response (200):
 
 ```json
-null
+{
+    "success": {
+        "code": 200,
+        "message": "Request completed successfully."
+    },
+    "data": {
+        "id": 1,
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "email": "jane@doe.com",
+        "picture": "http:\/\/www.fondo.com\/user\/kkjdfj.jpg",
+        "user_type": "Investor",
+        "token": "7geRI9P4LUFj3ensaxOV070Uk1yXeQ23ptqerJYc"
+    }
+}
 ```
 > Example response (404):
 
@@ -533,7 +793,7 @@ curl -X POST \
     "http://localhost/api/v1/user/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"first_name":"Jane","last_name":"Doe","picture":"iste","user_type_id":1,"email":"mail@mail.com","password":"eligendi","password_confirmation":"consequatur"}'
+    -d '{"first_name":"Jane","last_name":"Doe","picture":"sit","user_type_id":1,"email":"mail@mail.com","password":"temporibus","password_confirmation":"quis"}'
 
 ```
 
@@ -550,11 +810,11 @@ let headers = {
 let body = {
     "first_name": "Jane",
     "last_name": "Doe",
-    "picture": "iste",
+    "picture": "sit",
     "user_type_id": 1,
     "email": "mail@mail.com",
-    "password": "eligendi",
-    "password_confirmation": "consequatur"
+    "password": "temporibus",
+    "password_confirmation": "quis"
 }
 
 fetch(url, {
@@ -570,7 +830,21 @@ fetch(url, {
 > Example response (200):
 
 ```json
-null
+{
+    "success": {
+        "code": 200,
+        "message": "Request completed successfully."
+    },
+    "data": {
+        "id": 1,
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "email": "jane@doe.com",
+        "picture": "http:\/\/www.fondo.com\/user\/kkjdfj.jpg",
+        "user_type": "Entrepreneur",
+        "token": "7geRI9P4LUFj3ensaxOV070Uk1yXeQ23ptqerJYc"
+    }
+}
 ```
 
 ### HTTP Request

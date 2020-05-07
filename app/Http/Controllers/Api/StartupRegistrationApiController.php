@@ -135,7 +135,7 @@ class StartupRegistrationApiController extends Controller
      * {
      * "id": 2,
      * "name": "LP - Limited Partnership"
-     * },
+     * }
      * ]
      * },
      * "startup_industries": {
@@ -147,7 +147,7 @@ class StartupRegistrationApiController extends Controller
      * {
      * "id": 2,
      * "name": "Finance"
-     * },
+     * }
      * ]
      * }
      * }
@@ -364,8 +364,7 @@ class StartupRegistrationApiController extends Controller
      * {
      * "id": 2,
      * "name": "Product development"
-     * },
-     * ]
+     * }]
      *
      * }
      * @return ProductProgressCollection
@@ -433,9 +432,7 @@ class StartupRegistrationApiController extends Controller
      * {
      * "id": 2,
      * "name": "Product development"
-     * },
-     *
-     * ]
+     * }]
      * }
      *
      *

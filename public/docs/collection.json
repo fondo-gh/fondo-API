@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Laravel API",
-        "_postman_id": "315d5411-5ea8-4e2a-b8c2-e329a9c63204",
+        "_postman_id": "8cd5adb7-d4c6-4a15-99d2-625102c41ca2",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -12,7 +12,7 @@
             "description": "API routes for registering startups on the platform\n\nClass StartupRegistrationApiController",
             "item": [
                 {
-                    "name": "* Register a Startup",
+                    "name": "Register a Startup",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -33,9 +33,37 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"company_name\": \"Jane Ventures\",\n    \"caption\": \"quisquam\",\n    \"product_image\": \"quis\",\n    \"funds_to_raise\": \"Ghc 234.00\",\n    \"duration_for_raise\": \"3 months.\",\n    \"startup_id\": 1\n}"
+                            "raw": "{\n    \"company_name\": \"Jane Ventures\",\n    \"caption\": \"voluptatem\",\n    \"product_image\": \"vel\",\n    \"funds_to_raise\": \"Ghc 234.00\",\n    \"duration_for_raise\": \"3 months.\",\n    \"startup_id\": 1\n}"
                         },
                         "description": "Registers a startup. First step out of 7 steps.\nThe same route is used to update the startup, if startup id is provided.\nWhen registration is done, a startup id is returned. This then can be used for the next stages.",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Data For Startup Details Registration.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/v1\/startup\/registration\/data\/startup_detail",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "The endpoint provides startup types and startup industries which will be needed\nto populate a select input for startup details registration by entrepreneur",
                         "response": []
                     }
                 },
@@ -61,7 +89,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"startup_id\": 1,\n    \"startup_type_id\": 1,\n    \"startup_industry_id\": 1,\n    \"has_patent\": true,\n    \"location\": \"harum\"\n}"
+                            "raw": "{\n    \"startup_id\": 1,\n    \"startup_type_id\": 1,\n    \"startup_industry_id\": 1,\n    \"has_patent\": true,\n    \"location\": \"unde\"\n}"
                         },
                         "description": "Updates a startup with further startup details.\nThe same route is used to update.",
                         "response": []
@@ -89,7 +117,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"startup_id\": 1,\n    \"email\": \"jane@ventures.com\",\n    \"phone\": \"molestiae\",\n    \"facebook_handle\": \"in\",\n    \"twitter_handle\": \"ipsum\",\n    \"instagram_handle\": \"unde\",\n    \"linkdin_handle\": \"fuga\",\n    \"skype_handle\": \"hic\"\n}"
+                            "raw": "{\n    \"startup_id\": 1,\n    \"id\": 1,\n    \"email\": \"jane@ventures.com\",\n    \"phone\": \"adipisci\",\n    \"facebook_handle\": \"esse\",\n    \"twitter_handle\": \"enim\",\n    \"instagram_handle\": \"nulla\",\n    \"linkdin_handle\": \"perferendis\",\n    \"skype_handle\": \"fugit\"\n}"
                         },
                         "description": "Updates a startup with Contact details.\nThe same route is used to update.",
                         "response": []
@@ -117,9 +145,37 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"startup_id\": 1,\n    \"key_resources\": \"aperiam\",\n    \"customer_target\": \"consequuntur\",\n    \"value_proposition\": \"et\",\n    \"sales_channels\": \"et\",\n    \"revenue_streams\": \"vel\",\n    \"key_metrics\": \"suscipit\",\n    \"cost_structure\": \"quod\",\n    \"financial_file\": \"sapiente\",\n    \"optional_file\": \"quis\"\n}"
+                            "raw": "{\n    \"startup_id\": 1,\n    \"key_resources\": \"ut\",\n    \"customer_target\": \"rerum\",\n    \"value_proposition\": \"adipisci\",\n    \"sales_channels\": \"consectetur\",\n    \"revenue_streams\": \"quos\",\n    \"key_metrics\": \"doloribus\",\n    \"cost_structure\": \"alias\",\n    \"financial_file\": \"maxime\",\n    \"optional_file\": \"molestias\"\n}"
                         },
                         "description": "Updates a startup with Business model detail.\nThe same route is used to update.",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Data for Product Detail Registration",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/v1\/startup\/registration\/data\/product_detail",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "The endpoint provides product progress which will be needed\nto populate a select input for startup product details registration by entrepreneur",
                         "response": []
                     }
                 },
@@ -145,9 +201,65 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"startup_id\": 1,\n    \"product_progress_id\": 1,\n    \"product_url\": \"consectetur\"\n}"
+                            "raw": "{\n    \"startup_id\": 1,\n    \"product_progress_id\": 1,\n    \"product_url\": \"et\"\n}"
                         },
                         "description": "Updates a startup with product detail.\nThe same route is used to update.",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Data for Cofounder Details registration",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/v1\/startup\/registration\/data\/cofounder_detail",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "The endpoint provides cofounder roles which will be needed\nto populate a select input for startup cofounder details registration by entrepreneur",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Data for Startup Team registration",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/v1\/startup\/registration\/data\/startup_team",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "The endpoint provides business teams  which will be needed\nto populate a select input for startup teams registration by entrepreneur",
                         "response": []
                     }
                 }
@@ -179,7 +291,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"mail@mail.com\",\n    \"password\": \"fugiat\"\n}"
+                            "raw": "{\n    \"email\": \"mail@mail.com\",\n    \"password\": \"et\"\n}"
                         },
                         "description": "Authenticates an entrepreneur or investor.",
                         "response": []
@@ -235,7 +347,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"first_name\": \"Jane\",\n    \"last_name\": \"Doe\",\n    \"picture\": \"iste\",\n    \"user_type_id\": 1,\n    \"email\": \"mail@mail.com\",\n    \"password\": \"eligendi\",\n    \"password_confirmation\": \"consequatur\"\n}"
+                            "raw": "{\n    \"first_name\": \"Jane\",\n    \"last_name\": \"Doe\",\n    \"picture\": \"sit\",\n    \"user_type_id\": 1,\n    \"email\": \"mail@mail.com\",\n    \"password\": \"temporibus\",\n    \"password_confirmation\": \"quis\"\n}"
                         },
                         "description": "Registers a user as an entrepreneur or investor.",
                         "response": []

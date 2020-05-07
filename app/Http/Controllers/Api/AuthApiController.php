@@ -54,7 +54,7 @@ class AuthApiController extends Controller
      * "first_name": "Jane",
      * "last_name": "Doe",
      * "email": "jane@doe.com",
-     * "picture": http://www.fondo.com/user/kkjdfj.jpg,
+     * "picture": "http://www.fondo.com/user/kkjdfj.jpg",
      * "user_type": "Investor",
      * "token": "7geRI9P4LUFj3ensaxOV070Uk1yXeQ23ptqerJYc"
      *  }
@@ -120,7 +120,7 @@ class AuthApiController extends Controller
       * "first_name": "Jane",
       * "last_name": "Doe",
       * "email": "jane@doe.com",
-      * "picture": http://www.fondo.com/user/kkjdfj.jpg,
+      * "picture": "http://www.fondo.com/user/kkjdfj.jpg",
       * "user_type": "Entrepreneur",
       * "token": "7geRI9P4LUFj3ensaxOV070Uk1yXeQ23ptqerJYc"
       *    }
