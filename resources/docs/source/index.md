@@ -2,8 +2,9 @@
 title: API Reference
 
 language_tabs:
-- php
 - javascript
+- php
+- bash
 
 includes:
 
@@ -32,31 +33,6 @@ When registration is done, a startup id is returned. This then can be used for t
 
 > Example request:
 
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->post(
-    'http://localhost/api/v1/startup/register',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-        'json' => [
-            'company_name' => 'Jane Ventures',
-            'caption' => 'sit',
-            'product_image' => 'voluptas',
-            'funds_to_raise' => 'Ghc 234.00',
-            'duration_for_raise' => '3 months.',
-            'startup_id' => 1,
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/v1/startup/register"
@@ -70,8 +46,8 @@ let headers = {
 
 let body = {
     "company_name": "Jane Ventures",
-    "caption": "sit",
-    "product_image": "voluptas",
+    "caption": "nesciunt",
+    "product_image": "hic",
     "funds_to_raise": "Ghc 234.00",
     "duration_for_raise": "3 months.",
     "startup_id": 1
@@ -84,6 +60,41 @@ fetch(url, {
 })
     .then(response => response.json())
     .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://localhost/api/v1/startup/register',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+        'json' => [
+            'company_name' => 'Jane Ventures',
+            'caption' => 'nesciunt',
+            'product_image' => 'hic',
+            'funds_to_raise' => 'Ghc 234.00',
+            'duration_for_raise' => '3 months.',
+            'startup_id' => 1,
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X POST \
+    "http://localhost/api/v1/startup/register" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -d '{"company_name":"Jane Ventures","caption":"nesciunt","product_image":"hic","funds_to_raise":"Ghc 234.00","duration_for_raise":"3 months.","startup_id":1}'
+
 ```
 
 
@@ -125,23 +136,6 @@ to populate a select input for startup details registration by entrepreneur
 
 > Example request:
 
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->get(
-    'http://localhost/api/v1/startup/registration/data/startup_detail',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/v1/startup/registration/data/startup_detail"
@@ -159,6 +153,31 @@ fetch(url, {
 })
     .then(response => response.json())
     .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://localhost/api/v1/startup/registration/data/startup_detail',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/v1/startup/registration/data/startup_detail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 
@@ -208,30 +227,6 @@ The same route is used to update.
 
 > Example request:
 
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->post(
-    'http://localhost/api/v1/startup/startup_detail',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-        'json' => [
-            'startup_id' => 1,
-            'startup_type_id' => 1,
-            'startup_industry_id' => 1,
-            'has_patent' => true,
-            'location' => 'qui',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/v1/startup/startup_detail"
@@ -248,7 +243,7 @@ let body = {
     "startup_type_id": 1,
     "startup_industry_id": 1,
     "has_patent": true,
-    "location": "qui"
+    "location": "unde"
 }
 
 fetch(url, {
@@ -258,6 +253,40 @@ fetch(url, {
 })
     .then(response => response.json())
     .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://localhost/api/v1/startup/startup_detail',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+        'json' => [
+            'startup_id' => 1,
+            'startup_type_id' => 1,
+            'startup_industry_id' => 1,
+            'has_patent' => true,
+            'location' => 'unde',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X POST \
+    "http://localhost/api/v1/startup/startup_detail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -d '{"startup_id":1,"startup_type_id":1,"startup_industry_id":1,"has_patent":true,"location":"unde"}'
+
 ```
 
 
@@ -295,34 +324,6 @@ The same route is used to update.
 
 > Example request:
 
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->post(
-    'http://localhost/api/v1/startup/contact_detail',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-        'json' => [
-            'startup_id' => 1,
-            'id' => 1,
-            'email' => 'jane@ventures.com',
-            'phone' => 'atque',
-            'facebook_handle' => 'tenetur',
-            'twitter_handle' => 'neque',
-            'instagram_handle' => 'ut',
-            'linkdin_handle' => 'fuga',
-            'skype_handle' => 'ea',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/v1/startup/contact_detail"
@@ -338,12 +339,12 @@ let body = {
     "startup_id": 1,
     "id": 1,
     "email": "jane@ventures.com",
-    "phone": "atque",
-    "facebook_handle": "tenetur",
-    "twitter_handle": "neque",
-    "instagram_handle": "ut",
-    "linkdin_handle": "fuga",
-    "skype_handle": "ea"
+    "phone": "omnis",
+    "facebook_handle": "ut",
+    "twitter_handle": "omnis",
+    "instagram_handle": "optio",
+    "linkdin_handle": "quo",
+    "skype_handle": "eaque"
 }
 
 fetch(url, {
@@ -353,6 +354,44 @@ fetch(url, {
 })
     .then(response => response.json())
     .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://localhost/api/v1/startup/contact_detail',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+        'json' => [
+            'startup_id' => 1,
+            'id' => 1,
+            'email' => 'jane@ventures.com',
+            'phone' => 'omnis',
+            'facebook_handle' => 'ut',
+            'twitter_handle' => 'omnis',
+            'instagram_handle' => 'optio',
+            'linkdin_handle' => 'quo',
+            'skype_handle' => 'eaque',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X POST \
+    "http://localhost/api/v1/startup/contact_detail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -d '{"startup_id":1,"id":1,"email":"jane@ventures.com","phone":"omnis","facebook_handle":"ut","twitter_handle":"omnis","instagram_handle":"optio","linkdin_handle":"quo","skype_handle":"eaque"}'
+
 ```
 
 
@@ -394,35 +433,6 @@ The same route is used to update.
 
 > Example request:
 
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->post(
-    'http://localhost/api/v1/startup/business_model',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-        'json' => [
-            'startup_id' => 1,
-            'key_resources' => 'fugiat',
-            'customer_target' => 'est',
-            'value_proposition' => 'pariatur',
-            'sales_channels' => 'dolores',
-            'revenue_streams' => 'voluptatibus',
-            'key_metrics' => 'molestiae',
-            'cost_structure' => 'fuga',
-            'financial_file' => 'ex',
-            'optional_file' => 'a',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/v1/startup/business_model"
@@ -436,15 +446,15 @@ let headers = {
 
 let body = {
     "startup_id": 1,
-    "key_resources": "fugiat",
-    "customer_target": "est",
-    "value_proposition": "pariatur",
-    "sales_channels": "dolores",
-    "revenue_streams": "voluptatibus",
-    "key_metrics": "molestiae",
-    "cost_structure": "fuga",
-    "financial_file": "ex",
-    "optional_file": "a"
+    "key_resources": "quidem",
+    "customer_target": "error",
+    "value_proposition": "illo",
+    "sales_channels": "sit",
+    "revenue_streams": "amet",
+    "key_metrics": "temporibus",
+    "cost_structure": "inventore",
+    "financial_file": "et",
+    "optional_file": "omnis"
 }
 
 fetch(url, {
@@ -454,6 +464,45 @@ fetch(url, {
 })
     .then(response => response.json())
     .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://localhost/api/v1/startup/business_model',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+        'json' => [
+            'startup_id' => 1,
+            'key_resources' => 'quidem',
+            'customer_target' => 'error',
+            'value_proposition' => 'illo',
+            'sales_channels' => 'sit',
+            'revenue_streams' => 'amet',
+            'key_metrics' => 'temporibus',
+            'cost_structure' => 'inventore',
+            'financial_file' => 'et',
+            'optional_file' => 'omnis',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X POST \
+    "http://localhost/api/v1/startup/business_model" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -d '{"startup_id":1,"key_resources":"quidem","customer_target":"error","value_proposition":"illo","sales_channels":"sit","revenue_streams":"amet","key_metrics":"temporibus","cost_structure":"inventore","financial_file":"et","optional_file":"omnis"}'
+
 ```
 
 
@@ -496,23 +545,6 @@ to populate a select input for startup product details registration by entrepren
 
 > Example request:
 
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->get(
-    'http://localhost/api/v1/startup/registration/data/product_detail',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/v1/startup/registration/data/product_detail"
@@ -530,6 +562,31 @@ fetch(url, {
 })
     .then(response => response.json())
     .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://localhost/api/v1/startup/registration/data/product_detail',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/v1/startup/registration/data/product_detail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 
@@ -565,28 +622,6 @@ The same route is used to update.
 
 > Example request:
 
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->post(
-    'http://localhost/api/v1/startup/product_detail',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-        'json' => [
-            'startup_id' => 1,
-            'product_progress_id' => 1,
-            'product_url' => 'tenetur',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/v1/startup/product_detail"
@@ -601,7 +636,7 @@ let headers = {
 let body = {
     "startup_id": 1,
     "product_progress_id": 1,
-    "product_url": "tenetur"
+    "product_url": "autem"
 }
 
 fetch(url, {
@@ -611,6 +646,38 @@ fetch(url, {
 })
     .then(response => response.json())
     .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://localhost/api/v1/startup/product_detail',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+        'json' => [
+            'startup_id' => 1,
+            'product_progress_id' => 1,
+            'product_url' => 'autem',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X POST \
+    "http://localhost/api/v1/startup/product_detail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -d '{"startup_id":1,"product_progress_id":1,"product_url":"autem"}'
+
 ```
 
 
@@ -646,23 +713,6 @@ to populate a select input for startup cofounder details registration by entrepr
 
 > Example request:
 
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->get(
-    'http://localhost/api/v1/startup/registration/data/cofounder_detail',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/v1/startup/registration/data/cofounder_detail"
@@ -680,6 +730,31 @@ fetch(url, {
 })
     .then(response => response.json())
     .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://localhost/api/v1/startup/registration/data/cofounder_detail',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/v1/startup/registration/data/cofounder_detail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 
@@ -731,29 +806,6 @@ cofounder_role_id: 5<br>
 
 > Example request:
 
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->post(
-    'http://localhost/api/v1/startup/cofounder_detail',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-        'json' => [
-            'startup_id' => 1,
-            'funding_amount' => '3000.0',
-            'rate_of_devotion' => 'et',
-            'cofounders' => [],
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/v1/startup/cofounder_detail"
@@ -768,7 +820,7 @@ let headers = {
 let body = {
     "startup_id": 1,
     "funding_amount": "3000.0",
-    "rate_of_devotion": "et",
+    "rate_of_devotion": "omnis",
     "cofounders": []
 }
 
@@ -779,6 +831,39 @@ fetch(url, {
 })
     .then(response => response.json())
     .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://localhost/api/v1/startup/cofounder_detail',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+        'json' => [
+            'startup_id' => 1,
+            'funding_amount' => '3000.0',
+            'rate_of_devotion' => 'omnis',
+            'cofounders' => [],
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X POST \
+    "http://localhost/api/v1/startup/cofounder_detail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -d '{"startup_id":1,"funding_amount":"3000.0","rate_of_devotion":"omnis","cofounders":[]}'
+
 ```
 
 
@@ -815,23 +900,6 @@ to populate a select input for startup teams registration by entrepreneur
 
 > Example request:
 
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->get(
-    'http://localhost/api/v1/startup/registration/data/startup_team',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/v1/startup/registration/data/startup_team"
@@ -849,6 +917,31 @@ fetch(url, {
 })
     .then(response => response.json())
     .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://localhost/api/v1/startup/registration/data/startup_team',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/v1/startup/registration/data/startup_team" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 
@@ -885,23 +978,6 @@ fetch(url, {
 
 > Example request:
 
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->get(
-    'http://localhost/oauth/authorize',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/oauth/authorize"
@@ -919,6 +995,31 @@ fetch(url, {
 })
     .then(response => response.json())
     .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://localhost/oauth/authorize',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X GET \
+    -G "http://localhost/oauth/authorize" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 
@@ -941,23 +1042,6 @@ fetch(url, {
 
 > Example request:
 
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->post(
-    'http://localhost/oauth/authorize',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/oauth/authorize"
@@ -977,23 +1061,10 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
-
-
-### HTTP Request
-`POST oauth/authorize`
-
-
-<!-- END_e48cc6a0b45dd21b7076ab2c03908687 -->
-
-<!-- START_de5d7581ef1275fce2a229b6b6eaad9c -->
-## Deny the authorization request.
-
-> Example request:
-
 ```php
 
 $client = new \GuzzleHttp\Client();
-$response = $client->delete(
+$response = $client->post(
     'http://localhost/oauth/authorize',
     [
         'headers' => [
@@ -1006,6 +1077,27 @@ $response = $client->delete(
 $body = $response->getBody();
 print_r(json_decode((string) $body));
 ```
+
+```bash
+curl -X POST \
+    "http://localhost/oauth/authorize" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
+
+
+### HTTP Request
+`POST oauth/authorize`
+
+
+<!-- END_e48cc6a0b45dd21b7076ab2c03908687 -->
+
+<!-- START_de5d7581ef1275fce2a229b6b6eaad9c -->
+## Deny the authorization request.
+
+> Example request:
 
 ```javascript
 const url = new URL(
@@ -1026,6 +1118,31 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->delete(
+    'http://localhost/oauth/authorize',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X DELETE \
+    "http://localhost/oauth/authorize" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
 
 
 ### HTTP Request
@@ -1038,23 +1155,6 @@ fetch(url, {
 ## Authorize a client to access the user&#039;s account.
 
 > Example request:
-
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->post(
-    'http://localhost/oauth/token',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
 
 ```javascript
 const url = new URL(
@@ -1075,6 +1175,31 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://localhost/oauth/token',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X POST \
+    "http://localhost/oauth/token" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
 
 
 ### HTTP Request
@@ -1087,23 +1212,6 @@ fetch(url, {
 ## Get all of the authorized tokens for the authenticated user.
 
 > Example request:
-
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->get(
-    'http://localhost/oauth/tokens',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
 
 ```javascript
 const url = new URL(
@@ -1124,6 +1232,31 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://localhost/oauth/tokens',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X GET \
+    -G "http://localhost/oauth/tokens" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
 
 
 ### HTTP Request
@@ -1136,23 +1269,6 @@ fetch(url, {
 ## Delete the given token.
 
 > Example request:
-
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->delete(
-    'http://localhost/oauth/tokens/1',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
 
 ```javascript
 const url = new URL(
@@ -1173,6 +1289,31 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->delete(
+    'http://localhost/oauth/tokens/1',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X DELETE \
+    "http://localhost/oauth/tokens/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
 
 
 ### HTTP Request
@@ -1185,23 +1326,6 @@ fetch(url, {
 ## Get a fresh transient token cookie for the authenticated user.
 
 > Example request:
-
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->post(
-    'http://localhost/oauth/token/refresh',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
 
 ```javascript
 const url = new URL(
@@ -1222,6 +1346,31 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://localhost/oauth/token/refresh',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X POST \
+    "http://localhost/oauth/token/refresh" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
 
 
 ### HTTP Request
@@ -1234,23 +1383,6 @@ fetch(url, {
 ## Get all of the clients for the authenticated user.
 
 > Example request:
-
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->get(
-    'http://localhost/oauth/clients',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
 
 ```javascript
 const url = new URL(
@@ -1271,23 +1403,10 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
-
-
-### HTTP Request
-`GET oauth/clients`
-
-
-<!-- END_babcfe12d87b8708f5985e9d39ba8f2c -->
-
-<!-- START_9eabf8d6e4ab449c24c503fcb42fba82 -->
-## Store a new client.
-
-> Example request:
-
 ```php
 
 $client = new \GuzzleHttp\Client();
-$response = $client->post(
+$response = $client->get(
     'http://localhost/oauth/clients',
     [
         'headers' => [
@@ -1300,6 +1419,27 @@ $response = $client->post(
 $body = $response->getBody();
 print_r(json_decode((string) $body));
 ```
+
+```bash
+curl -X GET \
+    -G "http://localhost/oauth/clients" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
+
+
+### HTTP Request
+`GET oauth/clients`
+
+
+<!-- END_babcfe12d87b8708f5985e9d39ba8f2c -->
+
+<!-- START_9eabf8d6e4ab449c24c503fcb42fba82 -->
+## Store a new client.
+
+> Example request:
 
 ```javascript
 const url = new URL(
@@ -1320,6 +1460,31 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://localhost/oauth/clients',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X POST \
+    "http://localhost/oauth/clients" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
 
 
 ### HTTP Request
@@ -1332,23 +1497,6 @@ fetch(url, {
 ## Update the given client.
 
 > Example request:
-
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->put(
-    'http://localhost/oauth/clients/1',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
 
 ```javascript
 const url = new URL(
@@ -1369,23 +1517,10 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
-
-
-### HTTP Request
-`PUT oauth/clients/{client_id}`
-
-
-<!-- END_784aec390a455073fc7464335c1defa1 -->
-
-<!-- START_1f65a511dd86ba0541d7ba13ca57e364 -->
-## Delete the given client.
-
-> Example request:
-
 ```php
 
 $client = new \GuzzleHttp\Client();
-$response = $client->delete(
+$response = $client->put(
     'http://localhost/oauth/clients/1',
     [
         'headers' => [
@@ -1398,6 +1533,27 @@ $response = $client->delete(
 $body = $response->getBody();
 print_r(json_decode((string) $body));
 ```
+
+```bash
+curl -X PUT \
+    "http://localhost/oauth/clients/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
+
+
+### HTTP Request
+`PUT oauth/clients/{client_id}`
+
+
+<!-- END_784aec390a455073fc7464335c1defa1 -->
+
+<!-- START_1f65a511dd86ba0541d7ba13ca57e364 -->
+## Delete the given client.
+
+> Example request:
 
 ```javascript
 const url = new URL(
@@ -1418,6 +1574,31 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->delete(
+    'http://localhost/oauth/clients/1',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X DELETE \
+    "http://localhost/oauth/clients/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
 
 
 ### HTTP Request
@@ -1430,23 +1611,6 @@ fetch(url, {
 ## Get all of the available scopes for the application.
 
 > Example request:
-
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->get(
-    'http://localhost/oauth/scopes',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
 
 ```javascript
 const url = new URL(
@@ -1467,6 +1631,31 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://localhost/oauth/scopes',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X GET \
+    -G "http://localhost/oauth/scopes" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
 
 
 ### HTTP Request
@@ -1479,23 +1668,6 @@ fetch(url, {
 ## Get all of the personal access tokens for the authenticated user.
 
 > Example request:
-
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->get(
-    'http://localhost/oauth/personal-access-tokens',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
 
 ```javascript
 const url = new URL(
@@ -1516,23 +1688,10 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
-
-
-### HTTP Request
-`GET oauth/personal-access-tokens`
-
-
-<!-- END_9b2a7699ce6214a79e0fd8107f8b1c9e -->
-
-<!-- START_a8dd9c0a5583742e671711f9bb3ee406 -->
-## Create a new personal access token for the user.
-
-> Example request:
-
 ```php
 
 $client = new \GuzzleHttp\Client();
-$response = $client->post(
+$response = $client->get(
     'http://localhost/oauth/personal-access-tokens',
     [
         'headers' => [
@@ -1545,6 +1704,27 @@ $response = $client->post(
 $body = $response->getBody();
 print_r(json_decode((string) $body));
 ```
+
+```bash
+curl -X GET \
+    -G "http://localhost/oauth/personal-access-tokens" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
+
+
+### HTTP Request
+`GET oauth/personal-access-tokens`
+
+
+<!-- END_9b2a7699ce6214a79e0fd8107f8b1c9e -->
+
+<!-- START_a8dd9c0a5583742e671711f9bb3ee406 -->
+## Create a new personal access token for the user.
+
+> Example request:
 
 ```javascript
 const url = new URL(
@@ -1565,6 +1745,31 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://localhost/oauth/personal-access-tokens',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X POST \
+    "http://localhost/oauth/personal-access-tokens" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
 
 
 ### HTTP Request
@@ -1577,23 +1782,6 @@ fetch(url, {
 ## Delete the given token.
 
 > Example request:
-
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->delete(
-    'http://localhost/oauth/personal-access-tokens/1',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
 
 ```javascript
 const url = new URL(
@@ -1612,6 +1800,31 @@ fetch(url, {
 })
     .then(response => response.json())
     .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->delete(
+    'http://localhost/oauth/personal-access-tokens/1',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X DELETE \
+    "http://localhost/oauth/personal-access-tokens/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 
@@ -1633,27 +1846,6 @@ Authenticates an entrepreneur or investor.
 
 > Example request:
 
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->post(
-    'http://localhost/api/v1/user/login',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-        'json' => [
-            'email' => 'mail@mail.com',
-            'password' => 'eum',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/v1/user/login"
@@ -1667,7 +1859,7 @@ let headers = {
 
 let body = {
     "email": "mail@mail.com",
-    "password": "eum"
+    "password": "quia"
 }
 
 fetch(url, {
@@ -1677,6 +1869,37 @@ fetch(url, {
 })
     .then(response => response.json())
     .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://localhost/api/v1/user/login',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+        'json' => [
+            'email' => 'mail@mail.com',
+            'password' => 'quia',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X POST \
+    "http://localhost/api/v1/user/login" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -d '{"email":"mail@mail.com","password":"quia"}'
+
 ```
 
 
@@ -1728,23 +1951,6 @@ Displays listing of user types needed to register for an account on the system
 
 > Example request:
 
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->get(
-    'http://localhost/api/v1/user/types',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/v1/user/types"
@@ -1762,6 +1968,31 @@ fetch(url, {
 })
     .then(response => response.json())
     .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://localhost/api/v1/user/types',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X GET \
+    -G "http://localhost/api/v1/user/types" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 
@@ -1795,32 +2026,6 @@ Registers a user as an entrepreneur or investor.
 
 > Example request:
 
-```php
-
-$client = new \GuzzleHttp\Client();
-$response = $client->post(
-    'http://localhost/api/v1/user/register',
-    [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer {token}',
-        ],
-        'json' => [
-            'first_name' => 'Jane',
-            'last_name' => 'Doe',
-            'picture' => 'error',
-            'user_type_id' => 1,
-            'email' => 'mail@mail.com',
-            'password' => 'voluptates',
-            'password_confirmation' => 'vel',
-        ],
-    ]
-);
-$body = $response->getBody();
-print_r(json_decode((string) $body));
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/v1/user/register"
@@ -1835,11 +2040,11 @@ let headers = {
 let body = {
     "first_name": "Jane",
     "last_name": "Doe",
-    "picture": "error",
+    "picture": "velit",
     "user_type_id": 1,
     "email": "mail@mail.com",
-    "password": "voluptates",
-    "password_confirmation": "vel"
+    "password": "quas",
+    "password_confirmation": "alias"
 }
 
 fetch(url, {
@@ -1849,6 +2054,42 @@ fetch(url, {
 })
     .then(response => response.json())
     .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post(
+    'http://localhost/api/v1/user/register',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+        'json' => [
+            'first_name' => 'Jane',
+            'last_name' => 'Doe',
+            'picture' => 'velit',
+            'user_type_id' => 1,
+            'email' => 'mail@mail.com',
+            'password' => 'quas',
+            'password_confirmation' => 'alias',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X POST \
+    "http://localhost/api/v1/user/register" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}" \
+    -d '{"first_name":"Jane","last_name":"Doe","picture":"velit","user_type_id":1,"email":"mail@mail.com","password":"quas","password_confirmation":"alias"}'
+
 ```
 
 
