@@ -48,7 +48,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:user', 'namespace' => 'Api
     Route::post('startup/product_detail', 'StartupRegistrationApiController@startupProductDetail');
 
     Route::get('startup/registration/data/cofounder_detail', 'StartupRegistrationApiController@dataForCofounderDetailsRegistration');
-//    Route::post('startup/cofounder_detail', 'StartupRegistrationApiController@startupCofounderDetails');
+    Route::post('startup/cofounder_detail', 'StartupRegistrationApiController@startupCofounderDetails');
 
     Route::get('startup/registration/data/startup_team', 'StartupRegistrationApiController@dataForStartupTeamRegistration');
 //    Route::post('startup/startup_team', 'StartupRegistrationApiController@startupTeam');

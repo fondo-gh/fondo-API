@@ -2,14 +2,14 @@
     "variables": [],
     "info": {
         "name": "Laravel API",
-        "_postman_id": "8cd5adb7-d4c6-4a15-99d2-625102c41ca2",
+        "_postman_id": "afe7bab8-ec77-44c9-ac06-763bb77b82b7",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
     "item": [
         {
             "name": "Startup Registration",
-            "description": "API routes for registering startups on the platform\n\nClass StartupRegistrationApiController",
+            "description": "API routes for registering startups on the platform",
             "item": [
                 {
                     "name": "Register a Startup",
@@ -33,7 +33,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"company_name\": \"Jane Ventures\",\n    \"caption\": \"voluptatem\",\n    \"product_image\": \"vel\",\n    \"funds_to_raise\": \"Ghc 234.00\",\n    \"duration_for_raise\": \"3 months.\",\n    \"startup_id\": 1\n}"
+                            "raw": "{\n    \"company_name\": \"Jane Ventures\",\n    \"caption\": \"quos\",\n    \"product_image\": \"et\",\n    \"funds_to_raise\": \"Ghc 234.00\",\n    \"duration_for_raise\": \"3 months.\",\n    \"startup_id\": 1\n}"
                         },
                         "description": "Registers a startup. First step out of 7 steps.\nThe same route is used to update the startup, if startup id is provided.\nWhen registration is done, a startup id is returned. This then can be used for the next stages.",
                         "response": []
@@ -89,7 +89,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"startup_id\": 1,\n    \"startup_type_id\": 1,\n    \"startup_industry_id\": 1,\n    \"has_patent\": true,\n    \"location\": \"unde\"\n}"
+                            "raw": "{\n    \"startup_id\": 1,\n    \"startup_type_id\": 1,\n    \"startup_industry_id\": 1,\n    \"has_patent\": true,\n    \"location\": \"aspernatur\"\n}"
                         },
                         "description": "Updates a startup with further startup details.\nThe same route is used to update.",
                         "response": []
@@ -117,7 +117,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"startup_id\": 1,\n    \"id\": 1,\n    \"email\": \"jane@ventures.com\",\n    \"phone\": \"adipisci\",\n    \"facebook_handle\": \"esse\",\n    \"twitter_handle\": \"enim\",\n    \"instagram_handle\": \"nulla\",\n    \"linkdin_handle\": \"perferendis\",\n    \"skype_handle\": \"fugit\"\n}"
+                            "raw": "{\n    \"startup_id\": 1,\n    \"id\": 1,\n    \"email\": \"jane@ventures.com\",\n    \"phone\": \"ipsam\",\n    \"facebook_handle\": \"at\",\n    \"twitter_handle\": \"repudiandae\",\n    \"instagram_handle\": \"harum\",\n    \"linkdin_handle\": \"nulla\",\n    \"skype_handle\": \"amet\"\n}"
                         },
                         "description": "Updates a startup with Contact details.\nThe same route is used to update.",
                         "response": []
@@ -145,7 +145,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"startup_id\": 1,\n    \"key_resources\": \"ut\",\n    \"customer_target\": \"rerum\",\n    \"value_proposition\": \"adipisci\",\n    \"sales_channels\": \"consectetur\",\n    \"revenue_streams\": \"quos\",\n    \"key_metrics\": \"doloribus\",\n    \"cost_structure\": \"alias\",\n    \"financial_file\": \"maxime\",\n    \"optional_file\": \"molestias\"\n}"
+                            "raw": "{\n    \"startup_id\": 1,\n    \"key_resources\": \"nihil\",\n    \"customer_target\": \"consequatur\",\n    \"value_proposition\": \"qui\",\n    \"sales_channels\": \"qui\",\n    \"revenue_streams\": \"harum\",\n    \"key_metrics\": \"consequatur\",\n    \"cost_structure\": \"cumque\",\n    \"financial_file\": \"ut\",\n    \"optional_file\": \"voluptatem\"\n}"
                         },
                         "description": "Updates a startup with Business model detail.\nThe same route is used to update.",
                         "response": []
@@ -201,7 +201,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"startup_id\": 1,\n    \"product_progress_id\": 1,\n    \"product_url\": \"et\"\n}"
+                            "raw": "{\n    \"startup_id\": 1,\n    \"product_progress_id\": 1,\n    \"product_url\": \"sit\"\n}"
                         },
                         "description": "Updates a startup with product detail.\nThe same route is used to update.",
                         "response": []
@@ -232,6 +232,34 @@
                             "raw": "[]"
                         },
                         "description": "The endpoint provides cofounder roles which will be needed\nto populate a select input for startup cofounder details registration by entrepreneur",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Cofounder Detail for a Startup",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/v1\/startup\/cofounder_detail",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"startup_id\": 1,\n    \"funding_amount\": \"3000.0\",\n    \"rate_of_devotion\": \"modi\",\n    \"cofounders\": \"non\"\n}"
+                        },
+                        "description": "Updates a startup with product detail.\nThe same route is used to update.\nAs part of the parameters provided, the cofounders parameter accepts an array of cofounder personal\ninformation object. The nature is as this: <br><code>\n[<br>\n{<br>\nname: 'Jane Doe',<br>\nemail: 'jane@doe.com',<br>\ncofounder_role_id: 4<br>\n},<br>\n{<br>\nname: 'John Doe',<br>\nemail: 'john@doe.com',<br>\ncofounder_role_id: 5<br>\n}<br>\n]<br>\n<\/code><br>\n<b>The data submitted for cofounders will replace any existing record.<\/b>",
                         "response": []
                     }
                 },
@@ -291,7 +319,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"mail@mail.com\",\n    \"password\": \"et\"\n}"
+                            "raw": "{\n    \"email\": \"mail@mail.com\",\n    \"password\": \"recusandae\"\n}"
                         },
                         "description": "Authenticates an entrepreneur or investor.",
                         "response": []
@@ -347,7 +375,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"first_name\": \"Jane\",\n    \"last_name\": \"Doe\",\n    \"picture\": \"sit\",\n    \"user_type_id\": 1,\n    \"email\": \"mail@mail.com\",\n    \"password\": \"temporibus\",\n    \"password_confirmation\": \"quis\"\n}"
+                            "raw": "{\n    \"first_name\": \"Jane\",\n    \"last_name\": \"Doe\",\n    \"picture\": \"culpa\",\n    \"user_type_id\": 1,\n    \"email\": \"mail@mail.com\",\n    \"password\": \"distinctio\",\n    \"password_confirmation\": \"corrupti\"\n}"
                         },
                         "description": "Registers a user as an entrepreneur or investor.",
                         "response": []

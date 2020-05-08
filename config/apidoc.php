@@ -65,7 +65,7 @@ return [
         /*
          * Specify whether the Postman collection should be generated.
          */
-        'enabled' => true,
+        'enabled' => false,
 
         /*
          * The name for the exported Postman collection. Default: config('app.name')." API"
@@ -150,7 +150,7 @@ return [
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'Accept' => 'application/json',
-                    // 'Authorization' => 'Bearer {token}',
+                     'Authorization' => 'Bearer {token}',
                     // 'Api-Version' => 'v2',
                 ],
 
@@ -243,7 +243,7 @@ return [
     /*
      * Name for the group of routes which do not have a @group set.
      */
-    'default_group' => 'general',
+    'default_group' => 'System Generated Routes',
 
     /*
      * Example requests for each endpoint will be shown in each of these languages.
@@ -254,7 +254,7 @@ return [
      *
      */
     'example_languages' => [
-        'bash',
+        'php',
         'javascript',
     ],
 

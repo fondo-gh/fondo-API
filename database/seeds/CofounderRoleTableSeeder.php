@@ -3,7 +3,7 @@
 use App\CofounderRole;
 use Illuminate\Database\Seeder;
 
-class CofounderTableSeeder extends Seeder
+class CofounderRoleTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

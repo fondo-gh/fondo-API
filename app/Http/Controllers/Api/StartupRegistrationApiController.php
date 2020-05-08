@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\BusinessModel;
 use App\BusinessTeam;
+use App\Cofounder;
+use App\CofounderDetail;
 use App\CofounderRole;
 use App\ContactDetail;
 use App\Http\Controllers\Controller;
@@ -20,11 +22,14 @@ use App\StartupIndustry;
 use App\StartupType;
 use App\Traits\ApiBaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 /**
  * @group Startup Registration
  * API routes for registering startups on the platform
+ *
+ * @authenticated
  *
  * Class StartupRegistrationApiController
  * @package App\Http\Controllers\Api
@@ -48,12 +53,12 @@ class StartupRegistrationApiController extends Controller
      * The same route is used to update the startup, if startup id is provided.
      * When registration is done, a startup id is returned. This then can be used for the next stages.
      *
-     * @bodyParam company_name string required The name of the startup. Example: Jane Ventures
+     * @bodyParam company_name string required The name of the startup Example: Jane Ventures
      * @bodyParam caption string required The caption of the startup.
      * @bodyParam product_image file  The image of the startup product. Do not submit a null image field.
-     * @bodyParam funds_to_raise string required The funds to raise for startup. Example: Ghc 234.00
-     * @bodyParam duration_for_raise string required The duration needed to raise funds. Example: 3 months.
-     * @bodyParam startup_id int The id of the startup if updating. Example: 1
+     * @bodyParam funds_to_raise string required The funds to raise for startup Example: Ghc 234.00
+     * @bodyParam duration_for_raise string required The duration needed to raise funds Example: 3 months.
+     * @bodyParam startup_id int The id of the startup if updating Example: 1
      *
      * @response 200 {
      * "success": {
@@ -167,9 +172,9 @@ class StartupRegistrationApiController extends Controller
      * Updates a startup with further startup details.
      * The same route is used to update.
      *
-     * @bodyParam startup_id int required The id of the startup that startup details belong to. Example: 1
-     * @bodyParam startup_type_id int required The id of the startup type - ie LIMITED. Example: 1
-     * @bodyParam startup_industry_id int required The id of the startup industry - ie Agriculture. Example: 1
+     * @bodyParam startup_id int required The id of the startup that startup details belong to Example: 1
+     * @bodyParam startup_type_id int required The id of the startup type - ie LIMITED Example: 1
+     * @bodyParam startup_industry_id int required The id of the startup industry - ie Agriculture Example: 1
      * @bodyParam has_patent boolean required  Startup has patent or not. Example: 1 for true, 0 for false
      * @bodyParam location string  Startup location.
      *
@@ -427,11 +432,11 @@ class StartupRegistrationApiController extends Controller
      *"data": [
      * {
      * "id": 1,
-     * "name": "Concept only"
+     * "name": "Chairman"
      * },
      * {
      * "id": 2,
-     * "name": "Product development"
+     * "name": "Chief Executive Officer"
      * }]
      * }
      *
@@ -443,9 +448,125 @@ class StartupRegistrationApiController extends Controller
         return new CofounderRoleCollection(CofounderRole::all());
     }
 
+    /**
+     *Cofounder Detail for a Startup
+     *
+     * Updates a startup with product detail.
+     * The same route is used to update.
+     * As part of the parameters provided, the cofounders parameter accepts an array of cofounder personal
+     * information object. The nature is as this: <br><code>
+     * [<br>
+     * {<br>
+     * name: 'Jane Doe',<br>
+     * email: 'jane@doe.com',<br>
+     * cofounder_role_id: 4<br>
+     * },<br>
+     * {<br>
+     * name: 'John Doe',<br>
+     * email: 'john@doe.com',<br>
+     * cofounder_role_id: 5<br>
+     * }<br>
+     * ]<br>
+     * </code><br>
+     * <b>The data submitted for cofounders will replace any existing record.</b>
+     *
+     * @bodyParam startup_id int required The id of the startup that cofounder detail belongs to Example: 1
+     * @bodyParam funding_amount numeric required The amount for funding Example: 3000.0
+     * @bodyParam funding_amount numeric required The amount for funding Example: 3000.0
+     * @bodyParam rate_of_devotion string required  Devotion entrepreneurs put into startup. Could be any of the following: Part time dedication(<35 hours per week), Full time dedication(>35 hours per week), I don’t know
+     * @bodyParam cofounders array required name, email, cofounder_role_id object of as many cofounders stored in an array.
+     *
+     * @response 200 {
+     * "success": {
+     * "code": 200,
+     * "message": "Request completed successfully."
+     * }
+     * }
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function startupCofounderDetails(Request $request)
     {
-        //todo:implement logic
+        //Rate of devotion
+//        Part time dedication(<35 hours per week)
+//        Full time dedication(>35 hours per week)
+//        I don’t know
+
+        //validate credentials
+        $validator = Validator::make($request->all(), [
+            'startup_id' => 'required|integer|exists:startups,id',
+            'funding_amount' => 'required|numeric|min:1',
+            'rate_of_devotion' => 'required|string',
+            'cofounders' => 'required|array'
+        ]);
+
+        //send validation error response if any
+        if ($validator->fails()) {
+            return $this->sendErrorResponse($validator->errors()->first());
+        }
+        //execute in transaction
+        DB::beginTransaction();
+
+        //create or update co-founder detail
+        //update or create based on startup id
+        $cofounderDetail = CofounderDetail::query()->updateOrCreate(
+            ['startup_id' => $request['startup_id']],
+            $request->all()
+        );
+
+        //delete already existing cofounders
+        $cofounderDetail->cofounders->delete();
+
+        //loop through the cofounder arrays, attach detail id, save them
+        $cofounders = $this->getCofounderData($request);
+        $cofounders->each(function ($cofounderArray) use ($cofounderDetail) {
+            Cofounder::query()->create(
+                [
+                    'email' => $cofounderArray['email'],
+                    'name' => $cofounderArray['name'],
+                    'cofounder_role_id' => $cofounderArray['cofounder_role_id'],
+                    'cofounder_detail_id' => $cofounderDetail->id,
+                ]
+            );
+        });
+
+        DB::commit();
+
+        //return response
+        return $this->sendSuccessResponse();
+    }
+
+    /**
+     * Converts the cofounder into an array
+     * @param Request $request
+     * @return \Illuminate\Support\Collection
+     */
+    private function getCofounderData(Request $request)
+    {
+        //cofounders array/json
+//        [
+//      {
+//          name: 'Jane Doe',
+//        email: 'jane@doe.com',
+//        cofounder_role_id: 4
+//      },
+//      {
+//          name: 'John Doe',
+//        email: 'john@doe.com',
+//        cofounder_role_id: 5
+//      }
+//    ]
+        //retrieve the values for cofounders
+        $cofounders = $request['cofounders'];
+        //if its not an array, then its a json, decode it.
+        if (!is_array($cofounders)) {
+            $cofounders = Collect(json_decode($cofounders));
+        } else {
+            $cofounders = Collect($cofounders);
+        }
+
+        return $cofounders;
     }
 
     /**

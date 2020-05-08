@@ -12,7 +12,7 @@
 
           <script>
         $(function() {
-            setupLanguages(["bash","javascript"]);
+            setupLanguages(["php","javascript"]);
         });
       </script>
       </head>
@@ -27,7 +27,7 @@
     <div class="tocify-wrapper">
         <img src="../docs/images/logo.png" />
                     <div class="lang-selector">
-                                  <a href="#" data-language-name="bash">bash</a>
+                                  <a href="#" data-language-name="php">php</a>
                                   <a href="#" data-language-name="javascript">javascript</a>
                             </div>
                             <div class="search">
@@ -45,26 +45,41 @@
       <div class="content">
           <!-- START_INFO -->
 <h1>Info</h1>
-<p>Welcome to the generated API reference.
-<a href="http://localhost/docs/collection.json">Get Postman Collection</a></p>
+<p>Welcome to the generated API reference.</p>
 <!-- END_INFO -->
 <h1>Startup Registration</h1>
 <p>API routes for registering startups on the platform</p>
-<p>Class StartupRegistrationApiController</p>
 <!-- START_af3acc7ec335a1b55c53dc63fe31aac0 -->
 <h2>Register a Startup</h2>
-<p>Registers a startup. First step out of 7 steps.
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Registers a startup. First step out of 7 steps.
 The same route is used to update the startup, if startup id is provided.
 When registration is done, a startup id is returned. This then can be used for the next stages.</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/v1/startup/register" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"company_name":"Jane Ventures","caption":"voluptatem","product_image":"vel","funds_to_raise":"Ghc 234.00","duration_for_raise":"3 months.","startup_id":1}'
-</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost/api/v1/startup/register',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+        'json' =&gt; [
+            'company_name' =&gt; 'Jane Ventures',
+            'caption' =&gt; 'sit',
+            'product_image' =&gt; 'voluptas',
+            'funds_to_raise' =&gt; 'Ghc 234.00',
+            'duration_for_raise' =&gt; '3 months.',
+            'startup_id' =&gt; 1,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/v1/startup/register"
 );
@@ -72,12 +87,13 @@ When registration is done, a startup id is returned. This then can be used for t
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 let body = {
     "company_name": "Jane Ventures",
-    "caption": "voluptatem",
-    "product_image": "vel",
+    "caption": "sit",
+    "product_image": "voluptas",
     "funds_to_raise": "Ghc 234.00",
     "duration_for_raise": "3 months.",
     "startup_id": 1
@@ -119,7 +135,7 @@ fetch(url, {
 <td><code>company_name</code></td>
 <td>string</td>
 <td>required</td>
-<td>The name of the startup.</td>
+<td>The name of the startup</td>
 </tr>
 <tr>
 <td><code>caption</code></td>
@@ -137,34 +153,45 @@ fetch(url, {
 <td><code>funds_to_raise</code></td>
 <td>string</td>
 <td>required</td>
-<td>The funds to raise for startup.</td>
+<td>The funds to raise for startup</td>
 </tr>
 <tr>
 <td><code>duration_for_raise</code></td>
 <td>string</td>
 <td>required</td>
-<td>The duration needed to raise funds.</td>
+<td>The duration needed to raise funds</td>
 </tr>
 <tr>
 <td><code>startup_id</code></td>
 <td>integer</td>
 <td>optional</td>
-<td>The id of the startup if updating.</td>
+<td>The id of the startup if updating</td>
 </tr>
 </tbody>
 </table>
 <!-- END_af3acc7ec335a1b55c53dc63fe31aac0 -->
 <!-- START_d707ccb080e8da38aba340d4c42d8f00 -->
 <h2>Data For Startup Details Registration.</h2>
-<p>The endpoint provides startup types and startup industries which will be needed
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+The endpoint provides startup types and startup industries which will be needed
 to populate a select input for startup details registration by entrepreneur</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/v1/startup/registration/data/startup_detail" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost/api/v1/startup/registration/data/startup_detail',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/v1/startup/registration/data/startup_detail"
 );
@@ -172,6 +199,7 @@ to populate a select input for startup details registration by entrepreneur</p>
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -214,17 +242,33 @@ fetch(url, {
 <!-- END_d707ccb080e8da38aba340d4c42d8f00 -->
 <!-- START_ec7a7a59b235b51d4172b9f5abc84c0a -->
 <h2>Startup Detail for a Startup</h2>
-<p>Updates a startup with further startup details.
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Updates a startup with further startup details.
 The same route is used to update.</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/v1/startup/startup_detail" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"startup_id":1,"startup_type_id":1,"startup_industry_id":1,"has_patent":true,"location":"unde"}'
-</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost/api/v1/startup/startup_detail',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+        'json' =&gt; [
+            'startup_id' =&gt; 1,
+            'startup_type_id' =&gt; 1,
+            'startup_industry_id' =&gt; 1,
+            'has_patent' =&gt; true,
+            'location' =&gt; 'qui',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/v1/startup/startup_detail"
 );
@@ -232,6 +276,7 @@ The same route is used to update.</p>
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 let body = {
@@ -239,7 +284,7 @@ let body = {
     "startup_type_id": 1,
     "startup_industry_id": 1,
     "has_patent": true,
-    "location": "unde"
+    "location": "qui"
 }
 
 fetch(url, {
@@ -275,19 +320,19 @@ fetch(url, {
 <td><code>startup_id</code></td>
 <td>integer</td>
 <td>required</td>
-<td>The id of the startup that startup details belong to.</td>
+<td>The id of the startup that startup details belong to</td>
 </tr>
 <tr>
 <td><code>startup_type_id</code></td>
 <td>integer</td>
 <td>required</td>
-<td>The id of the startup type - ie LIMITED.</td>
+<td>The id of the startup type - ie LIMITED</td>
 </tr>
 <tr>
 <td><code>startup_industry_id</code></td>
 <td>integer</td>
 <td>required</td>
-<td>The id of the startup industry - ie Agriculture.</td>
+<td>The id of the startup industry - ie Agriculture</td>
 </tr>
 <tr>
 <td><code>has_patent</code></td>
@@ -306,17 +351,37 @@ fetch(url, {
 <!-- END_ec7a7a59b235b51d4172b9f5abc84c0a -->
 <!-- START_f5671621580735616ec788223c32deb9 -->
 <h2>Contact Details for a Startup</h2>
-<p>Updates a startup with Contact details.
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Updates a startup with Contact details.
 The same route is used to update.</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/v1/startup/contact_detail" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"startup_id":1,"id":1,"email":"jane@ventures.com","phone":"adipisci","facebook_handle":"esse","twitter_handle":"enim","instagram_handle":"nulla","linkdin_handle":"perferendis","skype_handle":"fugit"}'
-</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost/api/v1/startup/contact_detail',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+        'json' =&gt; [
+            'startup_id' =&gt; 1,
+            'id' =&gt; 1,
+            'email' =&gt; 'jane@ventures.com',
+            'phone' =&gt; 'atque',
+            'facebook_handle' =&gt; 'tenetur',
+            'twitter_handle' =&gt; 'neque',
+            'instagram_handle' =&gt; 'ut',
+            'linkdin_handle' =&gt; 'fuga',
+            'skype_handle' =&gt; 'ea',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/v1/startup/contact_detail"
 );
@@ -324,18 +389,19 @@ The same route is used to update.</p>
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 let body = {
     "startup_id": 1,
     "id": 1,
     "email": "jane@ventures.com",
-    "phone": "adipisci",
-    "facebook_handle": "esse",
-    "twitter_handle": "enim",
-    "instagram_handle": "nulla",
-    "linkdin_handle": "perferendis",
-    "skype_handle": "fugit"
+    "phone": "atque",
+    "facebook_handle": "tenetur",
+    "twitter_handle": "neque",
+    "instagram_handle": "ut",
+    "linkdin_handle": "fuga",
+    "skype_handle": "ea"
 }
 
 fetch(url, {
@@ -426,17 +492,38 @@ fetch(url, {
 <!-- END_f5671621580735616ec788223c32deb9 -->
 <!-- START_5859401432fa237c862c239a45330785 -->
 <h2>Business Model for a Startup</h2>
-<p>Updates a startup with Business model detail.
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Updates a startup with Business model detail.
 The same route is used to update.</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/v1/startup/business_model" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"startup_id":1,"key_resources":"ut","customer_target":"rerum","value_proposition":"adipisci","sales_channels":"consectetur","revenue_streams":"quos","key_metrics":"doloribus","cost_structure":"alias","financial_file":"maxime","optional_file":"molestias"}'
-</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost/api/v1/startup/business_model',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+        'json' =&gt; [
+            'startup_id' =&gt; 1,
+            'key_resources' =&gt; 'fugiat',
+            'customer_target' =&gt; 'est',
+            'value_proposition' =&gt; 'pariatur',
+            'sales_channels' =&gt; 'dolores',
+            'revenue_streams' =&gt; 'voluptatibus',
+            'key_metrics' =&gt; 'molestiae',
+            'cost_structure' =&gt; 'fuga',
+            'financial_file' =&gt; 'ex',
+            'optional_file' =&gt; 'a',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/v1/startup/business_model"
 );
@@ -444,19 +531,20 @@ The same route is used to update.</p>
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 let body = {
     "startup_id": 1,
-    "key_resources": "ut",
-    "customer_target": "rerum",
-    "value_proposition": "adipisci",
-    "sales_channels": "consectetur",
-    "revenue_streams": "quos",
-    "key_metrics": "doloribus",
-    "cost_structure": "alias",
-    "financial_file": "maxime",
-    "optional_file": "molestias"
+    "key_resources": "fugiat",
+    "customer_target": "est",
+    "value_proposition": "pariatur",
+    "sales_channels": "dolores",
+    "revenue_streams": "voluptatibus",
+    "key_metrics": "molestiae",
+    "cost_structure": "fuga",
+    "financial_file": "ex",
+    "optional_file": "a"
 }
 
 fetch(url, {
@@ -553,15 +641,26 @@ fetch(url, {
 <!-- END_5859401432fa237c862c239a45330785 -->
 <!-- START_f89683583ee45ec05873a3e2e400c57a -->
 <h2>Data for Product Detail Registration</h2>
-<p>The endpoint provides product progress which will be needed
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+The endpoint provides product progress which will be needed
 to populate a select input for startup product details registration by entrepreneur</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/v1/startup/registration/data/product_detail" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost/api/v1/startup/registration/data/product_detail',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/v1/startup/registration/data/product_detail"
 );
@@ -569,6 +668,7 @@ to populate a select input for startup product details registration by entrepren
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -597,17 +697,31 @@ fetch(url, {
 <!-- END_f89683583ee45ec05873a3e2e400c57a -->
 <!-- START_9f81627daca3accf82a01c1fe5f1e36d -->
 <h2>Product Detail for a Startup</h2>
-<p>Updates a startup with product detail.
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Updates a startup with product detail.
 The same route is used to update.</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/v1/startup/product_detail" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"startup_id":1,"product_progress_id":1,"product_url":"et"}'
-</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost/api/v1/startup/product_detail',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+        'json' =&gt; [
+            'startup_id' =&gt; 1,
+            'product_progress_id' =&gt; 1,
+            'product_url' =&gt; 'tenetur',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/v1/startup/product_detail"
 );
@@ -615,12 +729,13 @@ The same route is used to update.</p>
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 let body = {
     "startup_id": 1,
     "product_progress_id": 1,
-    "product_url": "et"
+    "product_url": "tenetur"
 }
 
 fetch(url, {
@@ -675,15 +790,26 @@ fetch(url, {
 <!-- END_9f81627daca3accf82a01c1fe5f1e36d -->
 <!-- START_b76580eb2a2f944af1cc8ec6ec266979 -->
 <h2>Data for Cofounder Details registration</h2>
-<p>The endpoint provides cofounder roles which will be needed
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+The endpoint provides cofounder roles which will be needed
 to populate a select input for startup cofounder details registration by entrepreneur</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/v1/startup/registration/data/cofounder_detail" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost/api/v1/startup/registration/data/cofounder_detail',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/v1/startup/registration/data/cofounder_detail"
 );
@@ -691,6 +817,7 @@ to populate a select input for startup cofounder details registration by entrepr
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -706,28 +833,156 @@ fetch(url, {
     "data": [
         {
             "id": 1,
-            "name": "Concept only"
+            "name": "Chairman"
         },
         {
             "id": 2,
-            "name": "Product development"
+            "name": "Chief Executive Officer"
         }
     ]
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/v1/startup/registration/data/cofounder_detail</code></p>
 <!-- END_b76580eb2a2f944af1cc8ec6ec266979 -->
+<!-- START_894872d23e02c659d94f329d1c2d5704 -->
+<h2>Cofounder Detail for a Startup</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Updates a startup with product detail.
+The same route is used to update.
+As part of the parameters provided, the cofounders parameter accepts an array of cofounder personal
+information object. The nature is as this: <br><code>
+[<br>
+{<br>
+name: 'Jane Doe',<br>
+email: 'jane@doe.com',<br>
+cofounder_role_id: 4<br>
+},<br>
+{<br>
+name: 'John Doe',<br>
+email: 'john@doe.com',<br>
+cofounder_role_id: 5<br>
+}<br>
+]<br>
+</code><br>
+<b>The data submitted for cofounders will replace any existing record.</b></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost/api/v1/startup/cofounder_detail',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+        'json' =&gt; [
+            'startup_id' =&gt; 1,
+            'funding_amount' =&gt; '3000.0',
+            'rate_of_devotion' =&gt; 'et',
+            'cofounders' =&gt; [],
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/startup/cofounder_detail"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+let body = {
+    "startup_id": 1,
+    "funding_amount": "3000.0",
+    "rate_of_devotion": "et",
+    "cofounders": []
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "success": {
+        "code": 200,
+        "message": "Request completed successfully."
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/v1/startup/cofounder_detail</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>startup_id</code></td>
+<td>integer</td>
+<td>required</td>
+<td>The id of the startup that cofounder detail belongs to</td>
+</tr>
+<tr>
+<td><code>funding_amount</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>The amount for funding</td>
+</tr>
+<tr>
+<td><code>rate_of_devotion</code></td>
+<td>string</td>
+<td>required</td>
+<td>Devotion entrepreneurs put into startup. Could be any of the following: Part time dedication(&lt;35 hours per week), Full time dedication(&gt;35 hours per week), I don’t know</td>
+</tr>
+<tr>
+<td><code>cofounders</code></td>
+<td>array</td>
+<td>required</td>
+<td>name, email, cofounder_role_id object of as many cofounders stored in an array.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_894872d23e02c659d94f329d1c2d5704 -->
 <!-- START_d81fe156bc4fba413ad45237758a9714 -->
 <h2>Data for Startup Team registration</h2>
-<p>The endpoint provides business teams  which will be needed
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+The endpoint provides business teams  which will be needed
 to populate a select input for startup teams registration by entrepreneur</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/v1/startup/registration/data/startup_team" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost/api/v1/startup/registration/data/startup_team',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/v1/startup/registration/data/startup_team"
 );
@@ -735,6 +990,7 @@ to populate a select input for startup teams registration by entrepreneur</p>
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -763,6 +1019,583 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET api/v1/startup/registration/data/startup_team</code></p>
 <!-- END_d81fe156bc4fba413ad45237758a9714 -->
+<h1>System Generated Routes</h1>
+<!-- START_0c068b4037fb2e47e71bd44bd36e3e2a -->
+<h2>Authorize a client to access the user&#039;s account.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost/oauth/authorize',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/oauth/authorize"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (500):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Server Error"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET oauth/authorize</code></p>
+<!-- END_0c068b4037fb2e47e71bd44bd36e3e2a -->
+<!-- START_e48cc6a0b45dd21b7076ab2c03908687 -->
+<h2>Approve the authorization request.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost/oauth/authorize',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/oauth/authorize"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST oauth/authorize</code></p>
+<!-- END_e48cc6a0b45dd21b7076ab2c03908687 -->
+<!-- START_de5d7581ef1275fce2a229b6b6eaad9c -->
+<h2>Deny the authorization request.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;delete(
+    'http://localhost/oauth/authorize',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/oauth/authorize"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE oauth/authorize</code></p>
+<!-- END_de5d7581ef1275fce2a229b6b6eaad9c -->
+<!-- START_a09d20357336aa979ecd8e3972ac9168 -->
+<h2>Authorize a client to access the user&#039;s account.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost/oauth/token',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/oauth/token"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST oauth/token</code></p>
+<!-- END_a09d20357336aa979ecd8e3972ac9168 -->
+<!-- START_d6a56149547e03307199e39e03e12d1c -->
+<h2>Get all of the authorized tokens for the authenticated user.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost/oauth/tokens',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/oauth/tokens"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET oauth/tokens</code></p>
+<!-- END_d6a56149547e03307199e39e03e12d1c -->
+<!-- START_a9a802c25737cca5324125e5f60b72a5 -->
+<h2>Delete the given token.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;delete(
+    'http://localhost/oauth/tokens/1',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/oauth/tokens/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE oauth/tokens/{token_id}</code></p>
+<!-- END_a9a802c25737cca5324125e5f60b72a5 -->
+<!-- START_abe905e69f5d002aa7d26f433676d623 -->
+<h2>Get a fresh transient token cookie for the authenticated user.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost/oauth/token/refresh',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/oauth/token/refresh"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST oauth/token/refresh</code></p>
+<!-- END_abe905e69f5d002aa7d26f433676d623 -->
+<!-- START_babcfe12d87b8708f5985e9d39ba8f2c -->
+<h2>Get all of the clients for the authenticated user.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost/oauth/clients',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/oauth/clients"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET oauth/clients</code></p>
+<!-- END_babcfe12d87b8708f5985e9d39ba8f2c -->
+<!-- START_9eabf8d6e4ab449c24c503fcb42fba82 -->
+<h2>Store a new client.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost/oauth/clients',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/oauth/clients"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST oauth/clients</code></p>
+<!-- END_9eabf8d6e4ab449c24c503fcb42fba82 -->
+<!-- START_784aec390a455073fc7464335c1defa1 -->
+<h2>Update the given client.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;put(
+    'http://localhost/oauth/clients/1',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/oauth/clients/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT oauth/clients/{client_id}</code></p>
+<!-- END_784aec390a455073fc7464335c1defa1 -->
+<!-- START_1f65a511dd86ba0541d7ba13ca57e364 -->
+<h2>Delete the given client.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;delete(
+    'http://localhost/oauth/clients/1',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/oauth/clients/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE oauth/clients/{client_id}</code></p>
+<!-- END_1f65a511dd86ba0541d7ba13ca57e364 -->
+<!-- START_9e281bd3a1eb1d9eb63190c8effb607c -->
+<h2>Get all of the available scopes for the application.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost/oauth/scopes',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/oauth/scopes"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET oauth/scopes</code></p>
+<!-- END_9e281bd3a1eb1d9eb63190c8effb607c -->
+<!-- START_9b2a7699ce6214a79e0fd8107f8b1c9e -->
+<h2>Get all of the personal access tokens for the authenticated user.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost/oauth/personal-access-tokens',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/oauth/personal-access-tokens"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET oauth/personal-access-tokens</code></p>
+<!-- END_9b2a7699ce6214a79e0fd8107f8b1c9e -->
+<!-- START_a8dd9c0a5583742e671711f9bb3ee406 -->
+<h2>Create a new personal access token for the user.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost/oauth/personal-access-tokens',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/oauth/personal-access-tokens"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST oauth/personal-access-tokens</code></p>
+<!-- END_a8dd9c0a5583742e671711f9bb3ee406 -->
+<!-- START_bae65df80fd9d72a01439241a9ea20d0 -->
+<h2>Delete the given token.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;delete(
+    'http://localhost/oauth/personal-access-tokens/1',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/oauth/personal-access-tokens/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE oauth/personal-access-tokens/{token_id}</code></p>
+<!-- END_bae65df80fd9d72a01439241a9ea20d0 -->
 <h1>User Management</h1>
 <p>APIs for managing users - entrepreneurs and investors</p>
 <!-- START_7a184547882598fc164c10be7745584b -->
@@ -771,12 +1604,24 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/v1/user/login" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"email":"mail@mail.com","password":"et"}'
-</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost/api/v1/user/login',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+        'json' =&gt; [
+            'email' =&gt; 'mail@mail.com',
+            'password' =&gt; 'eum',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/v1/user/login"
 );
@@ -784,11 +1629,12 @@ fetch(url, {
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 let body = {
     "email": "mail@mail.com",
-    "password": "et"
+    "password": "eum"
 }
 
 fetch(url, {
@@ -859,10 +1705,20 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/v1/user/types" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost/api/v1/user/types',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/v1/user/types"
 );
@@ -870,6 +1726,7 @@ fetch(url, {
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -902,12 +1759,29 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/v1/user/register" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"first_name":"Jane","last_name":"Doe","picture":"sit","user_type_id":1,"email":"mail@mail.com","password":"temporibus","password_confirmation":"quis"}'
-</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost/api/v1/user/register',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+        'json' =&gt; [
+            'first_name' =&gt; 'Jane',
+            'last_name' =&gt; 'Doe',
+            'picture' =&gt; 'error',
+            'user_type_id' =&gt; 1,
+            'email' =&gt; 'mail@mail.com',
+            'password' =&gt; 'voluptates',
+            'password_confirmation' =&gt; 'vel',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/v1/user/register"
 );
@@ -915,16 +1789,17 @@ fetch(url, {
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 let body = {
     "first_name": "Jane",
     "last_name": "Doe",
-    "picture": "sit",
+    "picture": "error",
     "user_type_id": 1,
     "email": "mail@mail.com",
-    "password": "temporibus",
-    "password_confirmation": "quis"
+    "password": "voluptates",
+    "password_confirmation": "vel"
 }
 
 fetch(url, {
@@ -1010,422 +1885,10 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_7fef01e7235c89049ebe3685de4bff17 -->
-<h1>general</h1>
-<!-- START_0c068b4037fb2e47e71bd44bd36e3e2a -->
-<h2>Authorize a client to access the user&#039;s account.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/oauth/authorize" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/authorize"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<blockquote>
-<p>Example response (500):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "message": "Server Error"
-}</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET oauth/authorize</code></p>
-<!-- END_0c068b4037fb2e47e71bd44bd36e3e2a -->
-<!-- START_e48cc6a0b45dd21b7076ab2c03908687 -->
-<h2>Approve the authorization request.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/oauth/authorize" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/authorize"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST oauth/authorize</code></p>
-<!-- END_e48cc6a0b45dd21b7076ab2c03908687 -->
-<!-- START_de5d7581ef1275fce2a229b6b6eaad9c -->
-<h2>Deny the authorization request.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE \
-    "http://localhost/oauth/authorize" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/authorize"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>DELETE oauth/authorize</code></p>
-<!-- END_de5d7581ef1275fce2a229b6b6eaad9c -->
-<!-- START_a09d20357336aa979ecd8e3972ac9168 -->
-<h2>Authorize a client to access the user&#039;s account.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/oauth/token" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/token"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST oauth/token</code></p>
-<!-- END_a09d20357336aa979ecd8e3972ac9168 -->
-<!-- START_d6a56149547e03307199e39e03e12d1c -->
-<h2>Get all of the authorized tokens for the authenticated user.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/oauth/tokens" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/tokens"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET oauth/tokens</code></p>
-<!-- END_d6a56149547e03307199e39e03e12d1c -->
-<!-- START_a9a802c25737cca5324125e5f60b72a5 -->
-<h2>Delete the given token.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE \
-    "http://localhost/oauth/tokens/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/tokens/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>DELETE oauth/tokens/{token_id}</code></p>
-<!-- END_a9a802c25737cca5324125e5f60b72a5 -->
-<!-- START_abe905e69f5d002aa7d26f433676d623 -->
-<h2>Get a fresh transient token cookie for the authenticated user.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/oauth/token/refresh" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/token/refresh"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST oauth/token/refresh</code></p>
-<!-- END_abe905e69f5d002aa7d26f433676d623 -->
-<!-- START_babcfe12d87b8708f5985e9d39ba8f2c -->
-<h2>Get all of the clients for the authenticated user.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/oauth/clients" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/clients"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET oauth/clients</code></p>
-<!-- END_babcfe12d87b8708f5985e9d39ba8f2c -->
-<!-- START_9eabf8d6e4ab449c24c503fcb42fba82 -->
-<h2>Store a new client.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/oauth/clients" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/clients"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST oauth/clients</code></p>
-<!-- END_9eabf8d6e4ab449c24c503fcb42fba82 -->
-<!-- START_784aec390a455073fc7464335c1defa1 -->
-<h2>Update the given client.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X PUT \
-    "http://localhost/oauth/clients/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/clients/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>PUT oauth/clients/{client_id}</code></p>
-<!-- END_784aec390a455073fc7464335c1defa1 -->
-<!-- START_1f65a511dd86ba0541d7ba13ca57e364 -->
-<h2>Delete the given client.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE \
-    "http://localhost/oauth/clients/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/clients/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>DELETE oauth/clients/{client_id}</code></p>
-<!-- END_1f65a511dd86ba0541d7ba13ca57e364 -->
-<!-- START_9e281bd3a1eb1d9eb63190c8effb607c -->
-<h2>Get all of the available scopes for the application.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/oauth/scopes" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/scopes"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET oauth/scopes</code></p>
-<!-- END_9e281bd3a1eb1d9eb63190c8effb607c -->
-<!-- START_9b2a7699ce6214a79e0fd8107f8b1c9e -->
-<h2>Get all of the personal access tokens for the authenticated user.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/oauth/personal-access-tokens" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/personal-access-tokens"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET oauth/personal-access-tokens</code></p>
-<!-- END_9b2a7699ce6214a79e0fd8107f8b1c9e -->
-<!-- START_a8dd9c0a5583742e671711f9bb3ee406 -->
-<h2>Create a new personal access token for the user.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/oauth/personal-access-tokens" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/personal-access-tokens"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST oauth/personal-access-tokens</code></p>
-<!-- END_a8dd9c0a5583742e671711f9bb3ee406 -->
-<!-- START_bae65df80fd9d72a01439241a9ea20d0 -->
-<h2>Delete the given token.</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE \
-    "http://localhost/oauth/personal-access-tokens/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/personal-access-tokens/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>DELETE oauth/personal-access-tokens/{token_id}</code></p>
-<!-- END_bae65df80fd9d72a01439241a9ea20d0 -->
       </div>
       <div class="dark-box">
                         <div class="lang-selector">
-                                    <a href="#" data-language-name="bash">bash</a>
+                                    <a href="#" data-language-name="php">php</a>
                                     <a href="#" data-language-name="javascript">javascript</a>
                               </div>
                 </div>
