@@ -19,6 +19,7 @@ use App\ProductProgress;
 use App\Startup;
 use App\StartupDetail;
 use App\StartupIndustry;
+use App\StartupTeam;
 use App\StartupType;
 use App\Traits\ApiBaseController;
 use Illuminate\Http\Request;
@@ -519,8 +520,20 @@ class StartupRegistrationApiController extends Controller
         $cofounderDetail->cofounders->delete();
 
         //loop through the cofounder arrays, attach detail id, save them
-        $cofounders = $this->getCofounderData($request);
-        $cofounders->each(function ($cofounderArray) use ($cofounderDetail) {
+        //cofounders array/json
+//        [
+//      {
+//          name: 'Jane Doe',
+//        email: 'jane@doe.com',
+//        cofounder_role_id: 4
+//      },
+//      {
+//          name: 'John Doe',
+//        email: 'john@doe.com',
+//        cofounder_role_id: 5
+//      }
+//    ]
+        Collect($request['cofounders'])->each(function ($cofounderArray) use ($cofounderDetail) {
             Cofounder::query()->create(
                 [
                     'email' => $cofounderArray['email'],
@@ -535,38 +548,6 @@ class StartupRegistrationApiController extends Controller
 
         //return response
         return $this->sendSuccessResponse();
-    }
-
-    /**
-     * Converts the cofounder into an array
-     * @param Request $request
-     * @return \Illuminate\Support\Collection
-     */
-    private function getCofounderData(Request $request)
-    {
-        //cofounders array/json
-//        [
-//      {
-//          name: 'Jane Doe',
-//        email: 'jane@doe.com',
-//        cofounder_role_id: 4
-//      },
-//      {
-//          name: 'John Doe',
-//        email: 'john@doe.com',
-//        cofounder_role_id: 5
-//      }
-//    ]
-        //retrieve the values for cofounders
-        $cofounders = $request['cofounders'];
-        //if its not an array, then its a json, decode it.
-        if (!is_array($cofounders)) {
-            $cofounders = Collect(json_decode($cofounders));
-        } else {
-            $cofounders = Collect($cofounders);
-        }
-
-        return $cofounders;
     }
 
     /**
@@ -597,9 +578,89 @@ class StartupRegistrationApiController extends Controller
         return new BusinessTeamCollection(BusinessTeam::all());
     }
 
+
+    /**
+     * Startup Teams for a Startup
+     *
+     * Updates a startup with startup team.
+     * The same route is used to update. <br>
+     * Startup team consist of name of person, and the id of the business team member belongs to.
+     * ie. John Belongs to Marketing team.
+     *
+     * As part of the parameters provided, the startup_teams parameter accepts an array of members
+     * and their respective business teams. The nature is as this: <br><code>
+     * [<br>
+     * {<br>
+     * name: 'Jane Doe',<br>
+     * business_team_id: 1, //ie Marketing business team<br>
+     * },<br>
+     * {<br>
+     * name: 'John Doe',<br>
+     * business_team_id: 3,  //ie CEO business team<br>
+     * }<br>
+     * ]<br>
+     * </code><br>
+     * <b>The data submitted for startup_teams will replace any existing record.</b>
+     *
+     * @bodyParam startup_id int required The id of the startup that startup teams belongs to Example: 1
+     * @bodyParam startup_teams array required name, business_team_id object of as many startup teams stored in an array.
+     *
+     * @response 200 {
+     * "success": {
+     * "code": 200,
+     * "message": "Request completed successfully."
+     * }
+     * }
+     *
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function startupTeam(Request $request)
     {
-        //todo:implement logic
+        //validate credentials
+        $validator = Validator::make($request->all(), [
+            'startup_id' => 'required|integer|exists:startups,id',
+            'startup_teams' => 'required|array'
+        ]);
+
+        //send validation error response if any
+        if ($validator->fails()) {
+            return $this->sendErrorResponse($validator->errors()->first());
+        }
+
+        //execute in transaction
+        DB::beginTransaction();
+        //find the startup
+        $startup = Startup::query()->find($request['startup_id']);
+        //delete all startup teams
+        $startup->startup_teams->delete();
+        //add new startup teams
+        //startup_teams array/json
+//        [
+//      {
+//          name: 'Jane Doe',
+//        business_team_id: 1,
+//      },
+//      {
+//          name: 'John Doe',
+//        business_team_id: 3,
+//      }
+//    ]
+        Collect($request['startup_teams'])->each(function ($teamArray) use ($startup) {
+            StartupTeam::query()->create(
+                [
+                    'name' => $teamArray['name'],
+                    'business_team_id' => $teamArray['business_team_id'],
+                    'startup_id' => $startup->id
+                ]
+            );
+        });
+
+        DB::commit();
+
+        //return response
+        return $this->sendSuccessResponse();
     }
 
 }

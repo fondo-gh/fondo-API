@@ -66,4 +66,12 @@ class Startup extends Model
     public function startup_detail() {
         return $this->hasOne(StartupDetail::class);
     }
+
+    /**
+     * A startup has many startup teams with members
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function startup_teams() {
+        return $this->hasMany(StartupTeam::class);
+    }
 }
