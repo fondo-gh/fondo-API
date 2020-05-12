@@ -50,6 +50,96 @@
 <!-- END_INFO -->
 <h1>Startup Registration</h1>
 <p>API routes for registering startups on the platform</p>
+<!-- START_1020b66a975808d7fa78a8b915ac172d -->
+<h2>Users(Entrepreneur) Startups.</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Startups registered by the entrepreneur, both approved and unapproved</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-javascript">const url = new URL(
+    "http://fondo-app-gh.herokuapp.com/api/v1/user/startups"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://fondo-app-gh.herokuapp.com/api/v1/user/startups',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://fondo-app-gh.herokuapp.com/api/v1/user/startups" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": [
+        {
+            "id": null,
+            "company_name": null,
+            "product_image": "http:\/\/fondo-app-gh.herokuapp.com\/startups\/products\/",
+            "caption": null,
+            "funds_to_raise": null,
+            "duration_for_raise": null,
+            "approved": null,
+            "created_at": null,
+            "user": null,
+            "startup_detail": null,
+            "contact_detail": null,
+            "business_model": null,
+            "product_detail": null,
+            "startup_teams": {
+                "data": []
+            },
+            "cofounder_detail": null
+        },
+        {
+            "id": null,
+            "company_name": null,
+            "product_image": "http:\/\/fondo-app-gh.herokuapp.com\/startups\/products\/",
+            "caption": null,
+            "funds_to_raise": null,
+            "duration_for_raise": null,
+            "approved": null,
+            "created_at": null,
+            "user": null,
+            "startup_detail": null,
+            "contact_detail": null,
+            "business_model": null,
+            "product_detail": null,
+            "startup_teams": {
+                "data": []
+            },
+            "cofounder_detail": null
+        }
+    ]
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/v1/user/startups</code></p>
+<!-- END_1020b66a975808d7fa78a8b915ac172d -->
 <!-- START_af3acc7ec335a1b55c53dc63fe31aac0 -->
 <h2>Register a Startup</h2>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
@@ -60,7 +150,7 @@ When registration is done, a startup id is returned. This then can be used for t
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/startup/register"
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/register"
 );
 
 let headers = {
@@ -71,8 +161,8 @@ let headers = {
 
 let body = {
     "company_name": "Jane Ventures",
-    "caption": "sit",
-    "product_image": "at",
+    "caption": "vitae",
+    "product_image": "eum",
     "funds_to_raise": "Ghc 234.00",
     "duration_for_raise": "3 months.",
     "startup_id": 1
@@ -88,7 +178,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost/api/v1/startup/register',
+    'http://fondo-app-gh.herokuapp.com/api/v1/startup/register',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -97,8 +187,8 @@ $response = $client-&gt;post(
         ],
         'json' =&gt; [
             'company_name' =&gt; 'Jane Ventures',
-            'caption' =&gt; 'sit',
-            'product_image' =&gt; 'at',
+            'caption' =&gt; 'vitae',
+            'product_image' =&gt; 'eum',
             'funds_to_raise' =&gt; 'Ghc 234.00',
             'duration_for_raise' =&gt; '3 months.',
             'startup_id' =&gt; 1,
@@ -108,11 +198,11 @@ $response = $client-&gt;post(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/v1/startup/register" \
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"company_name":"Jane Ventures","caption":"sit","product_image":"at","funds_to_raise":"Ghc 234.00","duration_for_raise":"3 months.","startup_id":1}'
+    -d '{"company_name":"Jane Ventures","caption":"vitae","product_image":"eum","funds_to_raise":"Ghc 234.00","duration_for_raise":"3 months.","startup_id":1}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
@@ -187,7 +277,7 @@ to populate a select input for startup details registration by entrepreneur</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/startup/registration/data/startup_detail"
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/registration/data/startup_detail"
 );
 
 let headers = {
@@ -205,7 +295,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost/api/v1/startup/registration/data/startup_detail',
+    'http://fondo-app-gh.herokuapp.com/api/v1/startup/registration/data/startup_detail',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -217,7 +307,7 @@ $response = $client-&gt;get(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/v1/startup/registration/data/startup_detail" \
+    -G "http://fondo-app-gh.herokuapp.com/api/v1/startup/registration/data/startup_detail" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
@@ -262,7 +352,7 @@ The same route is used to update.</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/startup/startup_detail"
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/startup_detail"
 );
 
 let headers = {
@@ -276,7 +366,7 @@ let body = {
     "startup_type_id": 1,
     "startup_industry_id": 1,
     "has_patent": true,
-    "location": "et"
+    "location": "vero"
 }
 
 fetch(url, {
@@ -289,7 +379,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost/api/v1/startup/startup_detail',
+    'http://fondo-app-gh.herokuapp.com/api/v1/startup/startup_detail',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -301,18 +391,18 @@ $response = $client-&gt;post(
             'startup_type_id' =&gt; 1,
             'startup_industry_id' =&gt; 1,
             'has_patent' =&gt; true,
-            'location' =&gt; 'et',
+            'location' =&gt; 'vero',
         ],
     ]
 );
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/v1/startup/startup_detail" \
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/startup_detail" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"startup_type_id":1,"startup_industry_id":1,"has_patent":true,"location":"et"}'
+    -d '{"startup_id":1,"startup_type_id":1,"startup_industry_id":1,"has_patent":true,"location":"vero"}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
@@ -378,7 +468,7 @@ The same route is used to update.</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/startup/contact_detail"
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/contact_detail"
 );
 
 let headers = {
@@ -391,12 +481,12 @@ let body = {
     "startup_id": 1,
     "id": 1,
     "email": "jane@ventures.com",
-    "phone": "iure",
-    "facebook_handle": "et",
-    "twitter_handle": "aliquam",
-    "instagram_handle": "possimus",
-    "linkdin_handle": "est",
-    "skype_handle": "tenetur"
+    "phone": "eius",
+    "facebook_handle": "sunt",
+    "twitter_handle": "quas",
+    "instagram_handle": "eligendi",
+    "linkdin_handle": "modi",
+    "skype_handle": "sequi"
 }
 
 fetch(url, {
@@ -409,7 +499,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost/api/v1/startup/contact_detail',
+    'http://fondo-app-gh.herokuapp.com/api/v1/startup/contact_detail',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -420,23 +510,23 @@ $response = $client-&gt;post(
             'startup_id' =&gt; 1,
             'id' =&gt; 1,
             'email' =&gt; 'jane@ventures.com',
-            'phone' =&gt; 'iure',
-            'facebook_handle' =&gt; 'et',
-            'twitter_handle' =&gt; 'aliquam',
-            'instagram_handle' =&gt; 'possimus',
-            'linkdin_handle' =&gt; 'est',
-            'skype_handle' =&gt; 'tenetur',
+            'phone' =&gt; 'eius',
+            'facebook_handle' =&gt; 'sunt',
+            'twitter_handle' =&gt; 'quas',
+            'instagram_handle' =&gt; 'eligendi',
+            'linkdin_handle' =&gt; 'modi',
+            'skype_handle' =&gt; 'sequi',
         ],
     ]
 );
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/v1/startup/contact_detail" \
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/contact_detail" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"id":1,"email":"jane@ventures.com","phone":"iure","facebook_handle":"et","twitter_handle":"aliquam","instagram_handle":"possimus","linkdin_handle":"est","skype_handle":"tenetur"}'
+    -d '{"startup_id":1,"id":1,"email":"jane@ventures.com","phone":"eius","facebook_handle":"sunt","twitter_handle":"quas","instagram_handle":"eligendi","linkdin_handle":"modi","skype_handle":"sequi"}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
@@ -526,7 +616,7 @@ The same route is used to update.</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/startup/business_model"
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/business_model"
 );
 
 let headers = {
@@ -537,15 +627,15 @@ let headers = {
 
 let body = {
     "startup_id": 1,
-    "key_resources": "commodi",
-    "customer_target": "nemo",
-    "value_proposition": "officia",
-    "sales_channels": "vel",
-    "revenue_streams": "velit",
-    "key_metrics": "aut",
-    "cost_structure": "voluptatem",
-    "financial_file": "provident",
-    "optional_file": "nisi"
+    "key_resources": "ad",
+    "customer_target": "molestias",
+    "value_proposition": "dolorem",
+    "sales_channels": "accusantium",
+    "revenue_streams": "aut",
+    "key_metrics": "voluptates",
+    "cost_structure": "rerum",
+    "financial_file": "cumque",
+    "optional_file": "quia"
 }
 
 fetch(url, {
@@ -558,7 +648,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost/api/v1/startup/business_model',
+    'http://fondo-app-gh.herokuapp.com/api/v1/startup/business_model',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -567,26 +657,26 @@ $response = $client-&gt;post(
         ],
         'json' =&gt; [
             'startup_id' =&gt; 1,
-            'key_resources' =&gt; 'commodi',
-            'customer_target' =&gt; 'nemo',
-            'value_proposition' =&gt; 'officia',
-            'sales_channels' =&gt; 'vel',
-            'revenue_streams' =&gt; 'velit',
-            'key_metrics' =&gt; 'aut',
-            'cost_structure' =&gt; 'voluptatem',
-            'financial_file' =&gt; 'provident',
-            'optional_file' =&gt; 'nisi',
+            'key_resources' =&gt; 'ad',
+            'customer_target' =&gt; 'molestias',
+            'value_proposition' =&gt; 'dolorem',
+            'sales_channels' =&gt; 'accusantium',
+            'revenue_streams' =&gt; 'aut',
+            'key_metrics' =&gt; 'voluptates',
+            'cost_structure' =&gt; 'rerum',
+            'financial_file' =&gt; 'cumque',
+            'optional_file' =&gt; 'quia',
         ],
     ]
 );
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/v1/startup/business_model" \
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/business_model" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"key_resources":"commodi","customer_target":"nemo","value_proposition":"officia","sales_channels":"vel","revenue_streams":"velit","key_metrics":"aut","cost_structure":"voluptatem","financial_file":"provident","optional_file":"nisi"}'
+    -d '{"startup_id":1,"key_resources":"ad","customer_target":"molestias","value_proposition":"dolorem","sales_channels":"accusantium","revenue_streams":"aut","key_metrics":"voluptates","cost_structure":"rerum","financial_file":"cumque","optional_file":"quia"}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
@@ -682,7 +772,7 @@ to populate a select input for startup product details registration by entrepren
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/startup/registration/data/product_detail"
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/registration/data/product_detail"
 );
 
 let headers = {
@@ -700,7 +790,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost/api/v1/startup/registration/data/product_detail',
+    'http://fondo-app-gh.herokuapp.com/api/v1/startup/registration/data/product_detail',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -712,7 +802,7 @@ $response = $client-&gt;get(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/v1/startup/registration/data/product_detail" \
+    -G "http://fondo-app-gh.herokuapp.com/api/v1/startup/registration/data/product_detail" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
@@ -743,7 +833,7 @@ The same route is used to update.</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/startup/product_detail"
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/product_detail"
 );
 
 let headers = {
@@ -755,7 +845,7 @@ let headers = {
 let body = {
     "startup_id": 1,
     "product_progress_id": 1,
-    "product_url": "accusamus"
+    "product_url": "ut"
 }
 
 fetch(url, {
@@ -768,7 +858,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost/api/v1/startup/product_detail',
+    'http://fondo-app-gh.herokuapp.com/api/v1/startup/product_detail',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -778,18 +868,18 @@ $response = $client-&gt;post(
         'json' =&gt; [
             'startup_id' =&gt; 1,
             'product_progress_id' =&gt; 1,
-            'product_url' =&gt; 'accusamus',
+            'product_url' =&gt; 'ut',
         ],
     ]
 );
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/v1/startup/product_detail" \
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/product_detail" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"product_progress_id":1,"product_url":"accusamus"}'
+    -d '{"startup_id":1,"product_progress_id":1,"product_url":"ut"}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
@@ -843,7 +933,7 @@ to populate a select input for startup cofounder details registration by entrepr
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/startup/registration/data/cofounder_detail"
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/registration/data/cofounder_detail"
 );
 
 let headers = {
@@ -861,7 +951,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost/api/v1/startup/registration/data/cofounder_detail',
+    'http://fondo-app-gh.herokuapp.com/api/v1/startup/registration/data/cofounder_detail',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -873,7 +963,7 @@ $response = $client-&gt;get(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/v1/startup/registration/data/cofounder_detail" \
+    -G "http://fondo-app-gh.herokuapp.com/api/v1/startup/registration/data/cofounder_detail" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
@@ -920,7 +1010,7 @@ cofounder_role_id: 5<br>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/startup/cofounder_detail"
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/cofounder_detail"
 );
 
 let headers = {
@@ -932,7 +1022,7 @@ let headers = {
 let body = {
     "startup_id": 1,
     "funding_amount": "3000.0",
-    "rate_of_devotion": "qui",
+    "rate_of_devotion": "similique",
     "cofounders": []
 }
 
@@ -946,7 +1036,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost/api/v1/startup/cofounder_detail',
+    'http://fondo-app-gh.herokuapp.com/api/v1/startup/cofounder_detail',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -956,7 +1046,7 @@ $response = $client-&gt;post(
         'json' =&gt; [
             'startup_id' =&gt; 1,
             'funding_amount' =&gt; '3000.0',
-            'rate_of_devotion' =&gt; 'qui',
+            'rate_of_devotion' =&gt; 'similique',
             'cofounders' =&gt; [],
         ],
     ]
@@ -964,11 +1054,11 @@ $response = $client-&gt;post(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/v1/startup/cofounder_detail" \
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/cofounder_detail" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"funding_amount":"3000.0","rate_of_devotion":"qui","cofounders":[]}'
+    -d '{"startup_id":1,"funding_amount":"3000.0","rate_of_devotion":"similique","cofounders":[]}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
@@ -1028,7 +1118,7 @@ to populate a select input for startup teams registration by entrepreneur</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/startup/registration/data/startup_team"
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/registration/data/startup_team"
 );
 
 let headers = {
@@ -1046,7 +1136,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost/api/v1/startup/registration/data/startup_team',
+    'http://fondo-app-gh.herokuapp.com/api/v1/startup/registration/data/startup_team',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1058,7 +1148,7 @@ $response = $client-&gt;get(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/v1/startup/registration/data/startup_team" \
+    -G "http://fondo-app-gh.herokuapp.com/api/v1/startup/registration/data/startup_team" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
@@ -1107,7 +1197,7 @@ business_team_id: 3,  //ie CEO business team<br>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/startup/startup_team"
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/startup_team"
 );
 
 let headers = {
@@ -1131,7 +1221,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost/api/v1/startup/startup_team',
+    'http://fondo-app-gh.herokuapp.com/api/v1/startup/startup_team',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1147,7 +1237,7 @@ $response = $client-&gt;post(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/v1/startup/startup_team" \
+    "http://fondo-app-gh.herokuapp.com/api/v1/startup/startup_team" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
@@ -1190,14 +1280,14 @@ print_r(json_decode((string) $body));</code></pre>
 </tbody>
 </table>
 <!-- END_ec031c2d4106f9b74dd9df80e918d490 -->
-<h1>System Generated Routes</h1>
+<h1>System Generated Routes (Ignore)</h1>
 <!-- START_0c068b4037fb2e47e71bd44bd36e3e2a -->
 <h2>Authorize a client to access the user&#039;s account.</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/authorize"
+    "http://fondo-app-gh.herokuapp.com/oauth/authorize"
 );
 
 let headers = {
@@ -1215,7 +1305,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost/oauth/authorize',
+    'http://fondo-app-gh.herokuapp.com/oauth/authorize',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1227,7 +1317,7 @@ $response = $client-&gt;get(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/oauth/authorize" \
+    -G "http://fondo-app-gh.herokuapp.com/oauth/authorize" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
@@ -1246,7 +1336,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/authorize"
+    "http://fondo-app-gh.herokuapp.com/oauth/authorize"
 );
 
 let headers = {
@@ -1264,7 +1354,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost/oauth/authorize',
+    'http://fondo-app-gh.herokuapp.com/oauth/authorize',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1276,10 +1366,16 @@ $response = $client-&gt;post(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/oauth/authorize" \
+    "http://fondo-app-gh.herokuapp.com/oauth/authorize" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
+<blockquote>
+<p>Example response (500):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Server Error"
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST oauth/authorize</code></p>
 <!-- END_e48cc6a0b45dd21b7076ab2c03908687 -->
@@ -1289,7 +1385,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/authorize"
+    "http://fondo-app-gh.herokuapp.com/oauth/authorize"
 );
 
 let headers = {
@@ -1307,7 +1403,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;delete(
-    'http://localhost/oauth/authorize',
+    'http://fondo-app-gh.herokuapp.com/oauth/authorize',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1319,10 +1415,16 @@ $response = $client-&gt;delete(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X DELETE \
-    "http://localhost/oauth/authorize" \
+    "http://fondo-app-gh.herokuapp.com/oauth/authorize" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
+<blockquote>
+<p>Example response (419):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "CSRF token mismatch."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>DELETE oauth/authorize</code></p>
 <!-- END_de5d7581ef1275fce2a229b6b6eaad9c -->
@@ -1332,7 +1434,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/token"
+    "http://fondo-app-gh.herokuapp.com/oauth/token"
 );
 
 let headers = {
@@ -1350,7 +1452,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost/oauth/token',
+    'http://fondo-app-gh.herokuapp.com/oauth/token',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1362,10 +1464,16 @@ $response = $client-&gt;post(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/oauth/token" \
+    "http://fondo-app-gh.herokuapp.com/oauth/token" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
+<blockquote>
+<p>Example response (500):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Server Error"
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST oauth/token</code></p>
 <!-- END_a09d20357336aa979ecd8e3972ac9168 -->
@@ -1375,7 +1483,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/tokens"
+    "http://fondo-app-gh.herokuapp.com/oauth/tokens"
 );
 
 let headers = {
@@ -1393,7 +1501,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost/oauth/tokens',
+    'http://fondo-app-gh.herokuapp.com/oauth/tokens',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1405,7 +1513,7 @@ $response = $client-&gt;get(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/oauth/tokens" \
+    -G "http://fondo-app-gh.herokuapp.com/oauth/tokens" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
@@ -1424,7 +1532,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/tokens/1"
+    "http://fondo-app-gh.herokuapp.com/oauth/tokens/1"
 );
 
 let headers = {
@@ -1442,7 +1550,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;delete(
-    'http://localhost/oauth/tokens/1',
+    'http://fondo-app-gh.herokuapp.com/oauth/tokens/1',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1454,10 +1562,16 @@ $response = $client-&gt;delete(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X DELETE \
-    "http://localhost/oauth/tokens/1" \
+    "http://fondo-app-gh.herokuapp.com/oauth/tokens/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
+<blockquote>
+<p>Example response (419):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "CSRF token mismatch."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>DELETE oauth/tokens/{token_id}</code></p>
 <!-- END_a9a802c25737cca5324125e5f60b72a5 -->
@@ -1467,7 +1581,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/token/refresh"
+    "http://fondo-app-gh.herokuapp.com/oauth/token/refresh"
 );
 
 let headers = {
@@ -1485,7 +1599,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost/oauth/token/refresh',
+    'http://fondo-app-gh.herokuapp.com/oauth/token/refresh',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1497,10 +1611,16 @@ $response = $client-&gt;post(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/oauth/token/refresh" \
+    "http://fondo-app-gh.herokuapp.com/oauth/token/refresh" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
+<blockquote>
+<p>Example response (419):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "CSRF token mismatch."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST oauth/token/refresh</code></p>
 <!-- END_abe905e69f5d002aa7d26f433676d623 -->
@@ -1510,7 +1630,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/clients"
+    "http://fondo-app-gh.herokuapp.com/oauth/clients"
 );
 
 let headers = {
@@ -1528,7 +1648,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost/oauth/clients',
+    'http://fondo-app-gh.herokuapp.com/oauth/clients',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1540,7 +1660,7 @@ $response = $client-&gt;get(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/oauth/clients" \
+    -G "http://fondo-app-gh.herokuapp.com/oauth/clients" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
@@ -1559,7 +1679,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/clients"
+    "http://fondo-app-gh.herokuapp.com/oauth/clients"
 );
 
 let headers = {
@@ -1577,7 +1697,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost/oauth/clients',
+    'http://fondo-app-gh.herokuapp.com/oauth/clients',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1589,10 +1709,16 @@ $response = $client-&gt;post(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/oauth/clients" \
+    "http://fondo-app-gh.herokuapp.com/oauth/clients" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
+<blockquote>
+<p>Example response (419):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "CSRF token mismatch."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST oauth/clients</code></p>
 <!-- END_9eabf8d6e4ab449c24c503fcb42fba82 -->
@@ -1602,7 +1728,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/clients/1"
+    "http://fondo-app-gh.herokuapp.com/oauth/clients/1"
 );
 
 let headers = {
@@ -1620,7 +1746,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;put(
-    'http://localhost/oauth/clients/1',
+    'http://fondo-app-gh.herokuapp.com/oauth/clients/1',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1632,10 +1758,16 @@ $response = $client-&gt;put(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X PUT \
-    "http://localhost/oauth/clients/1" \
+    "http://fondo-app-gh.herokuapp.com/oauth/clients/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
+<blockquote>
+<p>Example response (419):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "CSRF token mismatch."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>PUT oauth/clients/{client_id}</code></p>
 <!-- END_784aec390a455073fc7464335c1defa1 -->
@@ -1645,7 +1777,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/clients/1"
+    "http://fondo-app-gh.herokuapp.com/oauth/clients/1"
 );
 
 let headers = {
@@ -1663,7 +1795,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;delete(
-    'http://localhost/oauth/clients/1',
+    'http://fondo-app-gh.herokuapp.com/oauth/clients/1',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1675,10 +1807,16 @@ $response = $client-&gt;delete(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X DELETE \
-    "http://localhost/oauth/clients/1" \
+    "http://fondo-app-gh.herokuapp.com/oauth/clients/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
+<blockquote>
+<p>Example response (419):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "CSRF token mismatch."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>DELETE oauth/clients/{client_id}</code></p>
 <!-- END_1f65a511dd86ba0541d7ba13ca57e364 -->
@@ -1688,7 +1826,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/scopes"
+    "http://fondo-app-gh.herokuapp.com/oauth/scopes"
 );
 
 let headers = {
@@ -1706,7 +1844,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost/oauth/scopes',
+    'http://fondo-app-gh.herokuapp.com/oauth/scopes',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1718,7 +1856,7 @@ $response = $client-&gt;get(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/oauth/scopes" \
+    -G "http://fondo-app-gh.herokuapp.com/oauth/scopes" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
@@ -1737,7 +1875,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/personal-access-tokens"
+    "http://fondo-app-gh.herokuapp.com/oauth/personal-access-tokens"
 );
 
 let headers = {
@@ -1755,7 +1893,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost/oauth/personal-access-tokens',
+    'http://fondo-app-gh.herokuapp.com/oauth/personal-access-tokens',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1767,7 +1905,7 @@ $response = $client-&gt;get(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/oauth/personal-access-tokens" \
+    -G "http://fondo-app-gh.herokuapp.com/oauth/personal-access-tokens" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
@@ -1786,7 +1924,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/personal-access-tokens"
+    "http://fondo-app-gh.herokuapp.com/oauth/personal-access-tokens"
 );
 
 let headers = {
@@ -1804,7 +1942,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost/oauth/personal-access-tokens',
+    'http://fondo-app-gh.herokuapp.com/oauth/personal-access-tokens',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1816,10 +1954,16 @@ $response = $client-&gt;post(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/oauth/personal-access-tokens" \
+    "http://fondo-app-gh.herokuapp.com/oauth/personal-access-tokens" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
+<blockquote>
+<p>Example response (419):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "CSRF token mismatch."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST oauth/personal-access-tokens</code></p>
 <!-- END_a8dd9c0a5583742e671711f9bb3ee406 -->
@@ -1829,7 +1973,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/oauth/personal-access-tokens/1"
+    "http://fondo-app-gh.herokuapp.com/oauth/personal-access-tokens/1"
 );
 
 let headers = {
@@ -1847,7 +1991,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;delete(
-    'http://localhost/oauth/personal-access-tokens/1',
+    'http://fondo-app-gh.herokuapp.com/oauth/personal-access-tokens/1',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1859,10 +2003,16 @@ $response = $client-&gt;delete(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X DELETE \
-    "http://localhost/oauth/personal-access-tokens/1" \
+    "http://fondo-app-gh.herokuapp.com/oauth/personal-access-tokens/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
+<blockquote>
+<p>Example response (419):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "CSRF token mismatch."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>DELETE oauth/personal-access-tokens/{token_id}</code></p>
 <!-- END_bae65df80fd9d72a01439241a9ea20d0 -->
@@ -1875,7 +2025,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/user/login"
+    "http://fondo-app-gh.herokuapp.com/api/v1/user/login"
 );
 
 let headers = {
@@ -1886,7 +2036,7 @@ let headers = {
 
 let body = {
     "email": "mail@mail.com",
-    "password": "id"
+    "password": "ducimus"
 }
 
 fetch(url, {
@@ -1899,7 +2049,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost/api/v1/user/login',
+    'http://fondo-app-gh.herokuapp.com/api/v1/user/login',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -1908,18 +2058,18 @@ $response = $client-&gt;post(
         ],
         'json' =&gt; [
             'email' =&gt; 'mail@mail.com',
-            'password' =&gt; 'id',
+            'password' =&gt; 'ducimus',
         ],
     ]
 );
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/v1/user/login" \
+    "http://fondo-app-gh.herokuapp.com/api/v1/user/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"email":"mail@mail.com","password":"id"}'
+    -d '{"email":"mail@mail.com","password":"ducimus"}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
@@ -1983,7 +2133,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/user/types"
+    "http://fondo-app-gh.herokuapp.com/api/v1/user/types"
 );
 
 let headers = {
@@ -2001,7 +2151,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost/api/v1/user/types',
+    'http://fondo-app-gh.herokuapp.com/api/v1/user/types',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -2013,7 +2163,7 @@ $response = $client-&gt;get(
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/v1/user/types" \
+    -G "http://fondo-app-gh.herokuapp.com/api/v1/user/types" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
@@ -2042,7 +2192,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/user/register"
+    "http://fondo-app-gh.herokuapp.com/api/v1/user/register"
 );
 
 let headers = {
@@ -2054,11 +2204,11 @@ let headers = {
 let body = {
     "first_name": "Jane",
     "last_name": "Doe",
-    "picture": "delectus",
+    "picture": "beatae",
     "user_type_id": 1,
     "email": "mail@mail.com",
-    "password": "ex",
-    "password_confirmation": "officia"
+    "password": "unde",
+    "password_confirmation": "dolorum"
 }
 
 fetch(url, {
@@ -2071,7 +2221,7 @@ fetch(url, {
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'http://localhost/api/v1/user/register',
+    'http://fondo-app-gh.herokuapp.com/api/v1/user/register',
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
@@ -2081,22 +2231,22 @@ $response = $client-&gt;post(
         'json' =&gt; [
             'first_name' =&gt; 'Jane',
             'last_name' =&gt; 'Doe',
-            'picture' =&gt; 'delectus',
+            'picture' =&gt; 'beatae',
             'user_type_id' =&gt; 1,
             'email' =&gt; 'mail@mail.com',
-            'password' =&gt; 'ex',
-            'password_confirmation' =&gt; 'officia',
+            'password' =&gt; 'unde',
+            'password_confirmation' =&gt; 'dolorum',
         ],
     ]
 );
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-bash">curl -X POST \
-    "http://localhost/api/v1/user/register" \
+    "http://fondo-app-gh.herokuapp.com/api/v1/user/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"first_name":"Jane","last_name":"Doe","picture":"delectus","user_type_id":1,"email":"mail@mail.com","password":"ex","password_confirmation":"officia"}'
+    -d '{"first_name":"Jane","last_name":"Doe","picture":"beatae","user_type_id":1,"email":"mail@mail.com","password":"unde","password_confirmation":"dolorum"}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
