@@ -68,6 +68,14 @@ class Startup extends Model
     }
 
     /**
+     * A startup has one cofounder detail
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function cofounder_detail() {
+        return $this->hasOne(CofounderDetail::class);
+    }
+
+    /**
      * A startup has many startup teams with members
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

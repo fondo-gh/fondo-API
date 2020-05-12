@@ -79,11 +79,4 @@ class User extends Authenticatable
         return $this->hasMany(Startup::class);
     }
 
-    /**
-     * A startup has one contact detail
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function contact_detail(){
-        return $this->hasOne(ContactDetail::class);
-    }
 }
