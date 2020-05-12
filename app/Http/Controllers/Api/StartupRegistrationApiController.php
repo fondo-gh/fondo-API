@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\BusinessTeamCollection;
 use App\Http\Resources\CofounderRoleCollection;
 use App\Http\Resources\ProductProgressCollection;
+use App\Http\Resources\StartupCollection;
 use App\Http\Resources\StartupIndustryCollection;
 use App\Http\Resources\StartupTypeCollection;
 use App\ProductDetail;
@@ -39,12 +40,20 @@ class StartupRegistrationApiController extends Controller
 {
     use ApiBaseController;
 
+    /**
+     * Users(Entrepreneur) Startups.
+     *
+     * Startups registered by the entrepreneur, both approved and unapproved
+     *
+     * @apiResourceCollection App\Http\Resources\StartupCollection
+     * @apiResourceModel App\Startup
+     * @return StartupCollection
+     */
     public function startups()
     {
-        //todo:implement logic
-        //returns startups for the user/entrepreneur if user id is specified
-        //else returns all startups
-        //returns simple or all startups information format
+        //find the logged in user
+        $user = auth()->user();
+        return new StartupCollection($user->startups);
     }
 
     /**

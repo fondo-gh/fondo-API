@@ -164,7 +164,7 @@ return [
                      * API calls will be made only for routes in this group matching these HTTP methods (GET, POST, etc).
                      * List the methods here or use '*' to mean all methods. Leave empty to disable API calls.
                      */
-                    'methods' => ['GET'],
+                    'methods' => ['*'],
 
                     /*
                      * Laravel config variables which should be set for the API call.
@@ -243,7 +243,7 @@ return [
     /*
      * Name for the group of routes which do not have a @group set.
      */
-    'default_group' => 'System Generated Routes',
+    'default_group' => 'System Generated Routes (Ignore)',
 
     /*
      * Example requests for each endpoint will be shown in each of these languages.

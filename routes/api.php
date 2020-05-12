@@ -35,7 +35,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
  *Authenticated routes
  */
 Route::group(['prefix' => 'v1', 'middleware' => 'auth:user', 'namespace' => 'Api'], function () {
-//    Route::get('startups/{user?}/{format?}', 'StartupRegistrationApiController@startups');
+    Route::get('user/startups', 'StartupRegistrationApiController@startups');
     Route::post('startup/register', 'StartupRegistrationApiController@registerStartup');
 
     Route::get('startup/registration/data/startup_detail', 'StartupRegistrationApiController@dataForStartupDetailsRegistration');
