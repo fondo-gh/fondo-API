@@ -41,9 +41,9 @@ class StartupRegistrationApiController extends Controller
     use ApiBaseController;
 
     /**
-     * Users(Entrepreneur) Startups.
+     * User(Entrepreneur) Startups.
      *
-     * Startups registered by the entrepreneur, both approved and unapproved
+     * Startups registered by the logged in entrepreneur, both approved and unapproved
      *
      * @apiResourceCollection App\Http\Resources\StartupCollection
      * @apiResourceModel App\Startup

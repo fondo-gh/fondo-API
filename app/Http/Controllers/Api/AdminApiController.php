@@ -64,9 +64,9 @@ class AdminApiController extends Controller
      *
      * Approve a Startup
      *
-     * Registers a user as an entrepreneur or investor.
+     * Approve a startup.
      *
-     * @bodyParam startup_id id required The id of the startup to approve. Example: 1
+     * @bodyParam startup_id integer required The id of the startup to approve. Example: 1
      *
      * @response 200 {
      * "success": {
