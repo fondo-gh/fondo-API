@@ -4,16 +4,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\UserTypeCollection;
+use App\Investor;
 use App\Traits\ApiBaseController;
 use App\User;
 use App\UserType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 /**
- * @group User Management
+ * @group User and Admin Management
  *
  * APIs for managing users - entrepreneurs and investors
  */
@@ -108,7 +110,7 @@ class AuthApiController extends Controller
       * @bodyParam user_type_id int required The id of the type of user. Example: 1 for Entrepreneur, 2 for Investor
       * @bodyParam email string required The email of the user. Example: mail@mail.com
       * @bodyParam password string required The password of the user.
-      * @bodyParam password_confirmation string required The password confirmation for the password..
+      * @bodyParam password_confirmation string required The password confirmation for the password.
       *
       * @response 200 {
       * "success": {
@@ -154,12 +156,79 @@ class AuthApiController extends Controller
             $request['picture'] = $name;
         }
 
+        DB::beginTransaction();
+
         //create the user
         $user = User::query()->create($request->all());
+
+        //if the user user is an investor, create an investor table
+        if($user->user_type_id == UserType::USER_TYPE_INVESTOR_ID) {
+            Investor::query()->create(['user_id' => $user->id]);
+        }
+
+        DB::commit();
 
         //data to be sent back
         return $this->sendSuccessResponse($this->generateUserData($user));
     }
 
+
+    /**
+     * Login an Admin
+     *
+     * Authenticates an administrator.
+     *
+     * @bodyParam email string required The email of the admin. Example: mail@mail.com
+     * @bodyParam password string required The password of the admin.
+     *
+     * @response 200 {
+     * "success": {
+     * "code": 200,
+     * "message": "Request completed successfully."
+     * },
+     * "data": {
+     * "id": 1,
+     * "name": "Jane Doe",
+     * "email": "jane@doe.com",
+     * "token": "7geRI9P4LUFj3ensaxOV070Uk1yXeQ23ptqerJYc"
+     *  }
+     * }
+     *
+     * @response 404 {
+     *  "error": {
+     *  "code": 422,
+     *  "message": "Invalid credentials."
+     *   }
+     *}
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function loginAdmin(Request $request)
+    {
+        //validate credentials
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        //send validation error response if any
+        if ($validator->fails()) {
+            return $this->sendErrorResponse($validator->errors()->first());
+        }
+
+        //extract credentials
+        $credentials = $request->only(['email', 'password']);
+
+        //attempt login, if successful, send back response
+        if (Auth::guard('admin')->attempt($credentials)) {
+            $admin = Auth::guard('admin')->user();
+            //data to be sent back
+            $data = $this->generateAdminData($admin);
+            return $this->sendSuccessResponse($data);
+        }
+
+        //if authentication fails, send error response
+        return $this->sendErrorResponse("Invalid credentials.");
+    }
 
 }

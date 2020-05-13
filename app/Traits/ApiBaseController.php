@@ -4,6 +4,7 @@
 namespace App\Traits;
 
 
+use App\Admin;
 use App\User;
 
 trait ApiBaseController
@@ -64,6 +65,19 @@ trait ApiBaseController
         $data['picture'] = $imageUrl;
         $data['user_type'] = $user->user_type->name;
         $data['token'] = $user->createToken(env('APP_NAME'))->accessToken;
+        return $data;
+    }
+
+    /**
+     * @param Admin $admin
+     * @return array
+     */
+    public function generateAdminData(Admin $admin) {
+        $data = array();
+        $data['id'] = $admin->id;
+        $data['name'] = $admin->name;
+        $data['email'] = $admin->email;
+        $data['token'] = $admin->createToken(env('APP_NAME'))->accessToken;
         return $data;
     }
 }

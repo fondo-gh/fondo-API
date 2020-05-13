@@ -16,7 +16,7 @@ class UserTypeTableSeeder extends Seeder
         UserType::query()->truncate();
 
         //insert into the database
-        UserType::query()->create(['name' => 'Entrepreneur']);
-        UserType::query()->create(['name' => 'Investor']);
+        UserType::query()->create(['id' => UserType::USER_TYPE_ENTREPRENEUR_ID,'name' => 'Entrepreneur']);
+        UserType::query()->create(['id' => UserType::USER_TYPE_INVESTOR_ID,'name' => 'Investor']);
     }
 }

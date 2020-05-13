@@ -29,10 +29,16 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
     Route::post('user/login', 'AuthApiController@loginUser');
     Route::get('user/types', 'AuthApiController@userTypes');
     Route::post('user/register', 'AuthApiController@registerUser');
+
+    /**
+     * Authentication routes for admin
+     */
+    Route::post('admin/login', 'AuthApiController@loginAdmin');
+
 });
 
 /**
- *Authenticated routes
+ *Authenticated routes for Users
  */
 Route::group(['prefix' => 'v1', 'middleware' => 'auth:user', 'namespace' => 'Api'], function () {
     Route::get('user/startups', 'StartupRegistrationApiController@startups');
@@ -52,6 +58,15 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:user', 'namespace' => 'Api
 
     Route::get('startup/registration/data/startup_team', 'StartupRegistrationApiController@dataForStartupTeamRegistration');
     Route::post('startup/startup_team', 'StartupRegistrationApiController@startupTeam');
+});
+
+/**
+ *Authenticated routes for Admins
+ */
+Route::group(['prefix' => 'v1', 'middleware' => 'auth:admin-api', 'namespace' => 'Api'], function () {
+    Route::get('admin/startups', 'AdminApiController@startups');
+    Route::get('admin/entrepreneur/{userId}/startups', 'AdminApiController@startupsForEntrepreneur');
+    Route::post('admin/startup/approve', 'AdminApiController@approveStartup');
 });
 
 

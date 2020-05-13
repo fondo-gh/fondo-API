@@ -19,8 +19,9 @@ class User extends JsonResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
-            'picture' => url('/') . '/users/' . $this->picture,
-            'user_type' => $this->user_type->name
+            'picture' =>  $this->picture ? url('/') . '/users/' . $this->picture : '',
+            'user_type' => $this->user_type->name,
+            'created_at' => $this->created_at
         ];
     }
 }
