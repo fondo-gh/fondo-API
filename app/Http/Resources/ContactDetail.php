@@ -16,6 +16,7 @@ class ContactDetail extends JsonResource
     {
         return [
             'id' => $this-id,
+            'uuid' => $this->uuid,
             'startup_id' => $this->startup_id,
             'email' => $this->email,
             'phone' => $this->phone,

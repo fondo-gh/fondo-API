@@ -16,6 +16,7 @@ class BusinessModel extends JsonResource
     {
         return [
             'id' => $this->id,
+            'uuid' => $this->uuid,
             'startup_id' => $this->startup_id,
             'key_resources' => $this->key_resources,
             'customer_target' => $this->customer_target,

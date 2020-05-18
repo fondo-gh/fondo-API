@@ -15,6 +15,7 @@ class CreateStartupDetailsTable extends Migration
     {
         Schema::create('startup_details', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')->unique();
             $table->integer('startup_id');
             $table->integer('startup_type_id');
             $table->integer('startup_industry_id');

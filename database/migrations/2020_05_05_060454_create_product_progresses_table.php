@@ -15,6 +15,7 @@ class CreateProductProgressesTable extends Migration
     {
         Schema::create('product_progresses', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')->unique();
             $table->string('name')->unique();
             $table->timestamps();
         });

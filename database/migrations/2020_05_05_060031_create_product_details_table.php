@@ -15,6 +15,7 @@ class CreateProductDetailsTable extends Migration
     {
         Schema::create('product_details', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')->unique();
             $table->integer('startup_id');
             $table->integer('product_progress_id');
             $table->string('product_url')->nullable();

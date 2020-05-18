@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use JamesMills\Uuid\HasUuidTrait;
 
 class StartupTeam extends Model
 {
+    use HasUuidTrait;
+
 
     /**
      * @var string[]

@@ -15,6 +15,7 @@ class CreateInvestorsTable extends Migration
     {
         Schema::create('investors', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')->unique();
             $table->integer('user_id');
             $table->integer('startups_invested_in')->nullable();
             $table->integer('amount_invested')->nullable();

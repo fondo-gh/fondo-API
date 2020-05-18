@@ -15,6 +15,7 @@ class CreateCofounderDetailsTable extends Migration
     {
         Schema::create('cofounder_details', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')->unique();
             $table->integer('startup_id');
             $table->string('funding_amount')->nullable();
             $table->string('rate_of_devotion')->nullable();

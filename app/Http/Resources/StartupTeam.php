@@ -16,6 +16,7 @@ class StartupTeam extends JsonResource
     {
         return [
             'id' => $this->id,
+            'uuid' => $this->uuid,
             'startup_id' => $this->startup_id,
             'name' => $this->name,
             'business_team_id' => $this->business_team_id,

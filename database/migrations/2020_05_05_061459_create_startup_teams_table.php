@@ -15,6 +15,7 @@ class CreateStartupTeamsTable extends Migration
     {
         Schema::create('startup_teams', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')->unique();
             $table->integer('startup_id');
             $table->integer('business_team_id');
             $table->string('name');

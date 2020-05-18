@@ -59,6 +59,7 @@ trait ApiBaseController
 
         $data = array();
         $data['id'] = $user->id;
+        $data['uuid'] = $user->uuid;
         $data['first_name'] = $user->first_name;
         $data['last_name'] = $user->last_name;
         $data['email'] = $user->email;
@@ -75,6 +76,7 @@ trait ApiBaseController
     public function generateAdminData(Admin $admin) {
         $data = array();
         $data['id'] = $admin->id;
+        $data['uuid'] = $admin->uuid;
         $data['name'] = $admin->name;
         $data['email'] = $admin->email;
         $data['token'] = $admin->createToken(env('APP_NAME'))->accessToken;

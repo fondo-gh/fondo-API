@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use JamesMills\Uuid\HasUuidTrait;
 
 class ContactDetail extends Model
 {
+    use HasUuidTrait;
+
     protected $fillable = [
         'startup_id',
         'email',
@@ -14,7 +17,7 @@ class ContactDetail extends Model
         'twitter_handle',
         'instagram_handle',
         'linkedin_handle',
-        'skype_handle'
+        'skype_handle',
     ];
 
     /**

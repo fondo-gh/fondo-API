@@ -53,6 +53,7 @@ class AuthApiController extends Controller
      * },
      * "data": {
      * "id": 1,
+     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
      * "first_name": "Jane",
      * "last_name": "Doe",
      * "email": "jane@doe.com",
@@ -119,6 +120,7 @@ class AuthApiController extends Controller
       * },
       * "data": {
       * "id": 1,
+      * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
       * "first_name": "Jane",
       * "last_name": "Doe",
       * "email": "jane@doe.com",
@@ -188,6 +190,7 @@ class AuthApiController extends Controller
      * },
      * "data": {
      * "id": 1,
+     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
      * "name": "Jane Doe",
      * "email": "jane@doe.com",
      * "token": "7geRI9P4LUFj3ensaxOV070Uk1yXeQ23ptqerJYc"

@@ -15,6 +15,7 @@ class CreateStartupsTable extends Migration
     {
         Schema::create('startups', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')->unique();
             $table->string('company_name')->nullable();
             $table->string('product_image')->nullable();
             $table->string('caption')->nullable();

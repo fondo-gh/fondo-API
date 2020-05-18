@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use JamesMills\Uuid\HasUuidTrait;
 
 class UserType extends Model
 {
+    use HasUuidTrait;
 
     /**
      * Constants for user type

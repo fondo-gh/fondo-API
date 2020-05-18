@@ -15,6 +15,7 @@ class CreateBusinessTeamsTable extends Migration
     {
         Schema::create('business_teams', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')->unique();
             $table->string('name')->unique();
             $table->string('description');
             $table->timestamps();

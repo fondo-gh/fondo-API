@@ -15,6 +15,7 @@ class CreateStartupIndustriesTable extends Migration
     {
         Schema::create('startup_industries', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')->unique();
             $table->string('name')->unique();
             $table->timestamps();
         });

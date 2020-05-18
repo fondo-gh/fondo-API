@@ -12,7 +12,6 @@ use App\Traits\ApiBaseController;
 use App\User;
 use App\UserType;
 use Illuminate\Http\Request;
-use App\Http\Resources\Startup as StartupResource;
 use Illuminate\Support\Facades\Validator;
 
 /**

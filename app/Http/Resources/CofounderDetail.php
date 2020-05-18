@@ -16,6 +16,7 @@ class CofounderDetail extends JsonResource
     {
         return [
             'id' => $this->id,
+            'uuid' => $this->uuid,
             'startup_id' => $this->startup_id,
             'funding_amount' => $this->funding_amount,
             'rate_of_devotion' => $this->rate_of_devotion,

@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use JamesMills\Uuid\HasUuidTrait;
 
 class BusinessModel extends Model
 {
+    use HasUuidTrait;
+
     /**
      * @var string[]
      */
@@ -19,7 +22,7 @@ class BusinessModel extends Model
         'key_metrics',
         'cost_structure',
         'financial_file',
-        'optional_file'
+        'optional_file',
     ];
 
 

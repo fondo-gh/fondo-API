@@ -15,6 +15,7 @@ class CreateBusinessModelsTable extends Migration
     {
         Schema::create('business_models', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')->unique();
             $table->integer('startup_id');
             $table->text('key_resources')->nullable();
             $table->text('customer_target')->nullable();

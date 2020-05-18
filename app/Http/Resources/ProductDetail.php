@@ -16,6 +16,7 @@ class ProductDetail extends JsonResource
     {
         return [
             'id' => $this->id,
+            'uuid' => $this->uuid,
             'startup_id' => $this->startup_id,
             'product_progress_id' => $this->product_progress_id,
             'product_progress' => $this->product_progress->name,

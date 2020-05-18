@@ -15,6 +15,7 @@ class CreateCofoundersTable extends Migration
     {
         Schema::create('cofounders', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')->unique();
             $table->string('name');
             $table->string('email')->unique();
             $table->integer('cofounder_role_id');

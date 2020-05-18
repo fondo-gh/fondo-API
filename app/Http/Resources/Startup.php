@@ -23,6 +23,7 @@ class Startup extends JsonResource
     {
         return [
             'id' => $this->id,
+            'uuid' => $this->uuid,
             'company_name' => $this->company_name,
             'product_image' => url('/') . '/startups/products/' . $this->product_image,
             'caption' => $this->caption,

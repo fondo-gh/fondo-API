@@ -16,6 +16,7 @@ class StartupDetail extends JsonResource
     {
         return [
             'id' => $this->id,
+            'uuid' => $this->uuid,
             'startup_id' => $this->startup_id,
             'startup_type_id' => $this->startup_type_id,
             'startup_type' => $this->startup_type->name,

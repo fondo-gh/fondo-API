@@ -76,7 +76,8 @@ class StartupRegistrationApiController extends Controller
      * "message": "Request completed successfully."
      * },
      * "data": {
-     * "startup_id": 1
+     * "startup_id": 1,
+     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
      * }
      * }
      * @param Request $request
@@ -145,10 +146,12 @@ class StartupRegistrationApiController extends Controller
      * "data": [
      * {
      * "id": 1,
+     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
      * "name": "LLP - Limited liability Partnership"
      * },
      * {
      * "id": 2,
+     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
      * "name": "LP - Limited Partnership"
      * }
      * ]
@@ -157,10 +160,12 @@ class StartupRegistrationApiController extends Controller
      * "data": [
      * {
      * "id": 1,
+     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
      * "name": "Agriculture"
      * },
      * {
      * "id": 2,
+     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
      * "name": "Finance"
      * }
      * ]
@@ -374,10 +379,12 @@ class StartupRegistrationApiController extends Controller
      *"data": [
      * {
      * "id": 1,
+     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
      * "name": "Concept only"
      * },
      * {
      * "id": 2,
+     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
      * "name": "Product development"
      * }]
      *
@@ -442,10 +449,12 @@ class StartupRegistrationApiController extends Controller
      *"data": [
      * {
      * "id": 1,
+     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
      * "name": "Chairman"
      * },
      * {
      * "id": 2,
+     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
      * "name": "Chief Executive Officer"
      * }]
      * }
@@ -569,11 +578,13 @@ class StartupRegistrationApiController extends Controller
      *"data": [
      * {
      * "id": 1,
+     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
      * "name": "Sales and marketing team",
      * "description": "Responsible for bringing the product to market. They use several approaches to get the word out regarding their new invention."
      * },
      * {
      * "id": 2,
+     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
      * "name": "Operations and Production team",
      * "description": "Responsible for bringing the product to life. They receive the product's vision and bring it into its finished stage."
      * }]
