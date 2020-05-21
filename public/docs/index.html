@@ -343,6 +343,114 @@ print_r(json_decode((string) $body));</code></pre>
 </tbody>
 </table>
 <!-- END_8337d9a1278b49cbb775aad1aa0e0c15 -->
+<!-- START_d828d841ef0226434ec4de6631c5f088 -->
+<h2>Investors.</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+All investors registered on the system.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-javascript">const url = new URL(
+    "http://fondo-app-gh.herokuapp.com/api/v1/admin/investors"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://fondo-app-gh.herokuapp.com/api/v1/admin/investors',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://fondo-app-gh.herokuapp.com/api/v1/admin/investors" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "error": {
+        "code": 401,
+        "message": "Unauthenticated."
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/v1/admin/investors</code></p>
+<!-- END_d828d841ef0226434ec4de6631c5f088 -->
+<!-- START_ab342b51312d1fcf45a4cccbb63becb2 -->
+<h2>Entrepreneurs.</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+All entrepreneurs registered on the system.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-javascript">const url = new URL(
+    "http://fondo-app-gh.herokuapp.com/api/v1/admin/entrepreneurs"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://fondo-app-gh.herokuapp.com/api/v1/admin/entrepreneurs',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+            'Authorization' =&gt; 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://fondo-app-gh.herokuapp.com/api/v1/admin/entrepreneurs" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "error": {
+        "code": 401,
+        "message": "Unauthenticated."
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/v1/admin/entrepreneurs</code></p>
+<!-- END_ab342b51312d1fcf45a4cccbb63becb2 -->
 <h1>Investor</h1>
 <p>Investor and startups management endpoints.</p>
 <!-- START_3d8cfc9a16089a3b331531d6d50aac27 -->
@@ -455,11 +563,11 @@ let headers = {
 };
 
 let body = {
-    "bio": "aspernatur",
-    "interests": "suscipit",
-    "startups_invested_in": "corporis",
-    "amount_invested": "asperiores",
-    "occupations": "placeat"
+    "bio": "et",
+    "interests": "natus",
+    "startups_invested_in": "et",
+    "amount_invested": "et",
+    "occupations": "consequatur"
 }
 
 fetch(url, {
@@ -480,11 +588,11 @@ $response = $client-&gt;post(
             'Authorization' =&gt; 'Bearer {token}',
         ],
         'json' =&gt; [
-            'bio' =&gt; 'aspernatur',
-            'interests' =&gt; 'suscipit',
-            'startups_invested_in' =&gt; 'corporis',
-            'amount_invested' =&gt; 'asperiores',
-            'occupations' =&gt; 'placeat',
+            'bio' =&gt; 'et',
+            'interests' =&gt; 'natus',
+            'startups_invested_in' =&gt; 'et',
+            'amount_invested' =&gt; 'et',
+            'occupations' =&gt; 'consequatur',
         ],
     ]
 );
@@ -495,7 +603,7 @@ print_r(json_decode((string) $body));</code></pre>
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"bio":"aspernatur","interests":"suscipit","startups_invested_in":"corporis","amount_invested":"asperiores","occupations":"placeat"}'
+    -d '{"bio":"et","interests":"natus","startups_invested_in":"et","amount_invested":"et","occupations":"consequatur"}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
@@ -667,8 +775,8 @@ let headers = {
 
 let body = {
     "company_name": "Jane Ventures",
-    "caption": "non",
-    "product_image": "ducimus",
+    "caption": "velit",
+    "product_image": "neque",
     "funds_to_raise": "Ghc 234.00",
     "duration_for_raise": "3 months.",
     "startup_id": 1
@@ -693,8 +801,8 @@ $response = $client-&gt;post(
         ],
         'json' =&gt; [
             'company_name' =&gt; 'Jane Ventures',
-            'caption' =&gt; 'non',
-            'product_image' =&gt; 'ducimus',
+            'caption' =&gt; 'velit',
+            'product_image' =&gt; 'neque',
             'funds_to_raise' =&gt; 'Ghc 234.00',
             'duration_for_raise' =&gt; '3 months.',
             'startup_id' =&gt; 1,
@@ -708,7 +816,7 @@ print_r(json_decode((string) $body));</code></pre>
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"company_name":"Jane Ventures","caption":"non","product_image":"ducimus","funds_to_raise":"Ghc 234.00","duration_for_raise":"3 months.","startup_id":1}'
+    -d '{"company_name":"Jane Ventures","caption":"velit","product_image":"neque","funds_to_raise":"Ghc 234.00","duration_for_raise":"3 months.","startup_id":1}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
@@ -839,7 +947,7 @@ let body = {
     "startup_type_id": 1,
     "startup_industry_id": 1,
     "has_patent": true,
-    "location": "sapiente"
+    "location": "iste"
 }
 
 fetch(url, {
@@ -864,7 +972,7 @@ $response = $client-&gt;post(
             'startup_type_id' =&gt; 1,
             'startup_industry_id' =&gt; 1,
             'has_patent' =&gt; true,
-            'location' =&gt; 'sapiente',
+            'location' =&gt; 'iste',
         ],
     ]
 );
@@ -875,7 +983,7 @@ print_r(json_decode((string) $body));</code></pre>
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"startup_type_id":1,"startup_industry_id":1,"has_patent":true,"location":"sapiente"}'
+    -d '{"startup_id":1,"startup_type_id":1,"startup_industry_id":1,"has_patent":true,"location":"iste"}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
@@ -954,12 +1062,12 @@ let body = {
     "startup_id": 1,
     "id": 1,
     "email": "jane@ventures.com",
-    "phone": "animi",
-    "facebook_handle": "numquam",
-    "twitter_handle": "aut",
-    "instagram_handle": "itaque",
-    "linkdin_handle": "maiores",
-    "skype_handle": "aspernatur"
+    "phone": "aut",
+    "facebook_handle": "architecto",
+    "twitter_handle": "adipisci",
+    "instagram_handle": "aut",
+    "linkdin_handle": "facere",
+    "skype_handle": "aliquam"
 }
 
 fetch(url, {
@@ -983,12 +1091,12 @@ $response = $client-&gt;post(
             'startup_id' =&gt; 1,
             'id' =&gt; 1,
             'email' =&gt; 'jane@ventures.com',
-            'phone' =&gt; 'animi',
-            'facebook_handle' =&gt; 'numquam',
-            'twitter_handle' =&gt; 'aut',
-            'instagram_handle' =&gt; 'itaque',
-            'linkdin_handle' =&gt; 'maiores',
-            'skype_handle' =&gt; 'aspernatur',
+            'phone' =&gt; 'aut',
+            'facebook_handle' =&gt; 'architecto',
+            'twitter_handle' =&gt; 'adipisci',
+            'instagram_handle' =&gt; 'aut',
+            'linkdin_handle' =&gt; 'facere',
+            'skype_handle' =&gt; 'aliquam',
         ],
     ]
 );
@@ -999,7 +1107,7 @@ print_r(json_decode((string) $body));</code></pre>
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"id":1,"email":"jane@ventures.com","phone":"animi","facebook_handle":"numquam","twitter_handle":"aut","instagram_handle":"itaque","linkdin_handle":"maiores","skype_handle":"aspernatur"}'
+    -d '{"startup_id":1,"id":1,"email":"jane@ventures.com","phone":"aut","facebook_handle":"architecto","twitter_handle":"adipisci","instagram_handle":"aut","linkdin_handle":"facere","skype_handle":"aliquam"}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
@@ -1100,15 +1208,15 @@ let headers = {
 
 let body = {
     "startup_id": 1,
-    "key_resources": "voluptas",
-    "customer_target": "rerum",
-    "value_proposition": "vitae",
-    "sales_channels": "ipsa",
-    "revenue_streams": "occaecati",
-    "key_metrics": "ipsum",
-    "cost_structure": "iusto",
-    "financial_file": "doloribus",
-    "optional_file": "exercitationem"
+    "key_resources": "ipsum",
+    "customer_target": "earum",
+    "value_proposition": "ab",
+    "sales_channels": "nostrum",
+    "revenue_streams": "qui",
+    "key_metrics": "sapiente",
+    "cost_structure": "quo",
+    "financial_file": "eos",
+    "optional_file": "quis"
 }
 
 fetch(url, {
@@ -1130,15 +1238,15 @@ $response = $client-&gt;post(
         ],
         'json' =&gt; [
             'startup_id' =&gt; 1,
-            'key_resources' =&gt; 'voluptas',
-            'customer_target' =&gt; 'rerum',
-            'value_proposition' =&gt; 'vitae',
-            'sales_channels' =&gt; 'ipsa',
-            'revenue_streams' =&gt; 'occaecati',
-            'key_metrics' =&gt; 'ipsum',
-            'cost_structure' =&gt; 'iusto',
-            'financial_file' =&gt; 'doloribus',
-            'optional_file' =&gt; 'exercitationem',
+            'key_resources' =&gt; 'ipsum',
+            'customer_target' =&gt; 'earum',
+            'value_proposition' =&gt; 'ab',
+            'sales_channels' =&gt; 'nostrum',
+            'revenue_streams' =&gt; 'qui',
+            'key_metrics' =&gt; 'sapiente',
+            'cost_structure' =&gt; 'quo',
+            'financial_file' =&gt; 'eos',
+            'optional_file' =&gt; 'quis',
         ],
     ]
 );
@@ -1149,7 +1257,7 @@ print_r(json_decode((string) $body));</code></pre>
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"key_resources":"voluptas","customer_target":"rerum","value_proposition":"vitae","sales_channels":"ipsa","revenue_streams":"occaecati","key_metrics":"ipsum","cost_structure":"iusto","financial_file":"doloribus","optional_file":"exercitationem"}'
+    -d '{"startup_id":1,"key_resources":"ipsum","customer_target":"earum","value_proposition":"ab","sales_channels":"nostrum","revenue_streams":"qui","key_metrics":"sapiente","cost_structure":"quo","financial_file":"eos","optional_file":"quis"}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
@@ -1307,7 +1415,7 @@ let headers = {
 let body = {
     "startup_id": 1,
     "product_progress_id": 1,
-    "product_url": "tempore"
+    "product_url": "neque"
 }
 
 fetch(url, {
@@ -1330,7 +1438,7 @@ $response = $client-&gt;post(
         'json' =&gt; [
             'startup_id' =&gt; 1,
             'product_progress_id' =&gt; 1,
-            'product_url' =&gt; 'tempore',
+            'product_url' =&gt; 'neque',
         ],
     ]
 );
@@ -1341,7 +1449,7 @@ print_r(json_decode((string) $body));</code></pre>
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"product_progress_id":1,"product_url":"tempore"}'
+    -d '{"startup_id":1,"product_progress_id":1,"product_url":"neque"}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
@@ -1473,7 +1581,7 @@ let headers = {
 let body = {
     "startup_id": 1,
     "funding_amount": "3000.0",
-    "rate_of_devotion": "animi",
+    "rate_of_devotion": "enim",
     "cofounders": []
 }
 
@@ -1497,7 +1605,7 @@ $response = $client-&gt;post(
         'json' =&gt; [
             'startup_id' =&gt; 1,
             'funding_amount' =&gt; '3000.0',
-            'rate_of_devotion' =&gt; 'animi',
+            'rate_of_devotion' =&gt; 'enim',
             'cofounders' =&gt; [],
         ],
     ]
@@ -1509,7 +1617,7 @@ print_r(json_decode((string) $body));</code></pre>
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"funding_amount":"3000.0","rate_of_devotion":"animi","cofounders":[]}'
+    -d '{"startup_id":1,"funding_amount":"3000.0","rate_of_devotion":"enim","cofounders":[]}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
@@ -2477,7 +2585,7 @@ let headers = {
 
 let body = {
     "email": "mail@mail.com",
-    "password": "qui"
+    "password": "ut"
 }
 
 fetch(url, {
@@ -2499,7 +2607,7 @@ $response = $client-&gt;post(
         ],
         'json' =&gt; [
             'email' =&gt; 'mail@mail.com',
-            'password' =&gt; 'qui',
+            'password' =&gt; 'ut',
         ],
     ]
 );
@@ -2510,7 +2618,7 @@ print_r(json_decode((string) $body));</code></pre>
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"email":"mail@mail.com","password":"qui"}'
+    -d '{"email":"mail@mail.com","password":"ut"}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
@@ -2633,11 +2741,11 @@ let headers = {
 let body = {
     "first_name": "Jane",
     "last_name": "Doe",
-    "picture": "sunt",
+    "picture": "veniam",
     "user_type_id": 1,
     "email": "mail@mail.com",
-    "password": "dolorum",
-    "password_confirmation": "est"
+    "password": "quasi",
+    "password_confirmation": "consectetur"
 }
 
 fetch(url, {
@@ -2660,11 +2768,11 @@ $response = $client-&gt;post(
         'json' =&gt; [
             'first_name' =&gt; 'Jane',
             'last_name' =&gt; 'Doe',
-            'picture' =&gt; 'sunt',
+            'picture' =&gt; 'veniam',
             'user_type_id' =&gt; 1,
             'email' =&gt; 'mail@mail.com',
-            'password' =&gt; 'dolorum',
-            'password_confirmation' =&gt; 'est',
+            'password' =&gt; 'quasi',
+            'password_confirmation' =&gt; 'consectetur',
         ],
     ]
 );
@@ -2675,7 +2783,7 @@ print_r(json_decode((string) $body));</code></pre>
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"first_name":"Jane","last_name":"Doe","picture":"sunt","user_type_id":1,"email":"mail@mail.com","password":"dolorum","password_confirmation":"est"}'
+    -d '{"first_name":"Jane","last_name":"Doe","picture":"veniam","user_type_id":1,"email":"mail@mail.com","password":"quasi","password_confirmation":"consectetur"}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
@@ -2757,7 +2865,7 @@ let headers = {
 
 let body = {
     "email": "mail@mail.com",
-    "password": "et"
+    "password": "quaerat"
 }
 
 fetch(url, {
@@ -2779,7 +2887,7 @@ $response = $client-&gt;post(
         ],
         'json' =&gt; [
             'email' =&gt; 'mail@mail.com',
-            'password' =&gt; 'et',
+            'password' =&gt; 'quaerat',
         ],
     ]
 );
@@ -2790,7 +2898,7 @@ print_r(json_decode((string) $body));</code></pre>
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"email":"mail@mail.com","password":"et"}'
+    -d '{"email":"mail@mail.com","password":"quaerat"}'
 </code></pre>
 <blockquote>
 <p>Example response (200):</p>
