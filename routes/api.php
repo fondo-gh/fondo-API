@@ -70,6 +70,8 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:admin-api', 'namespace' =>
     Route::get('admin/startups', 'AdminApiController@startups');
     Route::get('admin/entrepreneur/{userId}/startups', 'AdminApiController@startupsForEntrepreneur');
     Route::post('admin/startup/approve', 'AdminApiController@approveStartup');
+    Route::get('admin/investors', 'AdminApiController@investors');
+    Route::get('admin/entrepreneurs', 'AdminApiController@entrepreneurs');
 });
 
 
