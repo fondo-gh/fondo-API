@@ -80,4 +80,12 @@ class User extends Authenticatable
         return $this->hasMany(Startup::class);
     }
 
+    /**
+     * An user of type Investor has an investor database
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function investor(){
+        return $this->hasOne(Investor::class);
+    }
+
 }

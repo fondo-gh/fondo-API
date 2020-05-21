@@ -85,4 +85,13 @@ class Startup extends Model
     public function startup_teams() {
         return $this->hasMany(StartupTeam::class);
     }
+
+    /**
+     * Query for approved startups
+     * @param $query
+     * @return mixed
+     */
+    public function scopeApproved($query) {
+        return $query->where('approved', 1);
+    }
 }

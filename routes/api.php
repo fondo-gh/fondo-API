@@ -34,7 +34,6 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
      * Authentication routes for admin
      */
     Route::post('admin/login', 'AuthApiController@loginAdmin');
-
 });
 
 /**
@@ -58,6 +57,10 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:user', 'namespace' => 'Api
 
     Route::get('startup/registration/data/startup_team', 'StartupRegistrationApiController@dataForStartupTeamRegistration');
     Route::post('startup/startup_team', 'StartupRegistrationApiController@startupTeam');
+
+    // investor routes
+    Route::get('investor/startups', 'InvestorApiController@startups');
+    Route::post('investor/profile/complete', 'InvestorApiController@completeProfile');
 });
 
 /**
@@ -68,7 +71,6 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:admin-api', 'namespace' =>
     Route::get('admin/entrepreneur/{userId}/startups', 'AdminApiController@startupsForEntrepreneur');
     Route::post('admin/startup/approve', 'AdminApiController@approveStartup');
 });
-
 
 
 //fallback route
