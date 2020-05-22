@@ -23,10 +23,10 @@ class Investor extends JsonResource
             'picture' => $this->user->picture ? url('/') . '/users/' . $this->user->picture : '',
             'user_type' => $this->user->user_type->name,
             'bio' => $this->bio,
-            'interests' => $this->bio,
+            'interest' => $this->bio,
             'startups_invested_in' => $this->startups_invested_in,
             'amount_invested' => $this->amount_invested,
-            'occupations' => $this->occupations,
+            'occupation' => $this->occupations,
             'profile_is_completed' => $this->profile_is_completed
         ];
     }

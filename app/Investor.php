@@ -15,10 +15,10 @@ class Investor extends Model
     protected $fillable = [
         'user_id',
         'bio',
-        'interests',
+        'interest',
         'startups_invested_in',
         'amount_invested',
-        'occupations',
+        'occupation',
         'profile_is_completed'
     ];
 

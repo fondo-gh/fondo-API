@@ -60,8 +60,8 @@ class AuthApiController extends Controller
      * "email": "jane@doe.com",
      * "picture": "http://www.fondo.com/user/kkjdfj.jpg",
      * "user_type": "Investor",
+     * "profile_is_completed": "false",
      * "token": "7geRI9P4LUFj3ensaxOV070Uk1yXeQ23ptqerJYc",
-     * "profile_is_completed": false,
      *  }
      * }
      *
@@ -128,7 +128,7 @@ class AuthApiController extends Controller
      * "email": "jane@doe.com",
      * "picture": "http://www.fondo.com/user/kkjdfj.jpg",
      * "user_type": "Entrepreneur",
-     * "profile_is_completed": true,
+     * "profile_is_completed": "true",
      * "token": "7geRI9P4LUFj3ensaxOV070Uk1yXeQ23ptqerJYc"
      *    }
      * }

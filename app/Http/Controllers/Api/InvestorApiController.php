@@ -43,10 +43,10 @@ class InvestorApiController extends Controller
      * Provide required additional data about investor such as a short bio, occupations etc
      *
      * @bodyParam bio string required A short bio of investor.
-     * @bodyParam interests string  A short note of investor's interests.
+     * @bodyParam interest string  A short note of investor's interests.
      * @bodyParam startups_invested_in string Startups investor invested in if any.
      * @bodyParam amount_invested string Amount investor invested in startups if any.
-     * @bodyParam occupations string required Occupation(s) of investor.
+     * @bodyParam occupation string required Occupation(s) of investor.
      *
      * @response 200 {
      * "success": {
@@ -63,10 +63,10 @@ class InvestorApiController extends Controller
         //validate credentials
         $validator = Validator::make($request->all(), [
             'bio' => 'required|string',
-            'interests' => 'nullable|string',
+            'interest' => 'nullable|string',
             'startups_invested_in' => 'nullable|string',
             'amount_invested' => 'nullable|string',
-            'occupations' => 'required|string',
+            'occupation' => 'required|string',
         ]);
 
 
