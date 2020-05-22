@@ -18,14 +18,23 @@ class Investor extends Model
         'interests',
         'startups_invested_in',
         'amount_invested',
-        'occupations'
+        'occupations',
+        'profile_is_completed'
+    ];
+
+    /**
+     * @var string[]
+     */
+    protected $casts = [
+        'profile_is_completed' => 'boolean'
     ];
 
     /**
      * An investor is a user
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

@@ -6,6 +6,7 @@ namespace App\Traits;
 
 use App\Admin;
 use App\User;
+use App\UserType;
 
 trait ApiBaseController
 {
@@ -16,7 +17,8 @@ trait ApiBaseController
      * @param int $status
      * @return \Illuminate\Http\JsonResponse
      */
-    public function sendErrorResponse($message = "An error occurred.", $status = 422) {
+    public function sendErrorResponse($message = "An error occurred.", $status = 422)
+    {
         return response()->json(
             [
                 'error' => [
@@ -34,7 +36,8 @@ trait ApiBaseController
      * @param $message
      * @return \Illuminate\Http\JsonResponse
      */
-    public function sendSuccessResponse($data = [], $message = "Request completed successfully.") {
+    public function sendSuccessResponse($data = [], $message = "Request completed successfully.")
+    {
         return response()->json(
             [
                 'success' => [
@@ -53,7 +56,8 @@ trait ApiBaseController
      * @return array
      *
      */
-    public function generateUserData(User $user) {
+    public function generateUserData(User $user)
+    {
         //image path
         $imageUrl = $user->picture ? url('/') . '/users/' . $user->picture : '';
 
@@ -65,6 +69,11 @@ trait ApiBaseController
         $data['email'] = $user->email;
         $data['picture'] = $imageUrl;
         $data['user_type'] = $user->user_type->name;
+        //if user type is investor, add profile completion status
+        if ($user->user_type_id == UserType::USER_TYPE_INVESTOR_ID) {
+            $data['profile_is_completed'] = $user->investor->profile_is_completed;
+        }
+
         $data['token'] = $user->createToken(env('APP_NAME'))->accessToken;
         return $data;
     }
@@ -73,7 +82,8 @@ trait ApiBaseController
      * @param Admin $admin
      * @return array
      */
-    public function generateAdminData(Admin $admin) {
+    public function generateAdminData(Admin $admin)
+    {
         $data = array();
         $data['id'] = $admin->id;
         $data['uuid'] = $admin->uuid;

@@ -78,6 +78,9 @@ class InvestorApiController extends Controller
         //find the user
         $user = auth()->user();
 
+        //set the profile completed flag to true
+        $request['profile_is_completed'] = 1;
+
         //update the investor details
         $user->investor->update($request->all());
 

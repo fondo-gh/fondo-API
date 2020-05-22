@@ -33,7 +33,8 @@ class AuthApiController extends Controller
      * @apiResourceModel App\UserType
      * @return UserTypeCollection
      */
-    public function userTypes() {
+    public function userTypes()
+    {
         return new UserTypeCollection(UserType::all());
     }
 
@@ -59,7 +60,8 @@ class AuthApiController extends Controller
      * "email": "jane@doe.com",
      * "picture": "http://www.fondo.com/user/kkjdfj.jpg",
      * "user_type": "Investor",
-     * "token": "7geRI9P4LUFj3ensaxOV070Uk1yXeQ23ptqerJYc"
+     * "token": "7geRI9P4LUFj3ensaxOV070Uk1yXeQ23ptqerJYc",
+     * "profile_is_completed": false,
      *  }
      * }
      *
@@ -100,40 +102,42 @@ class AuthApiController extends Controller
         return $this->sendErrorResponse("Invalid credentials.");
     }
 
-     /**
-      * Register a User
-      *
-      * Registers a user as an entrepreneur or investor.
-      *
-      * @bodyParam first_name string required The first name of the user. Example: Jane
-      * @bodyParam last_name string required The last name of the user. Example: Doe
-      * @bodyParam picture file  The image of the person. Do not submit a null picture field.
-      * @bodyParam user_type_id int required The id of the type of user. Example: 1 for Entrepreneur, 2 for Investor
-      * @bodyParam email string required The email of the user. Example: mail@mail.com
-      * @bodyParam password string required The password of the user.
-      * @bodyParam password_confirmation string required The password confirmation for the password.
-      *
-      * @response 200 {
-      * "success": {
-      * "code": 200,
-      * "message": "Request completed successfully."
-      * },
-      * "data": {
-      * "id": 1,
-      * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
-      * "first_name": "Jane",
-      * "last_name": "Doe",
-      * "email": "jane@doe.com",
-      * "picture": "http://www.fondo.com/user/kkjdfj.jpg",
-      * "user_type": "Entrepreneur",
-      * "token": "7geRI9P4LUFj3ensaxOV070Uk1yXeQ23ptqerJYc"
-      *    }
-      * }
-      *
-      * @param Request $request
-      * @return \Illuminate\Http\JsonResponse
-      */
-    public function registerUser(Request $request) {
+    /**
+     * Register a User
+     *
+     * Registers a user as an entrepreneur or investor.
+     *
+     * @bodyParam first_name string required The first name of the user. Example: Jane
+     * @bodyParam last_name string required The last name of the user. Example: Doe
+     * @bodyParam picture file  The image of the person. Do not submit a null picture field.
+     * @bodyParam user_type_id int required The id of the type of user. Example: 1 for Entrepreneur, 2 for Investor
+     * @bodyParam email string required The email of the user. Example: mail@mail.com
+     * @bodyParam password string required The password of the user.
+     * @bodyParam password_confirmation string required The password confirmation for the password.
+     *
+     * @response 200 {
+     * "success": {
+     * "code": 200,
+     * "message": "Request completed successfully."
+     * },
+     * "data": {
+     * "id": 1,
+     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
+     * "first_name": "Jane",
+     * "last_name": "Doe",
+     * "email": "jane@doe.com",
+     * "picture": "http://www.fondo.com/user/kkjdfj.jpg",
+     * "user_type": "Entrepreneur",
+     * "profile_is_completed": true,
+     * "token": "7geRI9P4LUFj3ensaxOV070Uk1yXeQ23ptqerJYc"
+     *    }
+     * }
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function registerUser(Request $request)
+    {
         //validate credentials
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
@@ -164,7 +168,7 @@ class AuthApiController extends Controller
         $user = User::query()->create($request->all());
 
         //if the user user is an investor, create an investor table
-        if($user->user_type_id == UserType::USER_TYPE_INVESTOR_ID) {
+        if ($user->user_type_id == UserType::USER_TYPE_INVESTOR_ID) {
             Investor::query()->create(['user_id' => $user->id]);
         }
 
