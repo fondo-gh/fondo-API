@@ -45,6 +45,12 @@ return [
             'provider' => 'admins',
             'hash' => false,
         ],
+        //api guard for user/investor/entrepreneur
+        'user-api' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+            'hash' => false,
+        ],
         'admin-api' => [
             'driver' => 'passport',
             'provider' => 'admins',
