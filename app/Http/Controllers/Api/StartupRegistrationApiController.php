@@ -65,7 +65,7 @@ class StartupRegistrationApiController extends Controller
      *
      * @bodyParam company_name string required The name of the startup Example: Jane Ventures
      * @bodyParam caption string required The caption of the startup.
-     * @bodyParam product_image file  The image of the startup product. Do not submit a null image field.
+     * @bodyParam product_image_file file  The image of the startup product. Do not submit a null image field.
      * @bodyParam funds_to_raise string required The funds to raise for startup Example: Ghc 234.00
      * @bodyParam duration_for_raise string required The duration needed to raise funds Example: 3 months.
      * @bodyParam startup_id int The id of the startup if updating Example: 1
