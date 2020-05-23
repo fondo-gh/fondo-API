@@ -61,6 +61,8 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:user-api', 'namespace' => 
     // investor routes
     Route::get('investor/startups', 'InvestorApiController@startups');
     Route::post('investor/profile/complete', 'InvestorApiController@completeProfile');
+
+    Route::get('user/profile', 'AuthApiController@profile');
 });
 
 /**

@@ -91,7 +91,7 @@ class StartupRegistrationApiController extends Controller
             $validator = Validator::make($request->all(), [
                 'company_name' => 'required|string|max:255|unique:startups,company_name,' . $request['startup_id'],
                 'caption' => 'required|string|max:255',
-                'product_image' => 'required|image',
+                'product_image_file' => 'nullable|image',
                 'funds_to_raise' => 'required|string',
                 'duration_for_raise' => 'required|string',
                 'startup_id' => 'nullable|integer|exists:startups,id'
@@ -100,7 +100,7 @@ class StartupRegistrationApiController extends Controller
             $validator = Validator::make($request->all(), [
                 'company_name' => 'required|string|max:255|unique:startups',
                 'caption' => 'required|string|max:255',
-                'product_image' => 'required|image',
+                'product_image_file' => 'nullable|image',
                 'funds_to_raise' => 'required|string',
                 'duration_for_raise' => 'required|string',
                 'startup_id' => 'nullable|integer|exists:startups,id'
@@ -117,9 +117,9 @@ class StartupRegistrationApiController extends Controller
         $request['user_id'] = auth()->user()->id;
 
         //save image to disk, get url
-        if ($request->hasFile('product_image')) {
-            $name = date('Y-m-d-H:i:s') . '.' . $request->file('product_image')->getClientOriginalExtension();
-            $request->file('product_image')->move(public_path() . '/startups/products/', $name);
+        if ($request->hasFile('product_image_file')) {
+            $name = date('Y-m-d-H:i:s') . '.' . $request->file('product_image_file')->getClientOriginalExtension();
+            $request->file('product_image_file')->move(public_path() . '/startups/products/', $name);
 
             //save the image name the database
             $request['product_image'] = $name;

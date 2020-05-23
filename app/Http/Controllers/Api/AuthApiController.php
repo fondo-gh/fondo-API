@@ -13,6 +13,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\Investor as InvestorResource;
+use App\Http\Resources\User as UserResource;
 
 /**
  * @group User and Admin Management
@@ -236,6 +238,28 @@ class AuthApiController extends Controller
 
         //if authentication fails, send error response
         return $this->sendErrorResponse("Invalid credentials.");
+    }
+
+
+    /**
+     * User Profile
+     * Gets the profile for investor or entrepreneur
+     *
+     * @apiResource App\Http\Resources\Investor
+     * @apiResourceModel App\Investor
+     *
+     * @return InvestorResource|UserResource
+     */
+    public function profile()
+    {
+        //find the user
+        $user = auth()->user();
+
+        if ($user->user_type_id == UserType::USER_TYPE_INVESTOR_ID) {
+            return new InvestorResource($user->investor);
+        }
+
+        return new UserResource($user);
     }
 
 }

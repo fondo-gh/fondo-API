@@ -390,14 +390,42 @@ curl -X GET \
 ```
 
 
-> Example response (401):
+> Example response (200):
 
 ```json
 {
-    "error": {
-        "code": 401,
-        "message": "Unauthenticated."
-    }
+    "data": [
+        {
+            "id": 1,
+            "uuid": "6deb6497-4700-436d-8218-ee3a269f18cf",
+            "first_name": "Francis",
+            "last_name": "Deh",
+            "email": "francis@deh.com",
+            "picture": "",
+            "user_type": "Investor",
+            "bio": "bio",
+            "interest": "bio",
+            "startups_invested_in": null,
+            "amount_invested": null,
+            "occupation": null,
+            "profile_is_completed": true
+        },
+        {
+            "id": 1,
+            "uuid": "6deb6497-4700-436d-8218-ee3a269f18cf",
+            "first_name": "Francis",
+            "last_name": "Deh",
+            "email": "francis@deh.com",
+            "picture": "",
+            "user_type": "Investor",
+            "bio": "bio",
+            "interest": "bio",
+            "startups_invested_in": null,
+            "amount_invested": null,
+            "occupation": null,
+            "profile_is_completed": true
+        }
+    ]
 }
 ```
 
@@ -608,11 +636,11 @@ let headers = {
 };
 
 let body = {
-    "bio": "nihil",
-    "interests": "similique",
-    "startups_invested_in": "optio",
-    "amount_invested": "perspiciatis",
-    "occupations": "blanditiis"
+    "bio": "omnis",
+    "interest": "quo",
+    "startups_invested_in": "molestias",
+    "amount_invested": "sapiente",
+    "occupation": "et"
 }
 
 fetch(url, {
@@ -636,11 +664,11 @@ $response = $client->post(
             'Authorization' => 'Bearer {token}',
         ],
         'json' => [
-            'bio' => 'nihil',
-            'interests' => 'similique',
-            'startups_invested_in' => 'optio',
-            'amount_invested' => 'perspiciatis',
-            'occupations' => 'blanditiis',
+            'bio' => 'omnis',
+            'interest' => 'quo',
+            'startups_invested_in' => 'molestias',
+            'amount_invested' => 'sapiente',
+            'occupation' => 'et',
         ],
     ]
 );
@@ -654,7 +682,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"bio":"nihil","interests":"similique","startups_invested_in":"optio","amount_invested":"perspiciatis","occupations":"blanditiis"}'
+    -d '{"bio":"omnis","interest":"quo","startups_invested_in":"molestias","amount_invested":"sapiente","occupation":"et"}'
 
 ```
 
@@ -677,10 +705,10 @@ curl -X POST \
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
     `bio` | string |  required  | A short bio of investor.
-        `interests` | string |  optional  | A short note of investor's interests.
+        `interest` | string |  optional  | A short note of investor's interests.
         `startups_invested_in` | string |  optional  | Startups investor invested in if any.
         `amount_invested` | string |  optional  | Amount investor invested in startups if any.
-        `occupations` | string |  required  | Occupation(s) of investor.
+        `occupation` | string |  required  | Occupation(s) of investor.
     
 <!-- END_79ac1e30074e817614c00f3b12fef075 -->
 
@@ -818,8 +846,8 @@ let headers = {
 
 let body = {
     "company_name": "Jane Ventures",
-    "caption": "accusantium",
-    "product_image": "harum",
+    "caption": "ipsum",
+    "product_image": "ut",
     "funds_to_raise": "Ghc 234.00",
     "duration_for_raise": "3 months.",
     "startup_id": 1
@@ -847,8 +875,8 @@ $response = $client->post(
         ],
         'json' => [
             'company_name' => 'Jane Ventures',
-            'caption' => 'accusantium',
-            'product_image' => 'harum',
+            'caption' => 'ipsum',
+            'product_image' => 'ut',
             'funds_to_raise' => 'Ghc 234.00',
             'duration_for_raise' => '3 months.',
             'startup_id' => 1,
@@ -865,7 +893,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"company_name":"Jane Ventures","caption":"accusantium","product_image":"harum","funds_to_raise":"Ghc 234.00","duration_for_raise":"3 months.","startup_id":1}'
+    -d '{"company_name":"Jane Ventures","caption":"ipsum","product_image":"ut","funds_to_raise":"Ghc 234.00","duration_for_raise":"3 months.","startup_id":1}'
 
 ```
 
@@ -982,7 +1010,7 @@ let body = {
     "startup_type_id": 1,
     "startup_industry_id": 1,
     "has_patent": true,
-    "location": "voluptates"
+    "location": "doloremque"
 }
 
 fetch(url, {
@@ -1010,7 +1038,7 @@ $response = $client->post(
             'startup_type_id' => 1,
             'startup_industry_id' => 1,
             'has_patent' => true,
-            'location' => 'voluptates',
+            'location' => 'doloremque',
         ],
     ]
 );
@@ -1024,7 +1052,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"startup_type_id":1,"startup_industry_id":1,"has_patent":true,"location":"voluptates"}'
+    -d '{"startup_id":1,"startup_type_id":1,"startup_industry_id":1,"has_patent":true,"location":"doloremque"}'
 
 ```
 
@@ -1078,12 +1106,12 @@ let body = {
     "startup_id": 1,
     "id": 1,
     "email": "jane@ventures.com",
-    "phone": "est",
-    "facebook_handle": "rerum",
-    "twitter_handle": "quo",
-    "instagram_handle": "enim",
-    "linkdin_handle": "et",
-    "skype_handle": "officia"
+    "phone": "neque",
+    "facebook_handle": "odit",
+    "twitter_handle": "et",
+    "instagram_handle": "corrupti",
+    "linkdin_handle": "dignissimos",
+    "skype_handle": "at"
 }
 
 fetch(url, {
@@ -1110,12 +1138,12 @@ $response = $client->post(
             'startup_id' => 1,
             'id' => 1,
             'email' => 'jane@ventures.com',
-            'phone' => 'est',
-            'facebook_handle' => 'rerum',
-            'twitter_handle' => 'quo',
-            'instagram_handle' => 'enim',
-            'linkdin_handle' => 'et',
-            'skype_handle' => 'officia',
+            'phone' => 'neque',
+            'facebook_handle' => 'odit',
+            'twitter_handle' => 'et',
+            'instagram_handle' => 'corrupti',
+            'linkdin_handle' => 'dignissimos',
+            'skype_handle' => 'at',
         ],
     ]
 );
@@ -1129,7 +1157,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"id":1,"email":"jane@ventures.com","phone":"est","facebook_handle":"rerum","twitter_handle":"quo","instagram_handle":"enim","linkdin_handle":"et","skype_handle":"officia"}'
+    -d '{"startup_id":1,"id":1,"email":"jane@ventures.com","phone":"neque","facebook_handle":"odit","twitter_handle":"et","instagram_handle":"corrupti","linkdin_handle":"dignissimos","skype_handle":"at"}'
 
 ```
 
@@ -1185,15 +1213,15 @@ let headers = {
 
 let body = {
     "startup_id": 1,
-    "key_resources": "recusandae",
-    "customer_target": "aut",
-    "value_proposition": "aut",
-    "sales_channels": "aut",
-    "revenue_streams": "et",
-    "key_metrics": "sed",
-    "cost_structure": "enim",
-    "financial_file": "voluptas",
-    "optional_file": "fugiat"
+    "key_resources": "illum",
+    "customer_target": "veniam",
+    "value_proposition": "iure",
+    "sales_channels": "nam",
+    "revenue_streams": "officiis",
+    "key_metrics": "omnis",
+    "cost_structure": "recusandae",
+    "financial_file": "dolorem",
+    "optional_file": "expedita"
 }
 
 fetch(url, {
@@ -1218,15 +1246,15 @@ $response = $client->post(
         ],
         'json' => [
             'startup_id' => 1,
-            'key_resources' => 'recusandae',
-            'customer_target' => 'aut',
-            'value_proposition' => 'aut',
-            'sales_channels' => 'aut',
-            'revenue_streams' => 'et',
-            'key_metrics' => 'sed',
-            'cost_structure' => 'enim',
-            'financial_file' => 'voluptas',
-            'optional_file' => 'fugiat',
+            'key_resources' => 'illum',
+            'customer_target' => 'veniam',
+            'value_proposition' => 'iure',
+            'sales_channels' => 'nam',
+            'revenue_streams' => 'officiis',
+            'key_metrics' => 'omnis',
+            'cost_structure' => 'recusandae',
+            'financial_file' => 'dolorem',
+            'optional_file' => 'expedita',
         ],
     ]
 );
@@ -1240,7 +1268,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"key_resources":"recusandae","customer_target":"aut","value_proposition":"aut","sales_channels":"aut","revenue_streams":"et","key_metrics":"sed","cost_structure":"enim","financial_file":"voluptas","optional_file":"fugiat"}'
+    -d '{"startup_id":1,"key_resources":"illum","customer_target":"veniam","value_proposition":"iure","sales_channels":"nam","revenue_streams":"officiis","key_metrics":"omnis","cost_structure":"recusandae","financial_file":"dolorem","optional_file":"expedita"}'
 
 ```
 
@@ -1364,7 +1392,7 @@ let headers = {
 let body = {
     "startup_id": 1,
     "product_progress_id": 1,
-    "product_url": "sunt"
+    "product_url": "ducimus"
 }
 
 fetch(url, {
@@ -1390,7 +1418,7 @@ $response = $client->post(
         'json' => [
             'startup_id' => 1,
             'product_progress_id' => 1,
-            'product_url' => 'sunt',
+            'product_url' => 'ducimus',
         ],
     ]
 );
@@ -1404,7 +1432,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"product_progress_id":1,"product_url":"sunt"}'
+    -d '{"startup_id":1,"product_progress_id":1,"product_url":"ducimus"}'
 
 ```
 
@@ -1537,7 +1565,7 @@ let headers = {
 let body = {
     "startup_id": 1,
     "funding_amount": "3000.0",
-    "rate_of_devotion": "ea",
+    "rate_of_devotion": "sint",
     "cofounders": []
 }
 
@@ -1564,7 +1592,7 @@ $response = $client->post(
         'json' => [
             'startup_id' => 1,
             'funding_amount' => '3000.0',
-            'rate_of_devotion' => 'ea',
+            'rate_of_devotion' => 'sint',
             'cofounders' => [],
         ],
     ]
@@ -1579,7 +1607,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"funding_amount":"3000.0","rate_of_devotion":"ea","cofounders":[]}'
+    -d '{"startup_id":1,"funding_amount":"3000.0","rate_of_devotion":"sint","cofounders":[]}'
 
 ```
 
@@ -2769,7 +2797,7 @@ let headers = {
 
 let body = {
     "email": "mail@mail.com",
-    "password": "voluptatum"
+    "password": "deleniti"
 }
 
 fetch(url, {
@@ -2794,7 +2822,7 @@ $response = $client->post(
         ],
         'json' => [
             'email' => 'mail@mail.com',
-            'password' => 'voluptatum',
+            'password' => 'deleniti',
         ],
     ]
 );
@@ -2808,7 +2836,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"email":"mail@mail.com","password":"voluptatum"}'
+    -d '{"email":"mail@mail.com","password":"deleniti"}'
 
 ```
 
@@ -2938,11 +2966,11 @@ let headers = {
 let body = {
     "first_name": "Jane",
     "last_name": "Doe",
-    "picture": "magnam",
+    "picture": "minima",
     "user_type_id": 1,
     "email": "mail@mail.com",
-    "password": "quis",
-    "password_confirmation": "dolore"
+    "password": "voluptas",
+    "password_confirmation": "repellendus"
 }
 
 fetch(url, {
@@ -2968,11 +2996,11 @@ $response = $client->post(
         'json' => [
             'first_name' => 'Jane',
             'last_name' => 'Doe',
-            'picture' => 'magnam',
+            'picture' => 'minima',
             'user_type_id' => 1,
             'email' => 'mail@mail.com',
-            'password' => 'quis',
-            'password_confirmation' => 'dolore',
+            'password' => 'voluptas',
+            'password_confirmation' => 'repellendus',
         ],
     ]
 );
@@ -2986,7 +3014,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"first_name":"Jane","last_name":"Doe","picture":"magnam","user_type_id":1,"email":"mail@mail.com","password":"quis","password_confirmation":"dolore"}'
+    -d '{"first_name":"Jane","last_name":"Doe","picture":"minima","user_type_id":1,"email":"mail@mail.com","password":"voluptas","password_confirmation":"repellendus"}'
 
 ```
 
@@ -3033,7 +3061,7 @@ let headers = {
 
 let body = {
     "email": "mail@mail.com",
-    "password": "consequuntur"
+    "password": "dolores"
 }
 
 fetch(url, {
@@ -3058,7 +3086,7 @@ $response = $client->post(
         ],
         'json' => [
             'email' => 'mail@mail.com',
-            'password' => 'consequuntur',
+            'password' => 'dolores',
         ],
     ]
 );
@@ -3072,7 +3100,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"email":"mail@mail.com","password":"consequuntur"}'
+    -d '{"email":"mail@mail.com","password":"dolores"}'
 
 ```
 
@@ -3103,5 +3131,84 @@ Parameter | Type | Status | Description
         `password` | string |  required  | The password of the admin.
     
 <!-- END_356aa57a5886f377e4e6eea0dad27149 -->
+
+<!-- START_8a4d15dcbadf16adf64dd6109f40540a -->
+## User Profile
+Gets the profile for investor or entrepreneur
+
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://fondo-app-gh.herokuapp.com/api/v1/user/profile"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://fondo-app-gh.herokuapp.com/api/v1/user/profile',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X GET \
+    -G "http://fondo-app-gh.herokuapp.com/api/v1/user/profile" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": {
+        "id": 1,
+        "uuid": "6deb6497-4700-436d-8218-ee3a269f18cf",
+        "first_name": "Francis",
+        "last_name": "Deh",
+        "email": "francis@deh.com",
+        "picture": "",
+        "user_type": "Investor",
+        "bio": "bio",
+        "interest": "bio",
+        "startups_invested_in": null,
+        "amount_invested": null,
+        "occupation": null,
+        "profile_is_completed": true
+    }
+}
+```
+
+### HTTP Request
+`GET api/v1/user/profile`
+
+
+<!-- END_8a4d15dcbadf16adf64dd6109f40540a -->
 
 
