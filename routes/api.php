@@ -89,3 +89,4 @@ Route::fallback(function () {
         404
     );
 });
+

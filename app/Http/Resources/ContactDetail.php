@@ -15,7 +15,7 @@ class ContactDetail extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this-id,
+            'id' => $this->id,
             'uuid' => $this->uuid,
             'startup_id' => $this->startup_id,
             'email' => $this->email,

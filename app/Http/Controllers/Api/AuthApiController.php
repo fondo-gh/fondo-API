@@ -56,7 +56,7 @@ class AuthApiController extends Controller
      * },
      * "data": {
      * "id": 1,
-     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
+     * "uuid": "EIFAJEAF-EAFHEOA-4343D",
      * "first_name": "Jane",
      * "last_name": "Doe",
      * "email": "jane@doe.com",
@@ -111,7 +111,7 @@ class AuthApiController extends Controller
      *
      * @bodyParam first_name string required The first name of the user. Example: Jane
      * @bodyParam last_name string required The last name of the user. Example: Doe
-     * @bodyParam picture file  The image of the person. Do not submit a null picture field.
+     * @bodyParam picture_upload file  The image of the person. Do not submit a null picture field.
      * @bodyParam user_type_id int required The id of the type of user. Example: 1 for Entrepreneur, 2 for Investor
      * @bodyParam email string required The email of the user. Example: mail@mail.com
      * @bodyParam password string required The password of the user.
@@ -124,7 +124,7 @@ class AuthApiController extends Controller
      * },
      * "data": {
      * "id": 1,
-     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
+     * "uuid": "EIFAJEAF-EAFHEOA-4343D",
      * "first_name": "Jane",
      * "last_name": "Doe",
      * "email": "jane@doe.com",
@@ -144,7 +144,7 @@ class AuthApiController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'picture' => 'nullable|image',
+            'picture_upload' => 'nullable|image',
             'user_type_id' => 'required|integer|exists:user_types,id',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed'
@@ -156,9 +156,9 @@ class AuthApiController extends Controller
         }
 
         //save image to disk, get url
-        if ($request->hasFile('picture')) {
-            $name = date('Y-m-d-H:i:s') . '.' . $request->file('picture')->getClientOriginalExtension();
-            $request->file('picture')->move(public_path() . '/users/', $name);
+        if ($request->hasFile('picture_upload')) {
+            $name = date('Y-m-d-H:i:s') . '.' . $request->file('picture_upload')->getClientOriginalExtension();
+            $request->file('picture_upload')->move(public_path() . '/users/', $name);
 
             //save the image name the database
             $request['picture'] = $name;
@@ -196,7 +196,7 @@ class AuthApiController extends Controller
      * },
      * "data": {
      * "id": 1,
-     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
+     * "uuid": "EIFAJEAF-EAFHEOA-4343D",
      * "name": "Jane Doe",
      * "email": "jane@doe.com",
      * "token": "7geRI9P4LUFj3ensaxOV070Uk1yXeQ23ptqerJYc"

@@ -43,7 +43,7 @@ class StartupRegistrationApiController extends Controller
     /**
      * User(Entrepreneur) Startups.
      *
-     * Startups registered by the logged in entrepreneur, both approved and unapproved
+     * Startups registered by the logged in entrepreneur, both approved and unapproved.
      *
      * @apiResourceCollection App\Http\Resources\StartupCollection
      * @apiResourceModel App\Startup
@@ -127,7 +127,8 @@ class StartupRegistrationApiController extends Controller
 
         //create or update the startup details information
         if ($request->has('startup_id')) {
-            $startup = Startup::query()->find($request['startup_id'])->update($request->all());
+            $startup = Startup::query()->find($request['startup_id']);
+            $startup->update($request->all());
         } else {
             $startup = Startup::query()->create($request->all());
         }
@@ -146,12 +147,12 @@ class StartupRegistrationApiController extends Controller
      * "data": [
      * {
      * "id": 1,
-     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
+     * "uuid": "EIFAJEAF-EAFHEOA-4343D",
      * "name": "LLP - Limited liability Partnership"
      * },
      * {
      * "id": 2,
-     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
+     * "uuid": "EIFAJEAF-EAFHEOA-4343D",
      * "name": "LP - Limited Partnership"
      * }
      * ]
@@ -160,12 +161,12 @@ class StartupRegistrationApiController extends Controller
      * "data": [
      * {
      * "id": 1,
-     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
+     * "uuid": "EIFAJEAF-EAFHEOA-4343D",
      * "name": "Agriculture"
      * },
      * {
      * "id": 2,
-     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
+     * "uuid": "EIFAJEAF-EAFHEOA-4343D",
      * "name": "Finance"
      * }
      * ]
@@ -190,8 +191,9 @@ class StartupRegistrationApiController extends Controller
      * @bodyParam startup_id int required The id of the startup that startup details belong to Example: 1
      * @bodyParam startup_type_id int required The id of the startup type - ie LIMITED Example: 1
      * @bodyParam startup_industry_id int required The id of the startup industry - ie Agriculture Example: 1
-     * @bodyParam has_patent boolean required  Startup has patent or not. Example: 1 for true, 0 for false
+     * @bodyParam has_patent boolean required  Startup has patent or not. Example: 1 for tru, 0 for false
      * @bodyParam location string  Startup location.
+     * @bodyParam business_registration_number string required  Startup business registration number.
      *
      * @response 200 {
      * "success": {
@@ -209,8 +211,9 @@ class StartupRegistrationApiController extends Controller
             'startup_id' => 'required|integer|exists:startups,id',
             'startup_type_id' => 'required|integer|exists:startup_types,id',
             'startup_industry_id' => 'required|integer|exists:startup_industries,id',
-            'has_patent' => 'required|integer|max:1|min:0',
+            'has_patent' => 'required|boolean',
             'location' => 'nullable|string',
+            'business_registration_number' => 'required|string',
         ]);
 
         //send validation error response if any
@@ -236,7 +239,7 @@ class StartupRegistrationApiController extends Controller
      * @bodyParam startup_id int required The id of the startup that contact details belongs to. Example: 1
      * @bodyParam id int The id of the contact detail data when updating. This is used to enhance uniqueness validation for email. Example: 1
      * @bodyParam email string required The email of the startup. Example: jane@ventures.com
-     * @bodyParam phone string required The phone number of the startup.
+     * @bodyParam phone string required The phone number of the startup. Example 02438373838, 383738373
      * @bodyParam facebook_handle string  The facebook handle of the startup.
      * @bodyParam twitter_handle string  The twitter handle of the startup.
      * @bodyParam instagram_handle string  The instagram handle of the startup.
@@ -259,7 +262,7 @@ class StartupRegistrationApiController extends Controller
             $validator = Validator::make($request->all(), [
                 'startup_id' => 'required|integer|exists:startups,id',
                 'email' => 'required|email|max:255|unique:contact_details,email,' . $request['id'],
-                'phone' => 'required|digits:10',
+                'phone' => 'required',
                 'facebook_handle' => 'nullable|string|max:255',
                 'twitter_handle' => 'nullable|string|max:255',
                 'instagram_handle' => 'nullable|string|max:255',
@@ -270,7 +273,7 @@ class StartupRegistrationApiController extends Controller
             $validator = Validator::make($request->all(), [
                 'startup_id' => 'required|integer|exists:startups,id',
                 'email' => 'required|email|max:255|unique:contact_details',
-                'phone' => 'required|digits:10',
+                'phone' => 'required',
                 'facebook_handle' => 'nullable|string|max:255',
                 'twitter_handle' => 'nullable|string|max:255',
                 'instagram_handle' => 'nullable|string|max:255',
@@ -285,7 +288,7 @@ class StartupRegistrationApiController extends Controller
             return $this->sendErrorResponse($validator->errors()->first());
         }
 
-        //update or create a startup detail based on startup
+        //update or create a contact detail based on startup
         ContactDetail::query()->updateOrCreate(
             ['startup_id' => $request['startup_id']],
             $request->all()
@@ -308,8 +311,8 @@ class StartupRegistrationApiController extends Controller
      * @bodyParam revenue_streams string  Startup revenue streams.
      * @bodyParam key_metrics string  Startup key metrics.
      * @bodyParam cost_structure string  Startup cost structure.
-     * @bodyParam financial_file file  Startup financial file (format - pdf, word, etc).
-     * @bodyParam optional_file file  Startup optional documents (format - pdf, word, etc).
+     * @bodyParam financial_file_upload file  Startup financial file (format - pdf, word, etc).
+     * @bodyParam optional_file_upload file  Startup optional documents (format - pdf, word, etc).
      *
      * @response 200 {
      * "success": {
@@ -332,8 +335,8 @@ class StartupRegistrationApiController extends Controller
             'revenue_streams' => 'nullable|string',
             'key_metrics' => 'nullable|string',
             'cost_structure' => 'nullable|string',
-            'financial_file' => 'nullable|file',
-            'optional_file' => 'nullable|file',
+            'financial_file_upload' => 'nullable|file',
+            'optional_file_upload' => 'nullable|file',
         ]);
 
 
@@ -342,19 +345,20 @@ class StartupRegistrationApiController extends Controller
             return $this->sendErrorResponse($validator->errors()->first());
         }
 
+
         //save image to disk, get url
-        if ($request->hasFile('financial_file')) {
-            $name = date('Y-m-d-H:i:s') . '.' . $request->file('financial_file')->getClientOriginalExtension();
-            $request->file('financial_file')->move(public_path() . '/startups/files/', $name);
+        if ($request->hasFile('financial_file_upload')) {
+            $name = date('Y-m-d-H:i:s') . '.' . $request->file('financial_file_upload')->getClientOriginalExtension();
+            $request->file('financial_file_upload')->move(public_path() . '/startups/files/', $name);
 
             //save the image name to the database
             $request['financial_file'] = $name;
         }
 
         //save image to disk, get url
-        if ($request->hasFile('optional_file')) {
-            $name = date('Y-m-d-H:i:s') . '.' . $request->file('optional_file')->getClientOriginalExtension();
-            $request->file('optional_file')->move(public_path() . '/startups/files/', $name);
+        if ($request->hasFile('optional_file_upload')) {
+            $name = date('Y-m-d-H:i:s') . '.' . $request->file('optional_file_upload')->getClientOriginalExtension();
+            $request->file('optional_file_upload')->move(public_path() . '/startups/files/', $name);
 
             //save the image name to the database
             $request['optional_file'] = $name;
@@ -379,12 +383,12 @@ class StartupRegistrationApiController extends Controller
      *"data": [
      * {
      * "id": 1,
-     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
+     * "uuid": "EIFAJEAF-EAFHEOA-4343D",
      * "name": "Concept only"
      * },
      * {
      * "id": 2,
-     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
+     * "uuid": "EIFAJEAF-EAFHEOA-4343D",
      * "name": "Product development"
      * }]
      *
@@ -449,12 +453,12 @@ class StartupRegistrationApiController extends Controller
      *"data": [
      * {
      * "id": 1,
-     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
+     * "uuid": "EIFAJEAF-EAFHEOA-4343D",
      * "name": "Chairman"
      * },
      * {
      * "id": 2,
-     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
+     * "uuid": "EIFAJEAF-EAFHEOA-4343D",
      * "name": "Chief Executive Officer"
      * }]
      * }
@@ -578,13 +582,13 @@ class StartupRegistrationApiController extends Controller
      *"data": [
      * {
      * "id": 1,
-     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
+     * "uuid":"'EIFAJEAF-EAFHEOA-4343D",
      * "name": "Sales and marketing team",
      * "description": "Responsible for bringing the product to market. They use several approaches to get the word out regarding their new invention."
      * },
      * {
      * "id": 2,
-     * "uuid": 'EIFAJEAF-EAFHEOA-4343D",
+     * "uuid": "EIFAJEAF-EAFHEOA-4343D",
      * "name": "Operations and Production team",
      * "description": "Responsible for bringing the product to life. They receive the product's vision and bring it into its finished stage."
      * }]
@@ -602,7 +606,7 @@ class StartupRegistrationApiController extends Controller
     /**
      * Startup Teams for a Startup
      *
-     * Updates a startup with startup team.
+     * Updates a startup with startup team. This marks the startup registration complete.
      * The same route is used to update. <br>
      * Startup team consist of name of person, and the id of the business team member belongs to.
      * ie. John Belongs to Marketing team.
@@ -676,6 +680,9 @@ class StartupRegistrationApiController extends Controller
                 ]
             );
         });
+
+        // indicate startup registration is complete
+        $startup->update(['registration_is_complete' => 1]);
 
         DB::commit();
 

@@ -17,7 +17,8 @@ class  StartupDetail extends Model
         'startup_type_id',
         'startup_industry_id',
         'has_patent',
-        'location'
+        'location',
+        'business_registration_number'
     ];
 
     /**

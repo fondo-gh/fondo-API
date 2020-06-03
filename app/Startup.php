@@ -19,14 +19,16 @@ class Startup extends Model
         'funds_to_raise',
         'duration_for_raise',
         'user_id',
-        'approved'
+        'approved',
+        'registration_is_complete'
     ];
 
     /**
      * @var string[]
      */
     protected $casts = [
-        'approved' => 'boolean'
+        'approved' => 'boolean',
+        'registration_is_complete' => 'boolean'
     ];
 
     /**

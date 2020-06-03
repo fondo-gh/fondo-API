@@ -23,7 +23,8 @@ class StartupDetail extends JsonResource
             'startup_industry_id' => $this->startup_industry_id,
             'startup_industry' => $this->startup_industry->name,
             'has_patent' => $this->has_patent,
-            'location' => $this->location
+            'location' => $this->location,
+            'business_registration_number' => $this->business_registration_number
         ];
     }
 }
