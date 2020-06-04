@@ -539,7 +539,7 @@ class StartupRegistrationApiController extends Controller
         );
 
         //delete already existing cofounders
-        $cofounderDetail->cofounders->delete();
+        $cofounderDetail->cofounders()->delete();
 
         //loop through the cofounder arrays, attach detail id, save them
         //cofounders array/json
@@ -658,7 +658,7 @@ class StartupRegistrationApiController extends Controller
         //find the startup
         $startup = Startup::query()->find($request['startup_id']);
         //delete all startup teams
-        $startup->startup_teams->delete();
+        $startup->startup_teams()->delete();
         //add new startup teams
         //startup_teams array/json
 //        [
