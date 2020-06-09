@@ -257,30 +257,16 @@ class StartupRegistrationApiController extends Controller
      */
     public function startupContactDetail(Request $request)
     {
-        //perform different validation if request has id - it means validation should match update
-        if ($request->has('id')) {
-            $validator = Validator::make($request->all(), [
-                'startup_id' => 'required|integer|exists:startups,id',
-                'email' => 'required|email|max:255|unique:contact_details,email,' . $request['id'],
-                'phone' => 'required',
-                'facebook_handle' => 'nullable|string|max:255',
-                'twitter_handle' => 'nullable|string|max:255',
-                'instagram_handle' => 'nullable|string|max:255',
-                'linkdin_handle' => 'nullable|string|max:255',
-                'skype_handle' => 'nullable|string|max:255',
-            ]);
-        } else {
-            $validator = Validator::make($request->all(), [
-                'startup_id' => 'required|integer|exists:startups,id',
-                'email' => 'required|email|max:255|unique:contact_details',
-                'phone' => 'required',
-                'facebook_handle' => 'nullable|string|max:255',
-                'twitter_handle' => 'nullable|string|max:255',
-                'instagram_handle' => 'nullable|string|max:255',
-                'linkdin_handle' => 'nullable|string|max:255',
-                'skype_handle' => 'nullable|string|max:255',
-            ]);
-        }
+        $validator = Validator::make($request->all(), [
+            'startup_id' => 'required|integer|exists:startups,id',
+            'email' => 'required|email|max:255',
+            'phone' => 'required',
+            'facebook_handle' => 'nullable|string|max:255',
+            'twitter_handle' => 'nullable|string|max:255',
+            'instagram_handle' => 'nullable|string|max:255',
+            'linkdin_handle' => 'nullable|string|max:255',
+            'skype_handle' => 'nullable|string|max:255',
+        ]);
 
 
         //send validation error response if any
