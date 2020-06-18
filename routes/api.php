@@ -70,12 +70,12 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:user-api', 'namespace' => 
  */
 Route::group(['prefix' => 'v1', 'middleware' => 'auth:admin-api', 'namespace' => 'Api'], function () {
     Route::get('admin/startups', 'AdminApiController@startups');
-    Route::get('admin/startups/{startup}/startup_detail', 'AdminApiController@startupDetail');
-    Route::get('admin/startups/{startup}/contact_detail', 'AdminApiController@contactDetail');
-    Route::get('admin/startups/{startup}/business_model', 'AdminApiController@businessModel');
-    Route::get('admin/startups/{startup}/product_detail', 'AdminApiController@productDetail');
-    Route::get('admin/startups/{startup}/cofounder_detail', 'AdminApiController@cofounderDetail');
-    Route::get('admin/startups/{startup}/startup_team', 'AdminApiController@startupTeam');
+    Route::get('admin/startups/{id}/startup_detail', 'AdminApiController@startupDetail');
+    Route::get('admin/startups/{id}/contact_detail', 'AdminApiController@contactDetail');
+    Route::get('admin/startups/{id}/business_model', 'AdminApiController@businessModel');
+    Route::get('admin/startups/{id}/product_detail', 'AdminApiController@productDetail');
+    Route::get('admin/startups/{id}/cofounder_detail', 'AdminApiController@cofounderDetail');
+    Route::get('admin/startups/{id}/startup_team', 'AdminApiController@startupTeam');
 
     Route::get('admin/entrepreneur/{userId}/startups', 'AdminApiController@startupsForEntrepreneur');
     Route::post('admin/startup/approve', 'AdminApiController@approveStartup');

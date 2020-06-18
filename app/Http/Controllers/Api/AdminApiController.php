@@ -52,87 +52,105 @@ class AdminApiController extends Controller
      * Startup Detail.
      *
      * Startup detail for selected startup.
-     * @urlParam startup required The id of the startup. Example: 2
+     * @urlParam id required The id of the startup. Example: 2
      *
-     * @param Startup $startup
-     * @return StartupDetailResource
+     * @param $id
+     * @return StartupDetailResource|\Illuminate\Http\JsonResponse
      */
-    public function startupDetail(Startup $startup)
+    public function startupDetail($id)
     {
-        return new StartupDetailResource($startup->startup_detail);
+        $startup = Startup::query()->find($id);
+        return $startup->startup_detail ?
+            new StartupDetailResource($startup->startup_detail) :
+            $this->sendErrorResponse('Details are not available for startup.', 404);
     }
 
     /**
      * Contact Detail.
      *
      * Contact detail for selected startup.
-     * @urlParam startup required The id of the startup. Example: 2
+     * @urlParam id required The id of the startup. Example: 2
      *
-     * @param Startup $startup
-     * @return ContactDetailResource
+     * @param $id
+     * @return ContactDetailResource|\Illuminate\Http\JsonResponse
      */
-    public function contactDetail(Startup $startup)
+    public function contactDetail($id)
     {
-        return new ContactDetailResource($startup->contact_detail);
+        $startup = Startup::query()->find($id);
+        return $startup->contact_detail ?
+            new  ContactDetailResource($startup->contact_detail) :
+            $this->sendErrorResponse('Details are not available for startup.', 404);
     }
 
     /**
      * Business Model.
      *
      * Business Model for selected startup.
-     * @urlParam startup required The id of the startup. Example: 2
+     * @urlParam id required The id of the startup. Example: 2
      *
-     * @param Startup $startup
-     * @return BusinessModelResource
+     * @param $id
+     * @return BusinessModelResource|\Illuminate\Http\JsonResponse
      */
-    public function businessModel(Startup $startup)
+    public function businessModel($id)
     {
-        return new BusinessModelResource($startup->business_model);
+        $startup = Startup::query()->find($id);
+        return $startup->business_model ?
+            new  BusinessModelResource($startup->business_model) :
+            $this->sendErrorResponse('Details are not available for startup.', 404);
     }
 
     /**
      * Product Detail.
      *
      * Product Detail for selected startup.
-     * @urlParam startup required The id of the startup. Example: 2
+     * @urlParam id required The id of the startup. Example: 2
      *
-     * @param Startup $startup
-     * @return ProductDetailResource
+     * @param $id
+     * @return ProductDetailResource|\Illuminate\Http\JsonResponse
      */
-    public function productDetail(Startup $startup)
+    public function productDetail($id)
     {
-        return new ProductDetailResource($startup->product_detail);
+        $startup = Startup::query()->find($id);
+        return $startup->product_detail ?
+            new  ProductDetailResource($startup->product_detail) :
+            $this->sendErrorResponse('Details are not available for startup.', 404);
     }
 
     /**
      * Cofounder Detail.
      *
      * Cofounder Detail for selected startup.
-     * @urlParam startup required The id of the startup. Example: 2
+     * @urlParam id required The id of the startup. Example: 2
      *
-     * @param Startup $startup
-     * @return CofounderDetailResource
+     * @param $id
+     * @return CofounderDetailResource|\Illuminate\Http\JsonResponse
      */
-    public function cofounderDetail(Startup $startup)
+    public function cofounderDetail($id)
     {
-        return new CofounderDetailResource($startup->cofounder_detail);
+        $startup = Startup::query()->find($id);
+        return $startup->cofounder_detail ?
+            new  CofounderDetailResource($startup->cofounder_detail) :
+            $this->sendErrorResponse('Details are not available for startup.', 404);
     }
 
     /**
      * Startup Team.
      *
      * Startup Team for selected startup.
-     * @urlParam startup required The id of the startup Example: 2
+     * @urlParam id required The id of the startup Example: 2
      *
      * @apiResourceCollection App\Http\Resources\StartupTeamCollection
      * @apiResourceModel App\StartupTeam
      *
-     * @param Startup $startup
-     * @return StartupTeamCollection
+     * @param $id
+     * @return StartupTeamCollection|\Illuminate\Http\JsonResponse
      */
-    public function startupTeam(Startup $startup)
+    public function startupTeam($id)
     {
-        return new StartupTeamCollection($startup->startup_teams);
+        $startup = Startup::query()->find($id);
+        return $startup->startup_teams ?
+            new  StartupTeamCollection($startup->startup_teams) :
+            $this->sendErrorResponse('Details are not available for startup.', 404);
     }
 
 
