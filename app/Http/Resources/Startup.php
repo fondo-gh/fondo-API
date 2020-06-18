@@ -13,6 +13,7 @@ use App\Http\Resources\CofounderDetail as CofounderDetailResource;
 
 class Startup extends JsonResource
 {
+
     /**
      * Transform the resource into an array.
      *

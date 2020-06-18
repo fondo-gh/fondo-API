@@ -92,15 +92,7 @@ curl -X GET \
             "duration_for_raise": null,
             "approved": null,
             "created_at": null,
-            "user": null,
-            "startup_detail": null,
-            "contact_detail": null,
-            "business_model": null,
-            "product_detail": null,
-            "startup_teams": {
-                "data": []
-            },
-            "cofounder_detail": null
+            "user": null
         },
         {
             "id": null,
@@ -113,15 +105,7 @@ curl -X GET \
             "duration_for_raise": null,
             "approved": null,
             "created_at": null,
-            "user": null,
-            "startup_detail": null,
-            "contact_detail": null,
-            "business_model": null,
-            "product_detail": null,
-            "startup_teams": {
-                "data": []
-            },
-            "cofounder_detail": null
+            "user": null
         }
     ]
 }
@@ -132,6 +116,456 @@ curl -X GET \
 
 
 <!-- END_2104b5a5f9dc8b39efcfb843fc13dd49 -->
+
+<!-- START_11c72bafa1688755dd2caa2c2eca9073 -->
+## Startup Detail.
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Startup detail for selected startup.
+
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/startup_detail"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/startup_detail',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X GET \
+    -G "http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/startup_detail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
+
+> Example response (401):
+
+```json
+{
+    "error": {
+        "code": 401,
+        "message": "Unauthenticated."
+    }
+}
+```
+
+### HTTP Request
+`GET api/v1/admin/startups/{startup}/startup_detail`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `startup` |  required  | The id of the startup.
+
+<!-- END_11c72bafa1688755dd2caa2c2eca9073 -->
+
+<!-- START_1079fd8e59e3c7dae6f1f631205da406 -->
+## Contact Detail.
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Contact detail for selected startup.
+
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/contact_detail"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/contact_detail',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X GET \
+    -G "http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/contact_detail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
+
+> Example response (401):
+
+```json
+{
+    "error": {
+        "code": 401,
+        "message": "Unauthenticated."
+    }
+}
+```
+
+### HTTP Request
+`GET api/v1/admin/startups/{startup}/contact_detail`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `startup` |  required  | The id of the startup.
+
+<!-- END_1079fd8e59e3c7dae6f1f631205da406 -->
+
+<!-- START_5ec5aab945c5786613f8b668da0d7cb4 -->
+## Business Model.
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Business Model for selected startup.
+
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/business_model"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/business_model',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X GET \
+    -G "http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/business_model" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
+
+> Example response (401):
+
+```json
+{
+    "error": {
+        "code": 401,
+        "message": "Unauthenticated."
+    }
+}
+```
+
+### HTTP Request
+`GET api/v1/admin/startups/{startup}/business_model`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `startup` |  required  | The id of the startup.
+
+<!-- END_5ec5aab945c5786613f8b668da0d7cb4 -->
+
+<!-- START_3b4c938bdd82125180f6d08f3b3c898d -->
+## Product Detail.
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Product Detail for selected startup.
+
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/product_detail"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/product_detail',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X GET \
+    -G "http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/product_detail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
+
+> Example response (401):
+
+```json
+{
+    "error": {
+        "code": 401,
+        "message": "Unauthenticated."
+    }
+}
+```
+
+### HTTP Request
+`GET api/v1/admin/startups/{startup}/product_detail`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `startup` |  required  | The id of the startup.
+
+<!-- END_3b4c938bdd82125180f6d08f3b3c898d -->
+
+<!-- START_890c076396fac8954e17e236959bb2ca -->
+## Cofounder Detail.
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Cofounder Detail for selected startup.
+
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/cofounder_detail"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/cofounder_detail',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X GET \
+    -G "http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/cofounder_detail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
+
+> Example response (401):
+
+```json
+{
+    "error": {
+        "code": 401,
+        "message": "Unauthenticated."
+    }
+}
+```
+
+### HTTP Request
+`GET api/v1/admin/startups/{startup}/cofounder_detail`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `startup` |  required  | The id of the startup.
+
+<!-- END_890c076396fac8954e17e236959bb2ca -->
+
+<!-- START_5dc38b8f7778192b20a55b6b7850b3d5 -->
+## Startup Team.
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Startup Team for selected startup.
+
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/startup_team"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {token}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get(
+    'http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/startup_team',
+    [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer {token}',
+        ],
+    ]
+);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+```bash
+curl -X GET \
+    -G "http://fondo-app-gh.herokuapp.com/api/v1/admin/startups/2/startup_team" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
+```
+
+
+> Example response (401):
+
+```json
+{
+    "error": {
+        "code": 401,
+        "message": "Unauthenticated."
+    }
+}
+```
+
+### HTTP Request
+`GET api/v1/admin/startups/{startup}/startup_team`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `startup` |  required  | The id of the startup
+
+<!-- END_5dc38b8f7778192b20a55b6b7850b3d5 -->
 
 <!-- START_f051f1ba74cc38687456acf020aa3c6f -->
 ## Startups for Entrepreneur.
@@ -211,15 +645,7 @@ curl -X GET \
             "duration_for_raise": null,
             "approved": null,
             "created_at": null,
-            "user": null,
-            "startup_detail": null,
-            "contact_detail": null,
-            "business_model": null,
-            "product_detail": null,
-            "startup_teams": {
-                "data": []
-            },
-            "cofounder_detail": null
+            "user": null
         },
         {
             "id": null,
@@ -232,15 +658,7 @@ curl -X GET \
             "duration_for_raise": null,
             "approved": null,
             "created_at": null,
-            "user": null,
-            "startup_detail": null,
-            "contact_detail": null,
-            "business_model": null,
-            "product_detail": null,
-            "startup_teams": {
-                "data": []
-            },
-            "cofounder_detail": null
+            "user": null
         }
     ]
 }
@@ -253,7 +671,7 @@ curl -X GET \
 
 Parameter | Status | Description
 --------- | ------- | ------- | -----------
-    `userId` |  required  | The id of the user (entrepreneur)
+    `userId` |  required  | The id of the user (entrepreneur).
 
 <!-- END_f051f1ba74cc38687456acf020aa3c6f -->
 
@@ -614,11 +1032,11 @@ let headers = {
 };
 
 let body = {
-    "bio": "voluptate",
-    "interest": "ut",
-    "startups_invested_in": "et",
-    "amount_invested": "temporibus",
-    "occupation": "iusto"
+    "bio": "natus",
+    "interest": "et",
+    "startups_invested_in": "voluptatibus",
+    "amount_invested": "qui",
+    "occupation": "iure"
 }
 
 fetch(url, {
@@ -642,11 +1060,11 @@ $response = $client->post(
             'Authorization' => 'Bearer {token}',
         ],
         'json' => [
-            'bio' => 'voluptate',
-            'interest' => 'ut',
-            'startups_invested_in' => 'et',
-            'amount_invested' => 'temporibus',
-            'occupation' => 'iusto',
+            'bio' => 'natus',
+            'interest' => 'et',
+            'startups_invested_in' => 'voluptatibus',
+            'amount_invested' => 'qui',
+            'occupation' => 'iure',
         ],
     ]
 );
@@ -660,7 +1078,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"bio":"voluptate","interest":"ut","startups_invested_in":"et","amount_invested":"temporibus","occupation":"iusto"}'
+    -d '{"bio":"natus","interest":"et","startups_invested_in":"voluptatibus","amount_invested":"qui","occupation":"iure"}'
 
 ```
 
@@ -826,8 +1244,8 @@ let headers = {
 
 let body = {
     "company_name": "Jane Ventures",
-    "caption": "facere",
-    "product_image_file": "quam",
+    "caption": "velit",
+    "product_image_file": "sint",
     "funds_to_raise": "Ghc 234.00",
     "duration_for_raise": "3 months.",
     "startup_id": 1
@@ -855,8 +1273,8 @@ $response = $client->post(
         ],
         'json' => [
             'company_name' => 'Jane Ventures',
-            'caption' => 'facere',
-            'product_image_file' => 'quam',
+            'caption' => 'velit',
+            'product_image_file' => 'sint',
             'funds_to_raise' => 'Ghc 234.00',
             'duration_for_raise' => '3 months.',
             'startup_id' => 1,
@@ -873,7 +1291,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"company_name":"Jane Ventures","caption":"facere","product_image_file":"quam","funds_to_raise":"Ghc 234.00","duration_for_raise":"3 months.","startup_id":1}'
+    -d '{"company_name":"Jane Ventures","caption":"velit","product_image_file":"sint","funds_to_raise":"Ghc 234.00","duration_for_raise":"3 months.","startup_id":1}'
 
 ```
 
@@ -1019,8 +1437,8 @@ let body = {
     "startup_type_id": 1,
     "startup_industry_id": 1,
     "has_patent": true,
-    "location": "officia",
-    "business_registration_number": "molestiae"
+    "location": "fuga",
+    "business_registration_number": "sed"
 }
 
 fetch(url, {
@@ -1048,8 +1466,8 @@ $response = $client->post(
             'startup_type_id' => 1,
             'startup_industry_id' => 1,
             'has_patent' => true,
-            'location' => 'officia',
-            'business_registration_number' => 'molestiae',
+            'location' => 'fuga',
+            'business_registration_number' => 'sed',
         ],
     ]
 );
@@ -1063,7 +1481,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"startup_type_id":1,"startup_industry_id":1,"has_patent":true,"location":"officia","business_registration_number":"molestiae"}'
+    -d '{"startup_id":1,"startup_type_id":1,"startup_industry_id":1,"has_patent":true,"location":"fuga","business_registration_number":"sed"}'
 
 ```
 
@@ -1118,12 +1536,12 @@ let body = {
     "startup_id": 1,
     "id": 1,
     "email": "jane@ventures.com",
-    "phone": "quidem",
-    "facebook_handle": "perspiciatis",
-    "twitter_handle": "est",
-    "instagram_handle": "est",
-    "linkdin_handle": "debitis",
-    "skype_handle": "hic"
+    "phone": "accusamus",
+    "facebook_handle": "eaque",
+    "twitter_handle": "voluptatem",
+    "instagram_handle": "corporis",
+    "linkdin_handle": "adipisci",
+    "skype_handle": "accusantium"
 }
 
 fetch(url, {
@@ -1150,12 +1568,12 @@ $response = $client->post(
             'startup_id' => 1,
             'id' => 1,
             'email' => 'jane@ventures.com',
-            'phone' => 'quidem',
-            'facebook_handle' => 'perspiciatis',
-            'twitter_handle' => 'est',
-            'instagram_handle' => 'est',
-            'linkdin_handle' => 'debitis',
-            'skype_handle' => 'hic',
+            'phone' => 'accusamus',
+            'facebook_handle' => 'eaque',
+            'twitter_handle' => 'voluptatem',
+            'instagram_handle' => 'corporis',
+            'linkdin_handle' => 'adipisci',
+            'skype_handle' => 'accusantium',
         ],
     ]
 );
@@ -1169,7 +1587,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"id":1,"email":"jane@ventures.com","phone":"quidem","facebook_handle":"perspiciatis","twitter_handle":"est","instagram_handle":"est","linkdin_handle":"debitis","skype_handle":"hic"}'
+    -d '{"startup_id":1,"id":1,"email":"jane@ventures.com","phone":"accusamus","facebook_handle":"eaque","twitter_handle":"voluptatem","instagram_handle":"corporis","linkdin_handle":"adipisci","skype_handle":"accusantium"}'
 
 ```
 
@@ -1225,15 +1643,15 @@ let headers = {
 
 let body = {
     "startup_id": 1,
-    "key_resources": "id",
-    "customer_target": "ut",
-    "value_proposition": "est",
-    "sales_channels": "eum",
-    "revenue_streams": "porro",
-    "key_metrics": "sed",
-    "cost_structure": "necessitatibus",
-    "financial_file_upload": "totam",
-    "optional_file_upload": "dolorum"
+    "key_resources": "unde",
+    "customer_target": "modi",
+    "value_proposition": "blanditiis",
+    "sales_channels": "quisquam",
+    "revenue_streams": "illum",
+    "key_metrics": "qui",
+    "cost_structure": "est",
+    "financial_file_upload": "possimus",
+    "optional_file_upload": "fugit"
 }
 
 fetch(url, {
@@ -1258,15 +1676,15 @@ $response = $client->post(
         ],
         'json' => [
             'startup_id' => 1,
-            'key_resources' => 'id',
-            'customer_target' => 'ut',
-            'value_proposition' => 'est',
-            'sales_channels' => 'eum',
-            'revenue_streams' => 'porro',
-            'key_metrics' => 'sed',
-            'cost_structure' => 'necessitatibus',
-            'financial_file_upload' => 'totam',
-            'optional_file_upload' => 'dolorum',
+            'key_resources' => 'unde',
+            'customer_target' => 'modi',
+            'value_proposition' => 'blanditiis',
+            'sales_channels' => 'quisquam',
+            'revenue_streams' => 'illum',
+            'key_metrics' => 'qui',
+            'cost_structure' => 'est',
+            'financial_file_upload' => 'possimus',
+            'optional_file_upload' => 'fugit',
         ],
     ]
 );
@@ -1280,7 +1698,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"key_resources":"id","customer_target":"ut","value_proposition":"est","sales_channels":"eum","revenue_streams":"porro","key_metrics":"sed","cost_structure":"necessitatibus","financial_file_upload":"totam","optional_file_upload":"dolorum"}'
+    -d '{"startup_id":1,"key_resources":"unde","customer_target":"modi","value_proposition":"blanditiis","sales_channels":"quisquam","revenue_streams":"illum","key_metrics":"qui","cost_structure":"est","financial_file_upload":"possimus","optional_file_upload":"fugit"}'
 
 ```
 
@@ -1417,7 +1835,7 @@ let headers = {
 let body = {
     "startup_id": 1,
     "product_progress_id": 1,
-    "product_url": "exercitationem"
+    "product_url": "repellendus"
 }
 
 fetch(url, {
@@ -1443,7 +1861,7 @@ $response = $client->post(
         'json' => [
             'startup_id' => 1,
             'product_progress_id' => 1,
-            'product_url' => 'exercitationem',
+            'product_url' => 'repellendus',
         ],
     ]
 );
@@ -1457,7 +1875,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"product_progress_id":1,"product_url":"exercitationem"}'
+    -d '{"startup_id":1,"product_progress_id":1,"product_url":"repellendus"}'
 
 ```
 
@@ -1603,7 +2021,7 @@ let headers = {
 let body = {
     "startup_id": 1,
     "funding_amount": "3000.0",
-    "rate_of_devotion": "ut",
+    "rate_of_devotion": "dolorem",
     "cofounders": []
 }
 
@@ -1630,7 +2048,7 @@ $response = $client->post(
         'json' => [
             'startup_id' => 1,
             'funding_amount' => '3000.0',
-            'rate_of_devotion' => 'ut',
+            'rate_of_devotion' => 'dolorem',
             'cofounders' => [],
         ],
     ]
@@ -1645,7 +2063,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"startup_id":1,"funding_amount":"3000.0","rate_of_devotion":"ut","cofounders":[]}'
+    -d '{"startup_id":1,"funding_amount":"3000.0","rate_of_devotion":"dolorem","cofounders":[]}'
 
 ```
 
@@ -2850,7 +3268,7 @@ let headers = {
 
 let body = {
     "email": "mail@mail.com",
-    "password": "iusto"
+    "password": "similique"
 }
 
 fetch(url, {
@@ -2875,7 +3293,7 @@ $response = $client->post(
         ],
         'json' => [
             'email' => 'mail@mail.com',
-            'password' => 'iusto',
+            'password' => 'similique',
         ],
     ]
 );
@@ -2889,7 +3307,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"email":"mail@mail.com","password":"iusto"}'
+    -d '{"email":"mail@mail.com","password":"similique"}'
 
 ```
 
@@ -3019,11 +3437,11 @@ let headers = {
 let body = {
     "first_name": "Jane",
     "last_name": "Doe",
-    "picture_upload": "necessitatibus",
+    "picture_upload": "aliquam",
     "user_type_id": 1,
     "email": "mail@mail.com",
-    "password": "ipsum",
-    "password_confirmation": "et"
+    "password": "dolores",
+    "password_confirmation": "nihil"
 }
 
 fetch(url, {
@@ -3049,11 +3467,11 @@ $response = $client->post(
         'json' => [
             'first_name' => 'Jane',
             'last_name' => 'Doe',
-            'picture_upload' => 'necessitatibus',
+            'picture_upload' => 'aliquam',
             'user_type_id' => 1,
             'email' => 'mail@mail.com',
-            'password' => 'ipsum',
-            'password_confirmation' => 'et',
+            'password' => 'dolores',
+            'password_confirmation' => 'nihil',
         ],
     ]
 );
@@ -3067,7 +3485,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"first_name":"Jane","last_name":"Doe","picture_upload":"necessitatibus","user_type_id":1,"email":"mail@mail.com","password":"ipsum","password_confirmation":"et"}'
+    -d '{"first_name":"Jane","last_name":"Doe","picture_upload":"aliquam","user_type_id":1,"email":"mail@mail.com","password":"dolores","password_confirmation":"nihil"}'
 
 ```
 
@@ -3130,7 +3548,7 @@ let headers = {
 
 let body = {
     "email": "mail@mail.com",
-    "password": "assumenda"
+    "password": "quis"
 }
 
 fetch(url, {
@@ -3155,7 +3573,7 @@ $response = $client->post(
         ],
         'json' => [
             'email' => 'mail@mail.com',
-            'password' => 'assumenda',
+            'password' => 'quis',
         ],
     ]
 );
@@ -3169,7 +3587,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"email":"mail@mail.com","password":"assumenda"}'
+    -d '{"email":"mail@mail.com","password":"quis"}'
 
 ```
 

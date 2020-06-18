@@ -3,9 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\InvestorCollection;
-use App\Http\Resources\StartupCollection;
-use App\Http\Resources\UserCollection;
 use App\Investor;
 use App\Startup;
 use App\Traits\ApiBaseController;
@@ -13,6 +10,16 @@ use App\User;
 use App\UserType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+
+use App\Http\Resources\BusinessModel as BusinessModelResource;
+use App\Http\Resources\CofounderDetail as CofounderDetailResource;
+use App\Http\Resources\ContactDetail as ContactDetailResource;
+use App\Http\Resources\ProductDetail as ProductDetailResource;
+use App\Http\Resources\StartupDetail as StartupDetailResource;
+use App\Http\Resources\InvestorCollection;
+use App\Http\Resources\SimpleStartupCollection;
+use App\Http\Resources\StartupTeamCollection;
+use App\Http\Resources\UserCollection;
 
 /**
  * @group Admin Startup Management
@@ -32,31 +39,119 @@ class AdminApiController extends Controller
      *
      * Startups registered by all entrepreneurs, both approved and unapproved
      *
-     * @apiResourceCollection App\Http\Resources\StartupCollection
+     * @apiResourceCollection App\Http\Resources\SimpleStartupCollection
      * @apiResourceModel App\Startup
-     * @return StartupCollection
+     * @return SimpleStartupCollection
      */
     public function startups()
     {
-        return new StartupCollection(Startup::all());
+        return new SimpleStartupCollection(Startup::all());
     }
+
+    /**
+     * Startup Detail.
+     *
+     * Startup detail for selected startup.
+     * @urlParam startup required The id of the startup. Example: 2
+     *
+     * @param Startup $startup
+     * @return StartupDetailResource
+     */
+    public function startupDetail(Startup $startup)
+    {
+        return new StartupDetailResource($startup->startup_detail);
+    }
+
+    /**
+     * Contact Detail.
+     *
+     * Contact detail for selected startup.
+     * @urlParam startup required The id of the startup. Example: 2
+     *
+     * @param Startup $startup
+     * @return ContactDetailResource
+     */
+    public function contactDetail(Startup $startup)
+    {
+        return new ContactDetailResource($startup->contact_detail);
+    }
+
+    /**
+     * Business Model.
+     *
+     * Business Model for selected startup.
+     * @urlParam startup required The id of the startup. Example: 2
+     *
+     * @param Startup $startup
+     * @return BusinessModelResource
+     */
+    public function businessModel(Startup $startup)
+    {
+        return new BusinessModelResource($startup->business_model);
+    }
+
+    /**
+     * Product Detail.
+     *
+     * Product Detail for selected startup.
+     * @urlParam startup required The id of the startup. Example: 2
+     *
+     * @param Startup $startup
+     * @return ProductDetailResource
+     */
+    public function productDetail(Startup $startup)
+    {
+        return new ProductDetailResource($startup->product_detail);
+    }
+
+    /**
+     * Cofounder Detail.
+     *
+     * Cofounder Detail for selected startup.
+     * @urlParam startup required The id of the startup. Example: 2
+     *
+     * @param Startup $startup
+     * @return CofounderDetailResource
+     */
+    public function cofounderDetail(Startup $startup)
+    {
+        return new CofounderDetailResource($startup->cofounder_detail);
+    }
+
+    /**
+     * Startup Team.
+     *
+     * Startup Team for selected startup.
+     * @urlParam startup required The id of the startup Example: 2
+     *
+     * @apiResourceCollection App\Http\Resources\StartupTeamCollection
+     * @apiResourceModel App\StartupTeam
+     *
+     * @param Startup $startup
+     * @return StartupTeamCollection
+     */
+    public function startupTeam(Startup $startup)
+    {
+        return new StartupTeamCollection($startup->startup_teams);
+    }
+
 
     /**
      * Startups for Entrepreneur.
      *
      * Startups registered by an entrepreneur, both approved and unapproved
-     * @queryParam userId required The id of the user (entrepreneur) Example: 1
+     * @queryParam userId required The id of the user (entrepreneur). Example: 1
      *
-     * @apiResourceCollection App\Http\Resources\StartupCollection
+     * @apiResourceCollection App\Http\Resources\SimpleStartupCollection
      * @apiResourceModel App\Startup
      * @param $userId
-     * @return StartupCollection
+     * @return SimpleStartupCollection
      */
     public function startupsForEntrepreneur($userId)
     {
         //find the user
         $user = User::query()->find($userId);
-        return new StartupCollection($user->startups);
+        return new SimpleStartupCollection($user->startups);
     }
 
     /**
