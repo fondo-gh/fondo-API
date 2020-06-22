@@ -45,11 +45,11 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'aad73j7iu1mrlr.c2z8knai0w58.us-west-2.rds.amazonaws.com'),
+            'host' => env('DB_HOST', 'aa1v57nm4qyf9qr.c2z8knai0w58.us-west-2.rds.amazonaws.com'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'ebdb'),
             'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', 'admin1234'),
+            'password' => env('DB_PASSWORD', 'fondowebapi'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
