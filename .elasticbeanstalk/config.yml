@@ -1,9 +1,9 @@
 branch-defaults:
   CIsetup:
-    environment: FondoApi-env
+    environment: Fondowebapi-env
     group_suffix: null
 global:
-  application_name: fondo-API
+  application_name: fondowebapi
   branch: master
   default_ec2_keyname: null
   default_platform: PHP 7.4
