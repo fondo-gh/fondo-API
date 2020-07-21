@@ -7,6 +7,7 @@ namespace App\Traits;
 use App\Admin;
 use App\User;
 use App\UserType;
+use Illuminate\Support\Facades\Storage;
 
 trait ApiBaseController
 {
@@ -59,7 +60,7 @@ trait ApiBaseController
     public function generateUserData(User $user)
     {
         //image path
-        $imageUrl = $user->picture ? url('/') . '/users/' . $user->picture : '';
+        $imageUrl = $user->picture ? Storage::disk('s3')->url($user->picture)  : '';
 
         $data = array();
         $data['id'] = $user->id;

@@ -157,11 +157,10 @@ class AuthApiController extends Controller
 
         //save image to disk, get url
         if ($request->hasFile('picture_upload')) {
-            $name = date('Y-m-d-H:i:s') . '.' . $request->file('picture_upload')->getClientOriginalExtension();
-            $request->file('picture_upload')->move(public_path() . '/users/', $name);
-
+            // store on s3
+            $path = $request->file('picture_upload')->store('users', 's3');
             //save the image name the database
-            $request['picture'] = $name;
+            $request['picture'] = $path;
         }
 
         DB::beginTransaction();
