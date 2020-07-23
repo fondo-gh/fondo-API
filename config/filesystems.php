@@ -63,6 +63,7 @@ return [
             'region' => 'us-west-2',
             'bucket' => env('AWS_BUCKET', 'fondoresources'),
             'url' => env('AWS_URL'),
+            'visibility' => 'public',
         ],
 
     ],
