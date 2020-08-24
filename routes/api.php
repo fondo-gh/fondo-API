@@ -30,10 +30,16 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
     Route::get('user/types', 'AuthApiController@userTypes');
     Route::post('user/register', 'AuthApiController@registerUser');
 
+    Route::post('user/password/reset/code', 'AuthApiController@generatePasswordResetCodeForUser');
+    Route::post('user/password/reset/update', 'AuthApiController@passwordResetWithCodeForUser');
+
+
     /**
      * Authentication routes for admin
      */
     Route::post('admin/login', 'AuthApiController@loginAdmin');
+    Route::post('admin/password/reset/code', 'AuthApiController@generatePasswordResetCodeForAdmin');
+    Route::post('admin/password/reset/update', 'AuthApiController@passwordResetWithCodeForAdmin');
 });
 
 /**
