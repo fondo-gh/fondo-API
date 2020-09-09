@@ -13,19 +13,27 @@ class UserResetPasswordMail extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * User's password been reset.
-     * @var User
+     * User to reset password for.
+     * @var User $user
      */
     public $user;
+
+    /**
+     * Generated token
+     * @var $token
+     */
+    public $token;
 
     /**
      * Create a new message instance.
      *
      * @param User $user
+     * @param $token
      */
-    public function __construct(User $user)
+    public function __construct(User $user, $token)
     {
         $this->user = $user;
+        $this->token = $token;
     }
 
     /**

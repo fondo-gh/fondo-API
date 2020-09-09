@@ -19,13 +19,21 @@ class AdminResetPasswordMail extends Mailable
     public $admin;
 
     /**
+     * Generated token
+     * @var $token
+     */
+    public $token;
+
+    /**
      * Create a new message instance.
      *
      * @param Admin $admin
+     * @param $token
      */
-    public function __construct(Admin $admin)
+    public function __construct(Admin $admin, $token)
     {
         $this->admin = $admin;
+        $this->token = $token;
     }
 
     /**

@@ -1,15 +1,7 @@
-<p>Dear {{ $admin->name }},</p>
-<p>You initiated a password reset process. Below is the password reset code.</p>
-<ul style="list-style-type: none;">
-    <li>
-        <b>Reset Code: {{ $admin->reset_code }}</b>
-    </li>
-</ul>
-<p>Access the login page <a href="https://admin.fondowebapp.com/frontend/">here</a>, select <b>Forgot Password</b> on the <b>Login
-        Page.</b>
-    Click <b>I have a Reset Code</b> and provide <b>the necessary details</b> to complete the password reset process.
-</p>
-<p><b>NB: If you did not initiate this process. Kindly ignore.</b></p>
+<p>Hello {{ $admin->name }},</p>
+<p>you are receiving this email because we received a password reset request for your account.</p>
+<p>Click <a href="https://admin.fondowebapp.com/password/reset/{{ $token }}">here</a> to reset password.</p>
+<p><b>If you did not request a password reset, no further action is required.</b></p>
 
 <br><br>Best Regard!<br><br><br>
 

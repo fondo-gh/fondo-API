@@ -267,22 +267,22 @@ class AuthApiController extends Controller
     }
 
     /**
-     * Send Reset Password for User
-     * Generates password reset code for users and sends to mail with instruction.
+     * Send Reset Password Link for User
+     * Generates password reset token for users and sends to mail with instruction.
      *
      * @bodyParam email string required The email of the user. Example: mail@mail.com
      *
      * @response 200 {
      * "success": {
      * "code": 200,
-     * "message": "The reset code is sent via email. Kindly follow the mail to complete the password reset process."
+     * "message": "The reset link is sent via email. Kindly follow the mail to complete the password reset process."
      * },
      * "data": []
      * }
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function generatePasswordResetCodeForUser(Request $request)
+    public function sendPasswordResetEmailLinkForUser(Request $request)
     {
         $validator = Validator::make($request->all(), ['email' => 'required|email|max:255|exists:users,email']);
 
@@ -290,20 +290,29 @@ class AuthApiController extends Controller
             return $this->sendErrorResponse($validator->errors()->first());
         }
 
+        //get the user
         $user = User::query()->where('email', $request['email'])->first();
-        $user->update(['reset_code' => strtoupper(Str::random(5))]);
+
+        //generate reset token
+        $token = Str::random(60);
+
+        //set the token to the password reset table
+        DB::table('password_resets')->updateOrInsert(
+            ['email' => $request['email']],
+            ['email' => $request['email'], 'token' => $token, 'created_at' => date('Y-m-d H:i:s')]
+        );
 
         //send mail to user
-        Mail::send(new UserResetPasswordMail($user));
+        Mail::send(new UserResetPasswordMail($user, $token));
 
-        return $this->sendSuccessResponse([], "The reset code is sent via email. Kindly follow the mail to complete the password reset process.");
+        return $this->sendSuccessResponse([], "The reset link is sent via email. Kindly follow the mail to complete the password reset process.");
     }
 
     /**
      *Reset Password for User
      *Reset the password for user using the detail provided.
      *
-     * @bodyParam reset_code string required The reset code sent via mail. Example: LKJFAIE
+     * @bodyParam token string required The reset token sent via mail. Example: LKJFAIE
      * @bodyParam email string required The email of the user. Example: mail@mail.com
      * @bodyParam password string required The password of the user.
      * @bodyParam password_confirmation string required The password confirmation of the user.
@@ -329,26 +338,38 @@ class AuthApiController extends Controller
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
-    public function passwordResetWithCodeForUser(Request $request)
+    public function resetPasswordForUser(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'reset_code' => 'required|exists:users,reset_code',
-            'email' => 'required|email|exists:users,email',
-            'password' => 'required|string|min:8|confirmed'
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:8',
         ]);
+
 
         if ($validator->fails()) {
             return $this->sendErrorResponse($validator->errors()->first());
         }
-        //find the right user to reset password for
-        $user = User::query()->where('email', $request['email'])->where('reset_code', $request['reset_code'])->first();
-        if (!$user) {
-            return $this->sendErrorResponse("No record is found for email and reset code.");
+
+        //find the reset password record
+        $record = DB::table('password_resets')->where('email', $request['email'])->where('token', $request['token'])->first();
+        if (!$record) {
+            return $this->sendErrorResponse("No record is found for email and token.");
         }
 
+        //find the user
+        $user = User::query()->where('email', $request['email'])->first();
+        if (!$user) {
+            return $this->sendErrorResponse("No record is found for email and token.");
+        }
+
+        //delete the reset password record
+        $record->delete();
+
         //update the password
-        $user->update(['reset_code' => null, 'password' => $request['password']]);
+        $user->update(['password' => $request['password']]);
 
         //data to be sent back
         $data = $this->generateUserData($user);
@@ -356,22 +377,22 @@ class AuthApiController extends Controller
     }
 
     /**
-     * Send Reset Password for Admin
-     * Generates password reset code for admins and sends to mail with instruction.
+     * Send Reset Password Link for Admin
+     * Generates password reset link for admins and sends to mail with instruction.
      *
      * @bodyParam email string required The email of the admin. Example: mail@mail.com
      *
      * @response 200 {
      * "success": {
      * "code": 200,
-     * "message": "The reset code is sent via email. Kindly follow the mail to complete the password reset process."
+     * "message": "The reset link is sent via email. Kindly follow the mail to complete the password reset process."
      * },
      * "data": []
      * }
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function generatePasswordResetCodeForAdmin(Request $request)
+    public function sendPasswordResetEmailLinkForAdmin(Request $request)
     {
         $validator = Validator::make($request->all(), ['email' => 'required|email|max:255|exists:admins,email']);
 
@@ -379,20 +400,29 @@ class AuthApiController extends Controller
             return $this->sendErrorResponse($validator->errors()->first());
         }
 
+        //get the user
         $admin = Admin::query()->where('email', $request['email'])->first();
-        $admin->update(['reset_code' => strtoupper(Str::random(5))]);
 
-        //send mail to user
-        Mail::send(new AdminResetPasswordMail($admin));
+        //generate reset token
+        $token = Str::random(60);
 
-        return $this->sendSuccessResponse([], "The reset code is sent via email. Kindly follow the mail to complete the password reset process.");
+        //set the token to the password reset table
+        DB::table('password_resets')->updateOrInsert(
+            ['email' => $request['email']],
+            ['email' => $request['email'], 'token' => $token, 'created_at' => date('Y-m-d H:i:s')]
+        );
+
+        //send mail to admin
+        Mail::send(new AdminResetPasswordMail($admin, $token));
+
+        return $this->sendSuccessResponse([], "The reset link is sent via email. Kindly follow the mail to complete the password reset process.");
     }
 
     /**
      *Reset Password for Admin
      *Reset the password for admin using the detail provided.
      *
-     * @bodyParam reset_code string required The reset code sent via mail. Example: LKJFAIE
+     * @bodyParam token string required The reset token sent via mail. Example: LKJFAIE
      * @bodyParam email string required The email of the admin. Example: mail@mail.com
      * @bodyParam password string required The password of the admin.
      * @bodyParam password_confirmation string required The password confirmation of the admin.
@@ -414,26 +444,38 @@ class AuthApiController extends Controller
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
-    public function passwordResetWithCodeForAdmin(Request $request)
+    public function resetPasswordForAdmin(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'reset_code' => 'required|exists:admins,reset_code',
-            'email' => 'required|email|exists:admins,email',
-            'password' => 'required|string|min:8|confirmed'
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:8',
         ]);
+
 
         if ($validator->fails()) {
             return $this->sendErrorResponse($validator->errors()->first());
         }
-        //find the right admin to reset password for
-        $admin = Admin::query()->where('email', $request['email'])->where('reset_code', $request['reset_code'])->first();
-        if (!$admin) {
-            return $this->sendErrorResponse("No record is found for email and reset code.");
+
+        //find the reset password record
+        $record = DB::table('password_resets')->where('email', $request['email'])->where('token', $request['token'])->first();
+        if (!$record) {
+            return $this->sendErrorResponse("No record is found for email and token.");
         }
 
+        //find the admin
+        $admin = Admin::query()->where('email', $request['email'])->first();
+        if (!$admin) {
+            return $this->sendErrorResponse("No record is found for email and token.");
+        }
+
+        //delete the reset password record
+        $record->delete();
+
         //update the password
-        $admin->update(['reset_code' => null, 'password' => $request['password']]);
+        $admin->update(['password' => $request['password']]);
 
         //data to be sent back
         $data = $this->generateAdminData($admin);
