@@ -16,7 +16,8 @@
         "jamesmills/eloquent-uuid": "^1.5",
         "laravel/framework": "^6.2",
         "laravel/passport": "^8.4",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "league/flysystem-aws-s3-v3": "^1.0"
     },
     "require-dev": {
         "beyondcode/laravel-er-diagram-generator": "^1.4",

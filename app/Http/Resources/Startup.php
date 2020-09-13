@@ -10,6 +10,7 @@ use App\Http\Resources\BusinessModel as BusinessModelResource;
 use App\Http\Resources\StartupDetail as StartupDetailResource;
 use App\Http\Resources\ProductDetail as ProductDetailResource;
 use App\Http\Resources\CofounderDetail as CofounderDetailResource;
+use Illuminate\Support\Facades\Storage;
 
 class Startup extends JsonResource
 {
@@ -27,7 +28,7 @@ class Startup extends JsonResource
             'uuid' => $this->uuid,
             'registration_is_complete' => $this->registration_is_complete,
             'company_name' => $this->company_name,
-            'product_image' => url('/') . '/startups/products/' . $this->product_image,
+            'product_image' =>  Storage::disk('s3')->url($this->product_image),
             'caption' => $this->caption,
             'funds_to_raise' => $this->funds_to_raise,
             'duration_for_raise' => $this->duration_for_raise,

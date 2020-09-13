@@ -118,11 +118,10 @@ class StartupRegistrationApiController extends Controller
 
         //save image to disk, get url
         if ($request->hasFile('product_image_file')) {
-            $name = date('Y-m-d-H:i:s') . '.' . $request->file('product_image_file')->getClientOriginalExtension();
-            $request->file('product_image_file')->move(public_path() . '/startups/products/', $name);
-
+            // store on s3
+            $path = $request->file('product_image_file')->store('startups/' . $request['company_name'], 's3');
             //save the image name the database
-            $request['product_image'] = $name;
+            $request['product_image'] = $path;
         }
 
         //create or update the startup details information
@@ -331,23 +330,23 @@ class StartupRegistrationApiController extends Controller
             return $this->sendErrorResponse($validator->errors()->first());
         }
 
+        //find the startup
+        $startup = Startup::find($request['startup_id']);
 
         //save image to disk, get url
         if ($request->hasFile('financial_file_upload')) {
-            $name = date('Y-m-d-H:i:s') . '.' . $request->file('financial_file_upload')->getClientOriginalExtension();
-            $request->file('financial_file_upload')->move(public_path() . '/startups/files/', $name);
-
-            //save the image name to the database
-            $request['financial_file'] = $name;
+            // store on s3
+            $path = $request->file('financial_file_upload')->store('startups/' . $startup->company_name, 's3');
+            //save the image name the database
+            $request['financial_file'] = $path;
         }
 
         //save image to disk, get url
         if ($request->hasFile('optional_file_upload')) {
-            $name = date('Y-m-d-H:i:s') . '.' . $request->file('optional_file_upload')->getClientOriginalExtension();
-            $request->file('optional_file_upload')->move(public_path() . '/startups/files/', $name);
-
-            //save the image name to the database
-            $request['optional_file'] = $name;
+            // store on s3
+            $path = $request->file('optional_file_upload')->store('startups/' . $startup->company_name, 's3');
+            //save the image name the database
+            $request['optional_file'] = $path;
         }
 
         //update or create based on startup id

@@ -3,13 +3,14 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class BusinessModel extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
@@ -25,8 +26,8 @@ class BusinessModel extends JsonResource
             'revenue_streams' => $this->revenue_streams,
             'key_metrics' => $this->key_metrics,
             'cost_structure' => $this->cost_structure,
-            'financial_file' =>  $this->financial_file ? url('/') . '/startups/files/' . $this->financial_file : '',
-            'optional_file' =>  $this->optional_file ? url('/') . '/startups/files/' . $this->optional_file : '',
+            'financial_file' => $this->financial_file ? Storage::disk('s3')->url($this->financial_file) : '',
+            'optional_file' => $this->optional_file ? Storage::disk('s3')->url($this->optional_file) : '',
         ];
     }
 }
