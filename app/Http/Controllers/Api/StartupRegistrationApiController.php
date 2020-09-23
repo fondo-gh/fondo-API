@@ -90,7 +90,7 @@ class StartupRegistrationApiController extends Controller
         if ($request->has('startup_id')) {
             $validator = Validator::make($request->all(), [
                 'company_name' => 'required|string|max:255|unique:startups,company_name,' . $request['startup_id'],
-                'caption' => 'required|string|max:255',
+                'caption' => 'required|string',
                 'product_image_file' => 'nullable|image',
                 'funds_to_raise' => 'required|string',
                 'duration_for_raise' => 'required|string',
@@ -99,7 +99,7 @@ class StartupRegistrationApiController extends Controller
         } else {
             $validator = Validator::make($request->all(), [
                 'company_name' => 'required|string|max:255|unique:startups',
-                'caption' => 'required|string|max:255',
+                'caption' => 'required|string',
                 'product_image_file' => 'nullable|image',
                 'funds_to_raise' => 'required|string',
                 'duration_for_raise' => 'required|string',
@@ -506,7 +506,8 @@ class StartupRegistrationApiController extends Controller
             'startup_id' => 'required|integer|exists:startups,id',
             'funding_amount' => 'required|numeric|min:1',
             'rate_of_devotion' => 'required|string',
-            'cofounders' => 'required|array'
+            'cofounders' => 'required|array',
+//            'cofounders.*.email' => 'required|email|exists:cofounders,email',
         ]);
 
         //send validation error response if any

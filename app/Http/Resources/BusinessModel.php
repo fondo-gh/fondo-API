@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
-class BusinessModel extends JsonResource
+class   BusinessModel extends JsonResource
 {
     /**
      * Transform the resource into an array.
