@@ -28,6 +28,7 @@ class SimpleStartup extends JsonResource
             'approved' => $this->approved,
             'created_at' => $this->created_at,
             'user' => new UserResource($this->user),
+            'startup_industry' => $this->startup_detail->startup_industry->name
         ];
     }
 }
