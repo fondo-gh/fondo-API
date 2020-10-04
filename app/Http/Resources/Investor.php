@@ -26,7 +26,7 @@ class Investor extends JsonResource
             'interest' => $this->bio,
             'startups_invested_in' => $this->startups_invested_in,
             'amount_invested' => $this->amount_invested,
-            'occupation' => $this->occupations,
+            'occupation' => $this->occupation,
             'profile_is_completed' => $this->profile_is_completed
         ];
     }
