@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SimpleStartupCollection;
 use App\Http\Resources\StartupCollection;
 use App\Startup;
 use App\Traits\ApiBaseController;
@@ -29,13 +30,13 @@ class InvestorApiController extends Controller
      *
      * Startups registered by all entrepreneurs and approved by the admins.
      *
-     * @apiResourceCollection App\Http\Resources\StartupCollection
+     * @apiResourceCollection App\Http\Resources\SimpleStartupCollection
      * @apiResourceModel App\Startup
-     * @return StartupCollection
+     * @return SimpleStartupCollection
      */
     public function startups()
     {
-        return new StartupCollection(Startup::approved()->get());
+        return new SimpleStartupCollection(Startup::all());
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Http\Resources\User as UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class SimpleStartup extends JsonResource
 {
@@ -20,7 +21,7 @@ class SimpleStartup extends JsonResource
             'uuid' => $this->uuid,
             'registration_is_complete' => $this->registration_is_complete,
             'company_name' => $this->company_name,
-            'product_image' => url('/') . '/startups/products/' . $this->product_image,
+            'product_image' =>  Storage::disk('s3')->url($this->product_image),
             'caption' => $this->caption,
             'funds_to_raise' => $this->funds_to_raise,
             'duration_for_raise' => $this->duration_for_raise,
